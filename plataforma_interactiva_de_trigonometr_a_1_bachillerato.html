@@ -1,0 +1,2300 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrigoLab 1.º Bachillerato | Simplificación Procedural y Visual</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <!-- KaTeX for Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .math-inline {
+            padding: 0 2px;
+        }
+        canvas {
+            touch-action: none;
+            user-select: none;
+        }
+        /* Custom Range Slider */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            cursor: pointer;
+        }
+        input[type="range"]::-webkit-slider-runnable-track {
+            height: 8px;
+            border-radius: 999px;
+            background: #cbd5e1;
+        }
+        .dark input[type="range"]::-webkit-slider-runnable-track {
+            background: #334155;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            margin-top: -5px;
+            background-color: #4f46e5;
+            height: 18px;
+            width: 18px;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+            transition: transform 0.15s ease;
+        }
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.18);
+        }
+        .tab-active {
+            border-bottom: 3px solid #4f46e5;
+            color: #4f46e5;
+            font-weight: 700;
+        }
+        .dark .tab-active {
+            border-bottom: 3px solid #818cf8;
+            color: #818cf8;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200">
+
+    <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-violet-600 flex items-center justify-center text-white font-bold shadow-md shadow-indigo-500/20">
+                        <i data-lucide="compass" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-extrabold text-lg tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-600 dark:from-indigo-400 dark:to-violet-400">TrigoLab</span>
+                            <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800 dark:bg-indigo-900/60 dark:text-indigo-300">1.º Bachillerato</span>
+                        </div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">Filosofía de Simplificación Procedural • Menos memoria, más comprensión</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Tabs Desktop -->
+                <nav class="hidden lg:flex space-x-1" aria-label="Módulos">
+                    <button onclick="switchSection('mod1')" id="nav-mod1" class="nav-btn tab-active px-3 py-2 text-sm rounded-t-lg transition-colors flex items-center gap-1.5">
+                        <span class="w-5 h-5 rounded-full bg-indigo-100 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300 text-xs flex items-center justify-center font-bold">1</span>
+                        Circunferencia ($R=1$)
+                    </button>
+                    <button onclick="switchSection('mod2')" id="nav-mod2" class="nav-btn px-3 py-2 text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 rounded-t-lg transition-colors flex items-center gap-1.5">
+                        <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-xs flex items-center justify-center font-bold">2</span>
+                        Estrategia de la Altura
+                    </button>
+                    <button onclick="switchSection('mod3')" id="nav-mod3" class="nav-btn px-3 py-2 text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 rounded-t-lg transition-colors flex items-center gap-1.5">
+                        <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-xs flex items-center justify-center font-bold">3</span>
+                        Fórmula Semilla
+                    </button>
+                    <button onclick="switchSection('mod4')" id="nav-mod4" class="nav-btn px-3 py-2 text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 rounded-t-lg transition-colors flex items-center gap-1.5">
+                        <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-xs flex items-center justify-center font-bold">4</span>
+                        Funciones y Radianes
+                    </button>
+                    <button onclick="switchSection('eval')" id="nav-eval" class="nav-btn px-3 py-2 text-sm text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 rounded-t-lg transition-colors flex items-center gap-1.5 font-semibold">
+                        <i data-lucide="Award" class="w-4 h-4"></i>
+                        Laboratorio de Ejercicios
+                    </button>
+                </nav>
+
+                <!-- Right Controls: Formula Cheat-Sheet Modal & Dark Mode -->
+                <div class="flex items-center gap-2">
+                    <button onclick="toggleModal('modal-formulario')" class="px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 dark:bg-amber-900/40 dark:hover:bg-amber-900/60 dark:text-amber-200 flex items-center gap-1.5 transition shadow-sm" title="Ver el Mínimo Formulario Indispensable">
+                        <i data-lucide="sparkles" class="w-4 h-4 text-amber-600 dark:text-amber-400"></i>
+                        <span>Mínimo Formulario</span>
+                    </button>
+                    <button onclick="toggleTheme()" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition" aria-label="Cambiar tema claro/oscuro">
+                        <i data-lucide="moon" id="theme-icon-dark" class="w-5 h-5 block dark:hidden"></i>
+                        <i data-lucide="sun" id="theme-icon-light" class="w-5 h-5 hidden dark:block text-amber-400"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation Bar -->
+            <div class="flex lg:hidden overflow-x-auto py-2 gap-1.5 no-scrollbar border-t border-slate-100 dark:border-slate-800">
+                <button onclick="switchSection('mod1')" id="mnav-mod1" class="mnav-btn shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold bg-indigo-600 text-white">1. Circunferencia</button>
+                <button onclick="switchSection('mod2')" id="mnav-mod2" class="mnav-btn shrink-0 px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">2. La Altura</button>
+                <button onclick="switchSection('mod3')" id="mnav-mod3" class="mnav-btn shrink-0 px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">3. Fórmula Semilla</button>
+                <button onclick="switchSection('mod4')" id="mnav-mod4" class="mnav-btn shrink-0 px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">4. Radianes y Ondas</button>
+                <button onclick="switchSection('eval')" id="mnav-eval" class="mnav-btn shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-300">★ Ejercicios</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="bg-indigo-950 text-indigo-100 py-2.5 px-4 border-b border-indigo-900">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-xs">
+            <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded bg-indigo-500/30 border border-indigo-400/30 font-semibold text-indigo-200">Principio Didáctico Activo</span>
+                <span id="pedagogical-banner-text">Integramos la circunferencia de radio $R=1$ con el triángulo rectángulo desde el primer instante.</span>
+            </div>
+            <div class="flex items-center gap-4 text-indigo-300">
+                <span class="hidden md:inline">📏 Geometría en <strong>Grados ($^\circ$)</strong></span>
+                <span class="hidden md:inline">〰️ Funciones en <strong>Radianes ($\text{rad}$)</strong></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- ===================================================================== -->
+        <!-- MÓDULO 1: LA CIRCUNFERENCIA GONIOMÉTRICA E INTEGRACIÓN INICIAL        -->
+        <!-- ===================================================================== -->
+        <section id="sec-mod1" class="module-section space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Módulo 1 • Conexión Visual Inmediata</span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">La Circunferencia Goniométrica ($R=1$) y el Triángulo Interior</h1>
+                </div>
+                <div class="flex items-center gap-2 self-start">
+                    <span class="text-xs px-3 py-1.5 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 font-medium">
+                        Unidad angular: <strong>Grados sexagesimales ($^\circ$)</strong>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Apuntes Sintéticos + Widget Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                
+                <!-- Columna Izquierda: Simulador Interactivo Canvas -->
+                <div class="lg:col-span-7 bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 p-4 sm:p-6">
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                        <div>
+                            <h2 class="font-bold text-base sm:text-lg flex items-center gap-2">
+                                <i data-lucide="mouse-pointer-click" class="w-5 h-5 text-indigo-600"></i>
+                                Explorador de Coordenadas sobre $R=1$
+                            </h2>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">Arrastra el punto $P(x,y)$ sobre la circunferencia o usa los botones de ángulos notables.</p>
+                        </div>
+                        <div id="m1-quadrant-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-100 text-indigo-800 dark:bg-indigo-900/70 dark:text-indigo-200">
+                            Cuadrante I (+, +)
+                        </div>
+                    </div>
+
+                    <!-- Canvas Container -->
+                    <div class="relative w-full aspect-square max-h-[420px] mx-auto bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden flex items-center justify-center">
+                        <canvas id="canvas-mod1" class="w-full h-full cursor-grab active:cursor-grabbing"></canvas>
+                    </div>
+
+                    <!-- Controles del Ángulo -->
+                    <div class="mt-5 space-y-4">
+                        <div class="flex items-center justify-between gap-4">
+                            <label for="slider-mod1" class="text-sm font-semibold text-slate-700 dark:text-slate-300 shrink-0">
+                                Ángulo $\alpha$: <span id="m1-angle-display" class="font-mono text-base font-bold text-indigo-600 dark:text-indigo-400">30°</span>
+                            </label>
+                            <input type="range" id="slider-mod1" min="0" max="360" value="30" step="1" class="w-full">
+                        </div>
+
+                        <!-- Botones de Ángulos Notables y Asociados -->
+                        <div>
+                            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-2">Saltar a Ángulos Notables y de Ejes:</span>
+                            <div class="flex flex-wrap gap-1.5">
+                                <button onclick="setMod1Angle(0)" class="px-2.5 py-1 text-xs font-mono font-semibold rounded-lg bg-slate-100 hover:bg-indigo-100 dark:bg-slate-800 dark:hover:bg-indigo-900/60 transition">0°</button>
+                                <button onclick="setMod1Angle(30)" class="px-2.5 py-1 text-xs font-mono font-semibold rounded-lg bg-indigo-50 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 hover:bg-indigo-100 transition">30°</button>
+                                <button onclick="setMod1Angle(45)" class="px-2.5 py-1 text-xs font-mono font-semibold rounded-lg bg-indigo-50 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 hover:bg-indigo-100 transition">45°</button>
+                                <button onclick="setMod1Angle(60)" class="px-2.5 py-1 text-xs font-mono font-semibold rounded-lg bg-indigo-50 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 hover:bg-indigo-100 transition">60°</button>
+                                <button onclick="setMod1Angle(90)" class="px-2.5 py-1 text-xs font-mono font-semibold rounded-lg bg-slate-100 hover:bg-indigo-100 dark:bg-slate-800 dark:hover:bg-indigo-900/60 transition">90°</button>
+                                <button onclick="setMod1Angle(120)" class="px-2.5 py-1 text-xs font-mono font-semibold rounded-lg bg-slate-100 hover:bg-indigo-100 dark:bg-slate-800 dark:hover:bg-indigo-900/60 transition">120°</button>
+                                <button onclick="setMod1Angle(135)" class="px-2.5 py-1 text-xs font-mono font-semibold rounded-lg bg-slate-100 hover:bg-indigo-100 dark:bg-slate-800 dark:hover:bg-indigo-900/60 transition">135°</button>
+                                <button onclick="setMod1Angle(150)" class="px-2.5 py-1 text-xs font-mono font-semibold rounded-lg bg-slate-100 hover:bg-indigo-100 dark:bg-slate-800 dark:hover:bg-indigo-900/60 transition">150°</button>
+                                <button onclick="setMod1Angle(180)" class="px-2.5 py-1 text-xs font-mono font-semibold rounded-lg bg-slate-100 hover:bg-indigo-100 dark:bg-slate-800 dark:hover:bg-indigo-900/60 transition">180°</button>
+                                <button onclick="setMod1Angle(210)" class="px-2.5 py-1 text-xs font-mono font-semibold rounded-lg bg-slate-100 hover:bg-indigo-100 dark:bg-slate-800 dark:hover:bg-indigo-900/60 transition">210°</button>
+                                <button onclick="setMod1Angle(225)" class="px-2.5 py-1 text-xs font-mono font-semibold rounded-lg bg-slate-100 hover:bg-indigo-100 dark:bg-slate-800 dark:hover:bg-indigo-900/60 transition">225°</button>
+                                <button onclick="setMod1Angle(270)" class="px-2.5 py-1 text-xs font-mono font-semibold rounded-lg bg-slate-100 hover:bg-indigo-100 dark:bg-slate-800 dark:hover:bg-indigo-900/60 transition">270°</button>
+                                <button onclick="setMod1Angle(315)" class="px-2.5 py-1 text-xs font-mono font-semibold rounded-lg bg-slate-100 hover:bg-indigo-100 dark:bg-slate-800 dark:hover:bg-indigo-900/60 transition">315°</button>
+                                <button onclick="setMod1Angle(330)" class="px-2.5 py-1 text-xs font-mono font-semibold rounded-lg bg-slate-100 hover:bg-indigo-100 dark:bg-slate-800 dark:hover:bg-indigo-900/60 transition">330°</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha: Lectura en Tiempo Real + Apuntes Sintéticos + Tabla -->
+                <div class="lg:col-span-5 space-y-5">
+                    
+                    <!-- Tarjetas de Lectura en Tiempo Real -->
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 p-5">
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Lectura Geométrica Instantánea ($R=1$)</h3>
+                        <div class="grid grid-cols-3 gap-3">
+                            <!-- Coseno (X) -->
+                            <div class="p-3 rounded-xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800/80">
+                                <div class="text-xs font-bold text-blue-700 dark:text-blue-400">Abscisa $x = \cos\alpha$</div>
+                                <div id="m1-val-cos" class="font-mono text-lg font-extrabold text-blue-900 dark:text-blue-200 mt-1">+0.866</div>
+                                <div id="m1-exact-cos" class="text-xs text-blue-600 dark:text-blue-400 mt-0.5 font-medium">$\frac{\sqrt{3}}{2}$</div>
+                            </div>
+                            <!-- Seno (Y) -->
+                            <div class="p-3 rounded-xl bg-rose-50/70 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800/80">
+                                <div class="text-xs font-bold text-rose-700 dark:text-rose-400">Ordenada $y = \operatorname{sen}\alpha$</div>
+                                <div id="m1-val-sin" class="font-mono text-lg font-extrabold text-rose-900 dark:text-rose-200 mt-1">+0.500</div>
+                                <div id="m1-exact-sin" class="text-xs text-rose-600 dark:text-rose-400 mt-0.5 font-medium">$\frac{1}{2}$</div>
+                            </div>
+                            <!-- Tangente (Y/X) -->
+                            <div class="p-3 rounded-xl bg-emerald-50/70 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/80">
+                                <div class="text-xs font-bold text-emerald-700 dark:text-emerald-400">Pendiente $\tan\alpha = \frac{y}{x}$</div>
+                                <div id="m1-val-tan" class="font-mono text-lg font-extrabold text-emerald-900 dark:text-emerald-200 mt-1">+0.577</div>
+                                <div id="m1-exact-tan" class="text-xs text-emerald-600 dark:text-emerald-400 mt-0.5 font-medium">$\frac{\sqrt{3}}{3}$</div>
+                            </div>
+                        </div>
+
+                        <!-- Relación Pitagórica en Vivo -->
+                        <div class="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-600 dark:text-slate-400">
+                            <span>Teorema de Pitágoras en el triángulo interior:</span>
+                            <span id="m1-pythagoras-live" class="font-mono font-semibold text-indigo-600 dark:text-indigo-400">$(0.87)^2 + (0.50)^2 = 1^2$</span>
+                        </div>
+                    </div>
+
+                    <!-- Apuntes Sintéticos -->
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 p-5 space-y-3">
+                        <div class="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-bold text-sm">
+                            <i data-lucide="book-open" class="w-4 h-4"></i>
+                            <span>Apuntes Sintéticos: ¿Por qué elegir radio $R = 1$?</span>
+                        </div>
+                        <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                            En un triángulo rectángulo cuya hipotenusa mide exactamente $R=1$, las razones trigonométricas dejan de ser divisiones abstractas y se convierten directamente en las <strong>coordenadas cartesianas $(x,y)$</strong> del punto $P$:
+                        </p>
+                        <ul class="text-xs sm:text-sm space-y-2 bg-slate-50 dark:bg-slate-800/60 p-3.5 rounded-xl border border-slate-200/70 dark:border-slate-700">
+                            <li class="flex items-start gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-blue-500 mt-1.5 shrink-0"></span>
+                                <span><strong>Coseno ($\cos\alpha = x$):</strong> Es la proyección horizontal (sombra en el eje $X$). Positivo a la derecha (Cuadrantes I y IV), negativo a la izquierda (II y III).</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-rose-500 mt-1.5 shrink-0"></span>
+                                <span><strong>Seno ($\operatorname{sen}\alpha = y$):</strong> Es la altura vertical (proyección en el eje $Y$). Positivo arriba (Cuadrantes I y II), negativo abajo (III y IV).</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 mt-1.5 shrink-0"></span>
+                                <span><strong>Tangente ($\tan\alpha = \frac{y}{x}$):</strong> Es el cociente entre altura y base, y coincide con el segmento vertical sobre la recta tangente en $x=1$.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Tabla de Ángulos Notables Interactiva -->
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 p-5">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-sm font-bold flex items-center gap-1.5">
+                                <i data-lucide="table" class="w-4 h-4 text-indigo-600"></i>
+                                Tabla de Ángulos Notables (Truco $\frac{\sqrt{n}}{2}$)
+                            </h3>
+                            <span class="text-[11px] text-slate-400">Haz clic en una columna</span>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-center text-xs border-collapse">
+                                <thead>
+                                    <tr class="border-b border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400">
+                                        <th class="py-2 px-2 text-left">Razón</th>
+                                        <th onclick="setMod1Angle(0)" class="py-2 px-2 cursor-pointer hover:bg-indigo-50 dark:hover:bg-slate-800 rounded-t transition font-bold">0°</th>
+                                        <th onclick="setMod1Angle(30)" class="py-2 px-2 cursor-pointer hover:bg-indigo-50 dark:hover:bg-slate-800 rounded-t transition font-bold text-indigo-600 dark:text-indigo-400">30°</th>
+                                        <th onclick="setMod1Angle(45)" class="py-2 px-2 cursor-pointer hover:bg-indigo-50 dark:hover:bg-slate-800 rounded-t transition font-bold">45°</th>
+                                        <th onclick="setMod1Angle(60)" class="py-2 px-2 cursor-pointer hover:bg-indigo-50 dark:hover:bg-slate-800 rounded-t transition font-bold">60°</th>
+                                        <th onclick="setMod1Angle(90)" class="py-2 px-2 cursor-pointer hover:bg-indigo-50 dark:hover:bg-slate-800 rounded-t transition font-bold">90°</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                                    <tr>
+                                        <td class="py-2.5 px-2 text-left font-bold text-rose-600 dark:text-rose-400">$\operatorname{sen}\alpha$ ($y$)</td>
+                                        <td class="py-2.5 px-2">$0$</td>
+                                        <td class="py-2.5 px-2">$\frac{1}{2}$</td>
+                                        <td class="py-2.5 px-2">$\frac{\sqrt{2}}{2}$</td>
+                                        <td class="py-2.5 px-2">$\frac{\sqrt{3}}{2}$</td>
+                                        <td class="py-2.5 px-2">$1$</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2.5 px-2 text-left font-bold text-blue-600 dark:text-blue-400">$\cos\alpha$ ($x$)</td>
+                                        <td class="py-2.5 px-2">$1$</td>
+                                        <td class="py-2.5 px-2">$\frac{\sqrt{3}}{2}$</td>
+                                        <td class="py-2.5 px-2">$\frac{\sqrt{2}}{2}$</td>
+                                        <td class="py-2.5 px-2">$\frac{1}{2}$</td>
+                                        <td class="py-2.5 px-2">$0$</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2.5 px-2 text-left font-bold text-emerald-600 dark:text-emerald-400">$\tan\alpha$ ($y/x$)</td>
+                                        <td class="py-2.5 px-2">$0$</td>
+                                        <td class="py-2.5 px-2">$\frac{\sqrt{3}}{3}$</td>
+                                        <td class="py-2.5 px-2">$1$</td>
+                                        <td class="py-2.5 px-2">$\sqrt{3}$</td>
+                                        <td class="py-2.5 px-2">$\nexists$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ===================================================================== -->
+        <!-- MÓDULO 2: RESOLUCIÓN PROCEDURAL ("ESTRATEGIA DE LA ALTURA")           -->
+        <!-- ===================================================================== -->
+        <section id="sec-mod2" class="module-section hidden space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Módulo 2 • Descomposición de Problemas</span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">Resolución Procedural: La "Estrategia de la Altura"</h1>
+                </div>
+                <div class="flex items-center gap-2 self-start">
+                    <span class="text-xs px-3 py-1.5 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800 font-medium">
+                        Sin memorizar Teorema del Seno ni del Coseno
+                    </span>
+                </div>
+            </div>
+
+            <!-- Las 3 Herramientas Semilla -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-start gap-3.5">
+                    <div class="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold shrink-0">1</div>
+                    <div>
+                        <h3 class="text-sm font-bold text-slate-900 dark:text-white">Proyección de un Segmento</h3>
+                        <div class="text-base font-semibold text-blue-600 dark:text-blue-400 my-1">$x = a \cdot \cos\alpha$</div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">La sombra horizontal de un lado inclinado $a$ sobre la base es el lado multiplicado por el coseno del ángulo.</p>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-start gap-3.5">
+                    <div class="w-10 h-10 rounded-xl bg-rose-100 dark:bg-rose-900/50 text-rose-600 dark:text-rose-400 flex items-center justify-center font-bold shrink-0">2</div>
+                    <div>
+                        <h3 class="text-sm font-bold text-slate-900 dark:text-white">Altura de un Triángulo</h3>
+                        <div class="text-base font-semibold text-rose-600 dark:text-rose-400 my-1">$h = a \cdot \operatorname{sen}\alpha$</div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Al trazar la altura $h$, esta actúa como cateto opuesto al ángulo $\alpha$, dividiendo el triángulo en dos rectángulos.</p>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-start gap-3.5">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold shrink-0">3</div>
+                    <div>
+                        <h3 class="text-sm font-bold text-slate-900 dark:text-white">Área del Triángulo</h3>
+                        <div class="text-base font-semibold text-emerald-600 dark:text-emerald-400 my-1">$S = \frac{1}{2} \cdot b \cdot a \cdot \operatorname{sen}\alpha$</div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Como $\text{Área} = \frac{\text{base} \cdot \text{altura}}{2}$ y sabemos que $h = a \cdot \operatorname{sen}\alpha$, sustituimos directamente.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trazador Dinámico de Triángulos -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <!-- Lienzo del Triángulo Oblicuángulo -->
+                <div class="lg:col-span-7 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 shadow-sm">
+                    <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+                        <div>
+                            <h2 class="font-bold text-base sm:text-lg flex items-center gap-2">
+                                <i data-lucide="scissors" class="w-5 h-5 text-indigo-600"></i>
+                                Trazador Dinámico: Divide y Vencerás
+                            </h2>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">Ajusta los datos conocidos ($a$, $b$, $\alpha$) y pulsa <strong>"Trazar Altura $h$"</strong> para descomponer.</p>
+                        </div>
+                        <button onclick="toggleMod2Altitude()" id="btn-mod2-altitude" class="px-4 py-2 rounded-xl font-bold text-xs sm:text-sm bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-500/20 flex items-center gap-2 transition">
+                            <i data-lucide="git-branch" class="w-4 h-4"></i>
+                            <span id="btn-mod2-altitude-text">Trazar Altura h (Dividir)</span>
+                        </button>
+                    </div>
+
+                    <div class="relative w-full h-[340px] bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+                        <canvas id="canvas-mod2" class="w-full h-full"></canvas>
+                    </div>
+
+                    <!-- Sliders para modificar el triángulo -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-5 pt-4 border-t border-slate-100 dark:border-slate-800">
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span>Lado inclinado $a$:</span>
+                                <span id="m2-val-a" class="font-mono text-indigo-600 dark:text-indigo-400 font-bold">8.0 m</span>
+                            </div>
+                            <input type="range" id="slider-m2-a" min="4" max="12" step="0.5" value="8" class="w-full">
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span>Base total $b$:</span>
+                                <span id="m2-val-b" class="font-mono text-indigo-600 dark:text-indigo-400 font-bold">11.0 m</span>
+                            </div>
+                            <input type="range" id="slider-m2-b" min="6" max="15" step="0.5" value="11" class="w-full">
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span>Ángulo $\alpha$ (vértice A):</span>
+                                <span id="m2-val-alpha" class="font-mono text-indigo-600 dark:text-indigo-400 font-bold">50°</span>
+                            </div>
+                            <input type="range" id="slider-m2-alpha" min="25" max="115" step="1" value="50" class="w-full">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resolución Paso a Paso del Trazador -->
+                <div class="lg:col-span-5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 shadow-sm space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="font-bold text-base flex items-center gap-2">
+                            <i data-lucide="list-Ordered" class="w-5 h-5 text-indigo-600"></i>
+                            Descomposición Paso a Paso
+                        </h3>
+                        <span id="m2-status-pill" class="text-xs px-2.5 py-0.5 rounded-full font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300">
+                            Altura Activa
+                        </span>
+                    </div>
+
+                    <p class="text-xs text-slate-500 dark:text-slate-400">
+                        Observa cómo cualquier triángulo oblicuángulo se resuelve encadenando pasos elementales sobre los <strong>dos triángulos rectángulos</strong> (Izquierdo $\text{I}$ y Derecho $\text{II}$):
+                    </p>
+
+                    <!-- Pasos Procedurales Dinámicos -->
+                    <div class="space-y-3" id="m2-steps-container">
+                        <!-- Paso 1 -->
+                        <div class="p-3.5 rounded-xl bg-rose-50/70 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-800/70">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold text-rose-700 dark:text-rose-300 uppercase">Paso 1: Triángulo Rectángulo I (Altura $h$)</span>
+                                <span class="text-xs font-mono font-bold text-rose-800 dark:text-rose-200" id="m2-step1-res">h = 6.13 m</span>
+                            </div>
+                            <p class="text-xs text-slate-600 dark:text-slate-300 mt-1" id="m2-step1-desc">
+                                Aplicamos la herramienta de la altura: $h = a \cdot \operatorname{sen}\alpha = 8 \cdot \operatorname{sen}(50^\circ) = 6.13\text{ m}$.
+                            </p>
+                        </div>
+
+                        <!-- Paso 2 -->
+                        <div class="p-3.5 rounded-xl bg-blue-50/70 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800/70">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold text-blue-700 dark:text-blue-300 uppercase">Paso 2: Proyección $x$ y Resto de Base $y$</span>
+                                <span class="text-xs font-mono font-bold text-blue-800 dark:text-blue-200" id="m2-step2-res">x = 5.14 m | y = 5.86 m</span>
+                            </div>
+                            <p class="text-xs text-slate-600 dark:text-slate-300 mt-1" id="m2-step2-desc">
+                                Proyección: $x = a \cdot \cos\alpha = 5.14\text{ m}$. Por tanto, la base del triángulo derecho es $y = b - x = 11 - 5.14 = 5.86\text{ m}$.
+                            </p>
+                        </div>
+
+                        <!-- Paso 3 -->
+                        <div class="p-3.5 rounded-xl bg-indigo-50/70 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-800/70">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold text-indigo-700 dark:text-indigo-300 uppercase">Paso 3: Triángulo Rectángulo II (Lado $c$ y Ángulo $\beta$)</span>
+                                <span class="text-xs font-mono font-bold text-indigo-800 dark:text-indigo-200" id="m2-step3-res">c = 8.48 m | β = 46.3°</span>
+                            </div>
+                            <p class="text-xs text-slate-600 dark:text-slate-300 mt-1" id="m2-step3-desc">
+                                Por Pitágoras en el triángulo derecho: $c = \sqrt{h^2 + y^2} = 8.48\text{ m}$. Y la tangente nos da $\tan\beta = \frac{h}{y} \Rightarrow \beta = 46.3^\circ$.
+                            </p>
+                        </div>
+
+                        <!-- Paso 4: Área -->
+                        <div class="p-3.5 rounded-xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/70">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold text-emerald-700 dark:text-emerald-300 uppercase">Paso 4: Área Total del Triángulo</span>
+                                <span class="text-xs font-mono font-bold text-emerald-800 dark:text-emerald-200" id="m2-step4-res">Área = 33.71 m²</span>
+                            </div>
+                            <p class="text-xs text-slate-600 dark:text-slate-300 mt-1" id="m2-step4-desc">
+                                $S = \frac{1}{2} \cdot b \cdot h = \frac{1}{2} \cdot b \cdot a \cdot \operatorname{sen}\alpha = 33.71\text{ m}^2$.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ===================================================================== -->
+        <!-- MÓDULO 3: ÁLGEBRA TRIGONOMÉTRICA CON LA "FÓRMULA SEMILLA"             -->
+        <!-- ===================================================================== -->
+        <section id="sec-mod3" class="module-section hidden space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Módulo 3 • Economía Cognitiva en Álgebra</span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">Álgebra Trigonométrica con una sola "Fórmula Semilla"</h1>
+                </div>
+                <div class="flex items-center gap-2 self-start">
+                    <span class="text-xs px-3 py-1.5 rounded-xl bg-purple-50 dark:bg-purple-950/60 text-purple-800 dark:text-purple-300 border border-purple-200 dark:border-purple-800 font-medium">
+                        1 Fórmula Semilla $\rightarrow$ Todas las Identidades
+                    </span>
+                </div>
+            </div>
+
+            <!-- Banner de la Fórmula Semilla -->
+            <div class="bg-gradient-to-r from-indigo-600 via-indigo-700 to-violet-700 rounded-2xl p-6 text-white shadow-lg">
+                <div class="max-w-3xl mx-auto text-center space-y-3">
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-white/20 backdrop-blur-sm">
+                        🌱 La Única Identidad de Adición que Necesitas
+                    </span>
+                    <div class="text-xl sm:text-3xl font-extrabold py-2 bg-slate-900/30 rounded-xl border border-white/15">
+                        $$\operatorname{sen}(\alpha + \beta) = \operatorname{sen}\alpha \cdot \cos\beta + \cos\alpha \cdot \operatorname{sen}\beta$$
+                    </div>
+                    <p class="text-xs sm:text-sm text-indigo-100">
+                        En lugar de memorizar decenas de fórmulas desconectadas, en 1.º de Bachillerato aprendemos a <strong>deducirlas en dos pasos algebraicos</strong> realizando simples sustituciones de ángulos.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Selector de Demostraciones Paso a Paso -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                
+                <!-- Lista de Derivaciones -->
+                <div class="lg:col-span-4 space-y-3">
+                    <h2 class="font-bold text-sm uppercase tracking-wider text-slate-400 px-1">Elige qué fórmula quieres deducir:</h2>
+                    
+                    <button onclick="selectDerivation('doble_sen')" id="deriv-btn-doble_sen" class="deriv-btn w-full text-left p-4 rounded-2xl border-2 border-indigo-600 bg-indigo-50/60 dark:bg-indigo-950/40 transition flex items-center justify-between">
+                        <div>
+                            <div class="text-xs font-bold text-indigo-600 dark:text-indigo-400">Deducción 1 • Sustitución $\beta = \alpha$</div>
+                            <div class="font-bold text-slate-900 dark:text-white mt-0.5">Seno del Ángulo Doble: $\operatorname{sen}(2\alpha)$</div>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-5 h-5 text-indigo-600"></i>
+                    </button>
+
+                    <button onclick="selectDerivation('resta_sen')" id="deriv-btn-resta_sen" class="deriv-btn w-full text-left p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-indigo-300 transition flex items-center justify-between">
+                        <div>
+                            <div class="text-xs font-bold text-slate-500">Deducción 2 • Sustitución $\beta \rightarrow -\beta$</div>
+                            <div class="font-bold text-slate-900 dark:text-white mt-0.5">Seno de la Resta: $\operatorname{sen}(\alpha - \beta)$</div>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400"></i>
+                    </button>
+
+                    <button onclick="selectDerivation('suma_cos')" id="deriv-btn-suma_cos" class="deriv-btn w-full text-left p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-indigo-300 transition flex items-center justify-between">
+                        <div>
+                            <div class="text-xs font-bold text-slate-500">Deducción 3 • Complementario $90^\circ - x$</div>
+                            <div class="font-bold text-slate-900 dark:text-white mt-0.5">Coseno de la Suma: $\cos(\alpha + \beta)$</div>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400"></i>
+                    </button>
+
+                    <button onclick="selectDerivation('doble_cos')" id="deriv-btn-doble_cos" class="deriv-btn w-full text-left p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-indigo-300 transition flex items-center justify-between">
+                        <div>
+                            <div class="text-xs font-bold text-slate-500">Deducción 4 • Sustitución $\beta = \alpha$ en $\cos$</div>
+                            <div class="font-bold text-slate-900 dark:text-white mt-0.5">Coseno del Ángulo Doble: $\cos(2\alpha)$</div>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400"></i>
+                    </button>
+                </div>
+
+                <!-- Panel del Demostrador Interactivo Paso a Paso -->
+                <div class="lg:col-span-8 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
+                    <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-slate-100 dark:border-slate-800">
+                        <div>
+                            <span id="deriv-badge" class="text-xs font-bold uppercase text-indigo-600 dark:text-indigo-400">Demostrador Algebraico Paso a Paso</span>
+                            <h3 id="deriv-title" class="text-xl font-extrabold text-slate-900 dark:text-white mt-0.5">Seno del Ángulo Doble: $\operatorname{sen}(2\alpha)$</h3>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="resetDerivationSteps()" class="px-3 py-1.5 text-xs font-semibold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 transition">
+                                Reiniciar Pasos
+                            </button>
+                            <button onclick="nextDerivationStep()" id="btn-next-deriv" class="px-4 py-1.5 text-xs font-bold rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm transition flex items-center gap-1">
+                                <span>Desplegar Siguiente Transformación</span>
+                                <i data-lucide="arrow-down" class="w-3.5 h-3.5"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Contenedor de Pasos Desplegables -->
+                    <div id="deriv-steps-wrapper" class="mt-5 space-y-4">
+                        <!-- Renderizado dinámicamente vía JS -->
+                    </div>
+
+                    <!-- Nota de Conexión Visual en Circunferencia -->
+                    <div class="mt-6 p-4 rounded-xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/70 flex items-start gap-3">
+                        <i data-lucide="lightbulb" class="w-5 h-5 text-amber-600 shrink-0 mt-0.5"></i>
+                        <div class="text-xs text-amber-900 dark:text-amber-200 leading-relaxed">
+                            <strong>Recordatorio de la Circunferencia ($R=1$):</strong> No memorices signos de ángulos opuestos ni complementarios. Al mirar la circunferencia del Módulo 1 ves inmediatamente que al cambiar $\beta$ por $-\beta$, la abscisa $x$ no cambia ($\cos(-\beta) = \cos\beta$) pero la altura $y$ invierte su signo ($\operatorname{sen}(-\beta) = -\operatorname{sen}\beta$).
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ===================================================================== -->
+        <!-- MÓDULO 4: FUNCIONES TRIGONOMÉTRICAS Y RADIANES                        -->
+        <!-- ===================================================================== -->
+        <section id="sec-mod4" class="module-section hidden space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Módulo 4 • De la Geometría al Análisis Funcional</span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">El Radián y el "Desenrollado" de las Funciones Circulares</h1>
+                </div>
+                <div class="flex items-center gap-2 self-start">
+                    <span class="text-xs px-3 py-1.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 font-medium">
+                        Unidad exclusiva para funciones: <strong>Radianes ($\text{rad}$)</strong>
+                    </span>
+                </div>
+            </div>
+
+            <!-- Explicación Didáctica: ¿Por qué introducimos el radián ahora? -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div class="text-xs font-bold uppercase text-indigo-600 dark:text-indigo-400 mb-1">1. ¿Qué es exactamente 1 Radián?</div>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+                        Es el ángulo central cuyo <strong>arco mide exactamente lo mismo que el radio ($L = R$)</strong>. En nuestra circunferencia goniométrica de radio $R=1$, el ángulo en radianes coincide numéricamente con la longitud del arco recorrido.
+                    </p>
+                </div>
+                <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div class="text-xs font-bold uppercase text-indigo-600 dark:text-indigo-400 mb-1">2. ¿Por qué no usar grados en $f(x)$?</div>
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+                        Para representar funciones reales $y = \operatorname{sen}(x)$ necesitamos que el eje horizontal $X$ y el eje vertical $Y$ tengan la <strong>misma escala lineal</strong>: desenrollamos la longitud del arco ($0$ a $2\pi \approx 6.28$) sobre el eje $X$.
+                    </p>
+                </div>
+                <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div class="text-xs font-bold uppercase text-indigo-600 dark:text-indigo-400 mb-1">3. Equivalencias Fundamentales</div>
+                    <div class="grid grid-cols-3 gap-1.5 mt-2 text-center font-mono text-xs">
+                        <div class="p-1.5 rounded bg-slate-100 dark:bg-slate-800">$30^\circ = \frac{\pi}{6}$</div>
+                        <div class="p-1.5 rounded bg-slate-100 dark:bg-slate-800">$45^\circ = \frac{\pi}{4}$</div>
+                        <div class="p-1.5 rounded bg-slate-100 dark:bg-slate-800">$60^\circ = \frac{\pi}{3}$</div>
+                        <div class="p-1.5 rounded bg-slate-100 dark:bg-slate-800">$90^\circ = \frac{\pi}{2}$</div>
+                        <div class="p-1.5 rounded bg-slate-100 dark:bg-slate-800">$180^\circ = \pi$</div>
+                        <div class="p-1.5 rounded bg-slate-100 dark:bg-slate-800">$360^\circ = 2\pi$</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Simulador de Desenrollado de la Circunferencia -->
+            <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 shadow-sm space-y-5">
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                    <div>
+                        <h2 class="font-bold text-base sm:text-lg flex items-center gap-2">
+                            <i data-lucide="activity" class="w-5 h-5 text-indigo-600"></i>
+                            Simulador de "Desenrollado" del Arco ($x \text{ rad}$) a la Onda Continua
+                        </h2>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Observa cómo el arco naranja de la circunferencia se estira sobre el eje horizontal mientras la altura proyecta la onda.</p>
+                    </div>
+
+                    <!-- Selector de Función y Animación -->
+                    <div class="flex flex-wrap items-center gap-2">
+                        <div class="inline-flex rounded-xl bg-slate-100 dark:bg-slate-800 p-1">
+                            <button onclick="setMod4Func('sin')" id="btn-m4-sin" class="px-3 py-1 rounded-lg text-xs font-bold bg-rose-600 text-white transition">$y = \operatorname{sen}(x)$</button>
+                            <button onclick="setMod4Func('cos')" id="btn-m4-cos" class="px-3 py-1 rounded-lg text-xs font-bold text-slate-600 dark:text-slate-300 transition">$y = \cos(x)$</button>
+                            <button onclick="setMod4Func('tan')" id="btn-m4-tan" class="px-3 py-1 rounded-lg text-xs font-bold text-slate-600 dark:text-slate-300 transition">$y = \tan(x)$</button>
+                        </div>
+                        <button onclick="toggleMod4Play()" id="btn-m4-play" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 hover:bg-indigo-700 text-white flex items-center gap-1.5 transition">
+                            <i data-lucide="play" class="w-4 h-4"></i>
+                            <span id="btn-m4-play-text">Auto-Desenrollar</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Canvas Panorámico (Circunferencia a la izquierda + Ejes Cartesiano a la derecha) -->
+                <div class="relative w-full h-[340px] bg-slate-50 dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+                    <canvas id="canvas-mod4" class="w-full h-full"></canvas>
+                </div>
+
+                <!-- Deslizador de Radianes -->
+                <div class="space-y-3">
+                    <div class="flex flex-wrap items-center justify-between gap-4">
+                        <div class="flex items-center gap-4">
+                            <span class="text-sm font-semibold">Longitud del arco desenrollado $x$:</span>
+                            <span id="m4-rad-display" class="px-3 py-1 rounded-lg bg-amber-100 dark:bg-amber-900/50 text-amber-900 dark:text-amber-200 font-mono text-sm font-bold">
+                                1.57 rad (π/2) = 90°
+                            </span>
+                        </div>
+                        <div id="m4-func-val-display" class="font-mono text-sm font-bold text-rose-600 dark:text-rose-400">
+                            sen(1.57) = +1.000
+                        </div>
+                    </div>
+                    <input type="range" id="slider-mod4" min="0" max="6.283" step="0.02" value="1.57" class="w-full">
+                    <div class="flex justify-between text-[11px] font-mono text-slate-400 px-1">
+                        <button onclick="setMod4Rad(0)" class="hover:text-indigo-500">$0\text{ rad}$</button>
+                        <button onclick="setMod4Rad(0.5236)" class="hover:text-indigo-500">$\frac{\pi}{6}$ ($30^\circ$)</button>
+                        <button onclick="setMod4Rad(1.0472)" class="hover:text-indigo-500 font-bold text-amber-600">$1\text{ rad}$ ($\approx 57.3^\circ$)</button>
+                        <button onclick="setMod4Rad(1.5708)" class="hover:text-indigo-500">$\frac{\pi}{2}$ ($90^\circ$)</button>
+                        <button onclick="setMod4Rad(3.1416)" class="hover:text-indigo-500">$\pi$ ($180^\circ$)</button>
+                        <button onclick="setMod4Rad(4.7124)" class="hover:text-indigo-500">$\frac{3\pi}{2}$ ($270^\circ$)</button>
+                        <button onclick="setMod4Rad(6.2832)" class="hover:text-indigo-500">$2\pi$ ($360^\circ$)</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ===================================================================== -->
+        <!-- SECCIÓN DE EJERCICIOS INTERACTIVOS Y EVALUACIÓN (3 NIVELES)           -->
+        <!-- ===================================================================== -->
+        <section id="sec-eval" class="module-section hidden space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">Evaluación Formativa • El Error como Aprendizaje</span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">Laboratorio de Ejercicios con Pistas Progresivas</h1>
+                </div>
+                <!-- Marcador de Progreso -->
+                <div class="flex items-center gap-3 bg-white dark:bg-slate-900 px-4 py-2 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <div class="text-xs text-slate-500 dark:text-slate-400">Dominio Procedural:</div>
+                    <div id="eval-score-badge" class="font-mono font-extrabold text-emerald-600 dark:text-emerald-400 text-sm">0 / 6 Completados</div>
+                </div>
+            </div>
+
+            <!-- Selector de los 3 Niveles de Profundidad -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <button onclick="switchEvalLevel(1)" id="btn-lvl-1" class="lvl-btn p-4 rounded-2xl border-2 border-indigo-600 bg-indigo-50/70 dark:bg-indigo-950/40 text-left transition">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Nivel 1 • Básico</span>
+                        <span class="px-2 py-0.5 text-[11px] rounded-full bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 font-bold">Fijar Ideas</span>
+                    </div>
+                    <div class="font-bold text-slate-900 dark:text-white mt-1">Lectura de Circunferencia y Ángulos Notables</div>
+                </button>
+
+                <button onclick="switchEvalLevel(2)" id="btn-lvl-2" class="lvl-btn p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-left hover:border-indigo-300 transition">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Nivel 2 • Procedural</span>
+                        <span class="px-2 py-0.5 text-[11px] rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-bold">Practicar</span>
+                    </div>
+                    <div class="font-bold text-slate-900 dark:text-white mt-1">Problemas Guiados: Estrategia de la Altura</div>
+                </button>
+
+                <button onclick="switchEvalLevel(3)" id="btn-lvl-3" class="lvl-btn p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-left hover:border-indigo-300 transition">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Nivel 3 • Contexto Real</span>
+                        <span class="px-2 py-0.5 text-[11px] rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-bold">Profundizar</span>
+                    </div>
+                    <div class="font-bold text-slate-900 dark:text-white mt-1">Topografía y Alturas Inaccesibles</div>
+                </button>
+            </div>
+
+            <!-- Contenedor Dinámico del Ejercicio Activo -->
+            <div id="eval-workspace" class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-5 sm:p-7 shadow-sm">
+                <!-- Renderizado por JavaScript -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===================================================================== -->
+    <!-- MODAL: EL MÍNIMO FORMULARIO INDISPENSABLE                             -->
+    <!-- ===================================================================== -->
+    <div id="modal-formulario" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-2xl max-w-2xl w-full border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+            <div class="bg-gradient-to-r from-amber-500 to-orange-500 p-5 text-white flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <i data-lucide="sparkles" class="w-6 h-6"></i>
+                    <div>
+                        <h3 class="font-extrabold text-lg">El Mínimo Formulario Indispensable</h3>
+                        <p class="text-xs text-amber-100">Todo 1.º de Bachillerato reducido a 3 herramientas métricas y 1 fórmula semilla</p>
+                    </div>
+                </div>
+                <button onclick="toggleModal('modal-formulario')" class="p-1.5 rounded-lg bg-white/20 hover:bg-white/30 text-white transition">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <div class="p-6 space-y-5 max-h-[80vh] overflow-y-auto">
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-2">A. En la Circunferencia Goniométrica ($R=1$)</h4>
+                    <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-sm">
+                        $$x = \cos\alpha \quad;\quad y = \operatorname{sen}\alpha \quad;\quad \tan\alpha = \frac{y}{x} \quad;\quad \cos^2\alpha + \operatorname{sen}^2\alpha = 1$$
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-2">B. Las 3 Herramientas para Resolver Cualquier Triángulo (Estrategia de la Altura)</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
+                        <div class="p-3 rounded-xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800">
+                            <div class="text-xs font-bold text-blue-700 dark:text-blue-300">1. Proyección</div>
+                            <div class="mt-1 font-semibold">$A'B' = AB \cdot \cos\alpha$</div>
+                        </div>
+                        <div class="p-3 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800">
+                            <div class="text-xs font-bold text-rose-700 dark:text-rose-300">2. Altura</div>
+                            <div class="mt-1 font-semibold">$h = a \cdot \operatorname{sen}\alpha$</div>
+                        </div>
+                        <div class="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800">
+                            <div class="text-xs font-bold text-emerald-700 dark:text-emerald-300">3. Área</div>
+                            <div class="mt-1 font-semibold">$A = \frac{1}{2} a b \operatorname{sen}\alpha$</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-2">C. La Única "Fórmula Semilla" para Identidades Algebraicas</h4>
+                    <div class="p-3.5 rounded-xl bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800 text-center">
+                        $$\operatorname{sen}(\alpha + \beta) = \operatorname{sen}\alpha \cos\beta + \cos\alpha \operatorname{sen}\beta$$
+                        <p class="text-xs text-slate-600 dark:text-slate-400 mt-1">De aquí brotan $\operatorname{sen}(2\alpha)$, $\operatorname{sen}(\alpha-\beta)$, $\cos(\alpha+\beta)$ y $\cos(2\alpha)$ sin memorizar más.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-4 px-4 mt-12">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 dark:text-slate-400 gap-2">
+            <div><strong>TrigoLab 1.º Bachillerato</strong> • Diseño Instruccional Basado en Simplificación Procedural y Visualización Dinámica</div>
+            <div>Unidades 3 y 4: Resolución de Triángulos, Fórmulas y Funciones Trigonométricas</div>
+        </div>
+    </footer>
+
+    <!-- ===================================================================== -->
+    <!-- JAVASCRIPT ENGINE: SIMULATORS, MATH RENDERING & ASSESSMENT            -->
+    <!-- ===================================================================== -->
+    <script>
+        // --- ESTADO GLOBAL DE LA PLATAFORMA ---
+        const state = {
+            currentSection: 'mod1',
+            darkMode: false,
+            // Módulo 1: Circunferencia Goniométrica
+            m1AngleDeg: 30,
+            m1Dragging: false,
+            // Módulo 2: Estrategia de la Altura
+            m2SideA: 8.0,
+            m2SideB: 11.0,
+            m2AngleAlpha: 50,
+            m2ShowAltitude: true,
+            // Módulo 3: Fórmula Semilla
+            m3CurrentDeriv: 'doble_sen',
+            m3VisibleSteps: 1,
+            // Módulo 4: Funciones y Radianes
+            m4Rad: Math.PI / 2,
+            m4Func: 'sin',
+            m4Playing: false,
+            m4AnimId: null,
+            // Evaluación Interactiva
+            evalLevel: 1,
+            evalQuestionIdx: 0,
+            evalAttempts: {}, // clave 'lvl-idx' -> número de fallos
+            evalCompleted: new Set()
+        };
+
+        const pedagogicalMessages = {
+            mod1: 'Integramos la circunferencia de radio R=1 con el triángulo rectángulo desde el primer instante.',
+            mod2: 'Estrategia de la Altura: Resuelve cualquier triángulo oblicuángulo dividiéndolo en dos rectángulos antes de usar teoremas.',
+            mod3: 'Economía Cognitiva: A partir de una sola "Fórmula Semilla" deducimos algebraicamente todas las demás identidades.',
+            mod4: 'Uso acotado del Radián: Reservamos los radianes exclusivamente para desenrollar la circunferencia y trazar funciones.',
+            eval: 'El Error como Aprendizaje: Si te equivocas, recibirás primero una pista conceptual y luego la descomposición geométrica.'
+        };
+
+        // Utilidad para renderizar KaTeX en un contenedor específico
+        function renderMathInContainer(el) {
+            if (window.renderMathInElement && el) {
+                renderMathInElement(el, {
+                    delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '$', right: '$', display: false}
+                    ],
+                    throwOnError: false
+                });
+            }
+        }
+
+        // Control de Tema Claro / Oscuro
+        function toggleTheme() {
+            state.darkMode = !state.darkMode;
+            document.documentElement.classList.toggle('dark', state.darkMode);
+            redrawAllActiveCanvases();
+        }
+
+        // Control de Modales
+        function toggleModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) {
+                modal.classList.toggle('hidden');
+                renderMathInContainer(modal);
+            }
+        }
+
+        // Cambio de Pestaña / Módulo
+        function switchSection(secId) {
+            state.currentSection = secId;
+            if (secId !== 'mod4' && state.m4Playing) {
+                toggleMod4Play(); // Pausa animación si sale del módulo 4
+            }
+
+            document.querySelectorAll('.module-section').forEach(s => s.classList.add('hidden'));
+            const target = document.getElementById(`sec-${secId}`);
+            if (target) target.classList.remove('hidden');
+
+            // Actualizar navegación Desktop
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('tab-active');
+            });
+            const activeNav = document.getElementById(`nav-${secId}`);
+            if (activeNav) activeNav.classList.add('tab-active');
+
+            // Actualizar navegación Móvil
+            document.querySelectorAll('.mnav-btn').forEach(btn => {
+                btn.className = 'mnav-btn shrink-0 px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300';
+            });
+            const activeMNav = document.getElementById(`mnav-${secId}`);
+            if (activeMNav) {
+                activeMNav.className = 'mnav-btn shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold bg-indigo-600 text-white';
+            }
+
+            // Actualizar banner pedagógico
+            const banner = document.getElementById('pedagogical-banner-text');
+            if (banner && pedagogicalMessages[secId]) {
+                banner.textContent = pedagogicalMessages[secId];
+            }
+
+            // Redibujar Canvas del módulo activo
+            setTimeout(() => {
+                redrawAllActiveCanvases();
+                renderMathInContainer(target);
+            }, 30);
+        }
+
+        function redrawAllActiveCanvases() {
+            if (state.currentSection === 'mod1') drawMod1Canvas();
+            if (state.currentSection === 'mod2') drawMod2Canvas();
+            if (state.currentSection === 'mod4') drawMod4Canvas();
+            if (state.currentSection === 'eval') drawEvalHelperCanvas();
+        }
+
+        // =========================================================================
+        // MÓDULO 1: LA CIRCUNFERENCIA GONIOMÉTRICA (R = 1)
+        // =========================================================================
+        const exactNotableTable = {
+            0:   { cos: '1', sin: '0', tan: '0' },
+            30:  { cos: '\\frac{\\sqrt{3}}{2}', sin: '\\frac{1}{2}', tan: '\\frac{\\sqrt{3}}{3}' },
+            45:  { cos: '\\frac{\\sqrt{2}}{2}', sin: '\\frac{\\sqrt{2}}{2}', tan: '1' },
+            60:  { cos: '\\frac{1}{2}', sin: '\\frac{\\sqrt{3}}{2}', tan: '\\sqrt{3}' },
+            90:  { cos: '0', sin: '1', tan: '\\nexists \\text{ (Asín.)}' },
+            120: { cos: '-\\frac{1}{2}', sin: '\\frac{\\sqrt{3}}{2}', tan: '-\\sqrt{3}' },
+            135: { cos: '-\\frac{\\sqrt{2}}{2}', sin: '\\frac{\\sqrt{2}}{2}', tan: '-1' },
+            150: { cos: '-\\frac{\\sqrt{3}}{2}', sin: '\\frac{1}{2}', tan: '-\\frac{\\sqrt{3}}{3}' },
+            180: { cos: '-1', sin: '0', tan: '0' },
+            210: { cos: '-\\frac{\\sqrt{3}}{2}', sin: '-\\frac{1}{2}', tan: '\\frac{\\sqrt{3}}{3}' },
+            225: { cos: '-\\frac{\\sqrt{2}}{2}', sin: '-\\frac{\\sqrt{2}}{2}', tan: '1' },
+            240: { cos: '-\\frac{1}{2}', sin: '-\\frac{\\sqrt{3}}{2}', tan: '\\sqrt{3}' },
+            270: { cos: '0', sin: '-1', tan: '\\nexists \\text{ (Asín.)}' },
+            300: { cos: '\\frac{1}{2}', sin: '-\\frac{\\sqrt{3}}{2}', tan: '-\\sqrt{3}' },
+            315: { cos: '\\frac{\\sqrt{2}}{2}', sin: '-\\frac{\\sqrt{2}}{2}', tan: '-1' },
+            330: { cos: '\\frac{\\sqrt{3}}{2}', sin: '-\\frac{1}{2}', tan: '-\\frac{\\sqrt{3}}{3}' },
+            360: { cos: '1', sin: '0', tan: '0' }
+        };
+
+        function setMod1Angle(deg) {
+            state.m1AngleDeg = ((deg % 360) + 360) % 360;
+            if (deg === 360) state.m1AngleDeg = 360;
+            document.getElementById('slider-mod1').value = state.m1AngleDeg;
+            updateMod1UI();
+            drawMod1Canvas();
+        }
+
+        function updateMod1UI() {
+            const deg = Math.round(state.m1AngleDeg);
+            const rad = (deg * Math.PI) / 180;
+            const cosVal = Math.cos(rad);
+            const sinVal = Math.sin(rad);
+
+            document.getElementById('m1-angle-display').textContent = `${deg}°`;
+
+            // Formateo con signo explícito para reforzar signos por cuadrante
+            const formatSigned = (v) => (Math.abs(v) < 1e-9 ? '0.000' : (v > 0 ? `+${v.toFixed(3)}` : v.toFixed(3)));
+            document.getElementById('m1-val-cos').textContent = formatSigned(cosVal);
+            document.getElementById('m1-val-sin').textContent = formatSigned(sinVal);
+
+            if (deg === 90 || deg === 270) {
+                document.getElementById('m1-val-tan').textContent = 'No def.';
+            } else {
+                const tanVal = Math.tan(rad);
+                document.getElementById('m1-val-tan').textContent = formatSigned(tanVal);
+            }
+
+            // Valores exactos si es notable
+            const exact = exactNotableTable[deg];
+            const elExCos = document.getElementById('m1-exact-cos');
+            const elExSin = document.getElementById('m1-exact-sin');
+            const elExTan = document.getElementById('m1-exact-tan');
+
+            if (exact) {
+                elExCos.innerHTML = `$${exact.cos}$`;
+                elExSin.innerHTML = `$${exact.sin}$`;
+                elExTan.innerHTML = `$${exact.tan}$`;
+                renderMathInContainer(elExCos.parentElement.parentElement);
+            } else {
+                elExCos.textContent = 'Aprox. decimal';
+                elExSin.textContent = 'Aprox. decimal';
+                elExTan.textContent = 'Cociente y/x';
+            }
+
+            // Badge de Cuadrante y signos
+            const qBadge = document.getElementById('m1-quadrant-badge');
+            if (deg > 0 && deg < 90) {
+                qBadge.textContent = 'Cuadrante I (x > 0, y > 0)';
+            } else if (deg > 90 && deg < 180) {
+                qBadge.textContent = 'Cuadrante II (x < 0, y > 0)';
+            } else if (deg > 180 && deg < 270) {
+                qBadge.textContent = 'Cuadrante III (x < 0, y < 0)';
+            } else if (deg > 270 && deg < 360) {
+                qBadge.textContent = 'Cuadrante IV (x > 0, y < 0)';
+            } else {
+                qBadge.textContent = `Ángulo sobre Eje (${deg}°)`;
+            }
+
+            // Pitágoras en vivo
+            const pythEl = document.getElementById('m1-pythagoras-live');
+            pythEl.textContent = `(${cosVal.toFixed(2)})² + (${sinVal.toFixed(2)})² = 1.00`;
+        }
+
+        function drawMod1Canvas() {
+            const canvas = document.getElementById('canvas-mod1');
+            if (!canvas) return;
+            const rect = canvas.parentElement.getBoundingClientRect();
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            const ctx = canvas.getContext('2d');
+            ctx.scale(dpr, dpr);
+
+            const w = rect.width;
+            const h = rect.height;
+            const cx = w * 0.46; // ligero desplazamiento a la izquierda para dejar ver la recta tangente x=1
+            const cy = h * 0.5;
+            const r = Math.min(w, h) * 0.34;
+
+            const isDark = state.darkMode;
+            ctx.clearRect(0, 0, w, h);
+
+            // Cuadrícula suave
+            ctx.strokeStyle = isDark ? '#1e293b' : '#e2e8f0';
+            ctx.lineWidth = 1;
+            const step = r / 2;
+            for (let x = cx % step; x < w; x += step) {
+                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+            }
+            for (let y = cy % step; y < h; y += step) {
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+            }
+
+            // Ejes de coordenadas
+            ctx.strokeStyle = isDark ? '#64748b' : '#94a3b8';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(15, cy); ctx.lineTo(w - 15, cy);
+            ctx.moveTo(cx, 15); ctx.lineTo(cx, h - 15);
+            ctx.stroke();
+
+            // Recta Tangente en x = 1
+            const tanLineX = cx + r;
+            ctx.save();
+            ctx.setLineDash([4, 4]);
+            ctx.strokeStyle = isDark ? '#059669' : '#10b981';
+            ctx.beginPath();
+            ctx.moveTo(tanLineX, 15);
+            ctx.lineTo(tanLineX, h - 15);
+            ctx.stroke();
+            ctx.restore();
+
+            // Circunferencia Goniométrica R = 1
+            ctx.strokeStyle = isDark ? '#818cf8' : '#4f46e5';
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            ctx.arc(cx, cy, r, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Cálculo del punto P(x, y)
+            const rad = (state.m1AngleDeg * Math.PI) / 180;
+            const cosVal = Math.cos(rad);
+            const sinVal = Math.sin(rad);
+            const px = cx + cosVal * r;
+            const py = cy - sinVal * r;
+
+            // Relleno sombreado del Triángulo Rectángulo Interior
+            ctx.fillStyle = isDark ? 'rgba(99, 102, 241, 0.16)' : 'rgba(79, 70, 229, 0.10)';
+            ctx.beginPath();
+            ctx.moveTo(cx, cy);
+            ctx.lineTo(px, cy);
+            ctx.lineTo(px, py);
+            ctx.closePath();
+            ctx.fill();
+
+            // Símbolo de ángulo recto en (px, cy) si hay triángulo visible
+            if (Math.abs(cosVal) > 0.12 && Math.abs(sinVal) > 0.12) {
+                const sq = 9;
+                const dirX = cosVal > 0 ? -1 : 1;
+                const dirY = sinVal > 0 ? -1 : 1;
+                ctx.strokeStyle = isDark ? '#94a3b8' : '#64748b';
+                ctx.lineWidth = 1.2;
+                ctx.strokeRect(px + (dirX < 0 ? -sq : 0), cy + (dirY < 0 ? -sq : 0), sq, sq);
+            }
+
+            // Arco del ángulo alpha
+            ctx.fillStyle = isDark ? 'rgba(245, 158, 11, 0.25)' : 'rgba(245, 158, 11, 0.2)';
+            ctx.strokeStyle = '#f59e0b';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(cx, cy);
+            ctx.arc(cx, cy, 28, 0, -rad, true);
+            ctx.closePath();
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(cx, cy, 28, 0, -rad, true);
+            ctx.stroke();
+
+            // Segmento Tangente Geométrica (en x = 1) cuando es visible
+            if (Math.abs(cosVal) > 0.08) {
+                const tanVal = sinVal / cosVal;
+                const tanY = cy - tanVal * r;
+                // Línea prolongada desde origen hasta la recta tangente
+                ctx.save();
+                ctx.setLineDash([3, 3]);
+                ctx.strokeStyle = isDark ? '#34d399' : '#059669';
+                ctx.lineWidth = 1.2;
+                ctx.beginPath();
+                ctx.moveTo(cx, cy);
+                ctx.lineTo(tanLineX, tanY);
+                ctx.stroke();
+                ctx.restore();
+
+                // Segmento vertical de la tangente
+                ctx.strokeStyle = '#10b981';
+                ctx.lineWidth = 3.5;
+                ctx.beginPath();
+                ctx.moveTo(tanLineX, cy);
+                ctx.lineTo(tanLineX, Math.max(-20, Math.min(h + 20, tanY)));
+                ctx.stroke();
+            }
+
+            // Cateto Horizontal: x = cos(alpha) (Azul)
+            ctx.strokeStyle = '#2563eb';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(cx, cy);
+            ctx.lineTo(px, cy);
+            ctx.stroke();
+
+            // Cateto Vertical: y = sen(alpha) (Rojo/Rosa)
+            ctx.strokeStyle = '#e11d48';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(px, cy);
+            ctx.lineTo(px, py);
+            ctx.stroke();
+
+            // Hipotenusa: Radio R = 1
+            ctx.strokeStyle = isDark ? '#e2e8f0' : '#1e293b';
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            ctx.moveTo(cx, cy);
+            ctx.lineTo(px, py);
+            ctx.stroke();
+
+            // Punto arrastrable P(x,y)
+            ctx.fillStyle = '#4f46e5';
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            ctx.arc(px, py, 8, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.stroke();
+
+            // Etiquetas dinámicas claras
+            ctx.font = 'bold 12px Inter, sans-serif';
+            // Etiqueta x = cos
+            ctx.fillStyle = isDark ? '#60a5fa' : '#1d4ed8';
+            ctx.fillText('x = cos α', (cx + px) / 2 - 24, cy + (sinVal >= 0 ? 18 : -10));
+            // Etiqueta y = sen
+            ctx.fillStyle = isDark ? '#fb7185' : '#be123c';
+            ctx.fillText('y = sen α', px + (cosVal >= 0 ? 8 : -64), (cy + py) / 2 + 4);
+            // Etiqueta R = 1
+            ctx.fillStyle = isDark ? '#cbd5e1' : '#334155';
+            ctx.fillText('R = 1', (cx + px) / 2 - 12, (cy + py) / 2 - 8);
+            // Etiqueta Punto P
+            ctx.font = 'bold 12px JetBrains Mono, monospace';
+            ctx.fillStyle = isDark ? '#f8fafc' : '#0f172a';
+            const labelOffsetX = cosVal >= 0 ? 12 : -115;
+            const labelOffsetY = sinVal >= 0 ? -12 : 20;
+            ctx.fillText(`P(${cosVal.toFixed(2)}, ${sinVal.toFixed(2)})`, px + labelOffsetX, py + labelOffsetY);
+        }
+
+        // Eventos de arrastre en el Canvas del Módulo 1
+        function setupMod1Interactions() {
+            const canvas = document.getElementById('canvas-mod1');
+            const slider = document.getElementById('slider-mod1');
+
+            slider.addEventListener('input', (e) => {
+                setMod1Angle(parseFloat(e.target.value));
+            });
+
+            const updateAngleFromPointer = (clientX, clientY) => {
+                const rect = canvas.getBoundingClientRect();
+                const cx = rect.width * 0.46;
+                const cy = rect.height * 0.5;
+                const dx = (clientX - rect.left) - cx;
+                const dy = cy - (clientY - rect.top);
+                let angleRad = Math.atan2(dy, dx);
+                if (angleRad < 0) angleRad += Math.PI * 2;
+                let deg = Math.round((angleRad * 180) / Math.PI);
+
+                // Imán suave hacia ángulos notables (30, 45, 60, 90, etc.)
+                const notables = [0, 30, 45, 60, 90, 120, 135, 150, 180, 210, 225, 240, 270, 300, 315, 330, 360];
+                for (let n of notables) {
+                    if (Math.abs(deg - n) <= 2) {
+                        deg = n;
+                        break;
+                    }
+                }
+                setMod1Angle(deg);
+            };
+
+            canvas.addEventListener('pointerdown', (e) => {
+                state.m1Dragging = true;
+                updateAngleFromPointer(e.clientX, e.clientY);
+            });
+            window.addEventListener('pointermove', (e) => {
+                if (state.m1Dragging) updateAngleFromPointer(e.clientX, e.clientY);
+            });
+            window.addEventListener('pointerup', () => {
+                state.m1Dragging = false;
+            });
+        }
+
+
+        // =========================================================================
+        // MÓDULO 2: RESOLUCIÓN PROCEDURAL ("ESTRATEGIA DE LA ALTURA")
+        // =========================================================================
+        function toggleMod2Altitude() {
+            state.m2ShowAltitude = !state.m2ShowAltitude;
+            const btnText = document.getElementById('btn-mod2-altitude-text');
+            const pill = document.getElementById('m2-status-pill');
+            if (state.m2ShowAltitude) {
+                btnText.textContent = 'Ocultar Altura h';
+                pill.textContent = 'Altura Activa (2 Triángulos Rectángulos)';
+                pill.className = 'text-xs px-2.5 py-0.5 rounded-full font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300';
+            } else {
+                btnText.textContent = 'Trazar Altura h (Dividir)';
+                pill.textContent = 'Sin Dividir (Oblicuángulo)';
+                pill.className = 'text-xs px-2.5 py-0.5 rounded-full font-semibold bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300';
+            }
+            drawMod2Canvas();
+        }
+
+        function setupMod2Interactions() {
+            const sA = document.getElementById('slider-m2-a');
+            const sB = document.getElementById('slider-m2-b');
+            const sAlpha = document.getElementById('slider-m2-alpha');
+
+            const onUpdate = () => {
+                state.m2SideA = parseFloat(sA.value);
+                state.m2SideB = parseFloat(sB.value);
+                state.m2AngleAlpha = parseFloat(sAlpha.value);
+
+                document.getElementById('m2-val-a').textContent = `${state.m2SideA.toFixed(1)} m`;
+                document.getElementById('m2-val-b').textContent = `${state.m2SideB.toFixed(1)} m`;
+                document.getElementById('m2-val-alpha').textContent = `${state.m2AngleAlpha}°`;
+
+                updateMod2Steps();
+                drawMod2Canvas();
+            };
+
+            sA.addEventListener('input', onUpdate);
+            sB.addEventListener('input', onUpdate);
+            sAlpha.addEventListener('input', onUpdate);
+            onUpdate();
+        }
+
+        function updateMod2Steps() {
+            const a = state.m2SideA;
+            const b = state.m2SideB;
+            const alphaDeg = state.m2AngleAlpha;
+            const alphaRad = (alphaDeg * Math.PI) / 180;
+
+            const h = a * Math.sin(alphaRad);
+            const x = a * Math.cos(alphaRad);
+            const y = b - x;
+            const c = Math.sqrt(h * h + y * y);
+            const betaDeg = (Math.atan2(h, Math.abs(y)) * 180) / Math.PI;
+            const area = 0.5 * b * h;
+
+            document.getElementById('m2-step1-res').textContent = `h = ${h.toFixed(2)} m`;
+            document.getElementById('m2-step1-desc').innerHTML =
+                `Aplicamos la herramienta de la altura: $h = a \\cdot \\operatorname{sen}\\alpha = ${a} \\cdot \\operatorname{sen}(${alphaDeg}^\\circ) = \\mathbf{${h.toFixed(2)}\\text{ m}}$.`;
+
+            document.getElementById('m2-step2-res').textContent = `x = ${x.toFixed(2)} m | y = ${y.toFixed(2)} m`;
+            document.getElementById('m2-step2-desc').innerHTML =
+                `Proyección: $x = a \\cdot \\cos(${alphaDeg}^\\circ) = \\mathbf{${x.toFixed(2)}\\text{ m}}$. Segmento restante en la base: $y = b - x = ${b} - (${x.toFixed(2)}) = \\mathbf{${y.toFixed(2)}\\text{ m}}$.`;
+
+            document.getElementById('m2-step3-res').textContent = `c = ${c.toFixed(2)} m | β = ${betaDeg.toFixed(1)}°`;
+            document.getElementById('m2-step3-desc').innerHTML =
+                `Pitágoras en el Triángulo II: $c = \\sqrt{h^2 + y^2} = \\sqrt{${h.toFixed(2)}^2 + (${y.toFixed(2)})^2} = \\mathbf{${c.toFixed(2)}\\text{ m}}$.`;
+
+            document.getElementById('m2-step4-res').textContent = `Área = ${area.toFixed(2)} m²`;
+            document.getElementById('m2-step4-desc').innerHTML =
+                `$S = \\frac{1}{2} \\cdot b \\cdot a \\cdot \\operatorname{sen}\\alpha = \\frac{1}{2} \\cdot ${b} \\cdot ${h.toFixed(2)} = \\mathbf{${area.toFixed(2)}\\text{ m}^2}$.`;
+
+            renderMathInContainer(document.getElementById('m2-steps-container'));
+        }
+
+        function drawMod2Canvas() {
+            const canvas = document.getElementById('canvas-mod2');
+            if (!canvas) return;
+            const rect = canvas.parentElement.getBoundingClientRect();
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            const ctx = canvas.getContext('2d');
+            ctx.scale(dpr, dpr);
+
+            const w = rect.width;
+            const hCanvas = rect.height;
+            const isDark = state.darkMode;
+            ctx.clearRect(0, 0, w, hCanvas);
+
+            const a = state.m2SideA;
+            const b = state.m2SideB;
+            const alphaRad = (state.m2AngleAlpha * Math.PI) / 180;
+
+            const hTri = a * Math.sin(alphaRad);
+            const xProj = a * Math.cos(alphaRad);
+
+            // Escala automática para encajar en el canvas
+            const minX = Math.min(0, xProj);
+            const maxX = Math.max(b, xProj);
+            const spanX = Math.max(maxX - minX, 8);
+            const spanY = Math.max(hTri, 5);
+            const scale = Math.min((w - 110) / spanX, (hCanvas - 90) / spanY);
+
+            const originX = 55 - minX * scale;
+            const originY = hCanvas - 45;
+
+            // Vértices en coordenadas del Canvas: A (origen), B (extremo base), C (cúspide), H (pie de la altura)
+            const Ax = originX, Ay = originY;
+            const Bx = originX + b * scale, By = originY;
+            const Cx = originX + xProj * scale, Cy = originY - hTri * scale;
+            const Hx = Cx, Hy = originY;
+
+            // Si la altura está activa, colorear suavemente los dos triángulos rectángulos
+            if (state.m2ShowAltitude) {
+                // Triángulo I (Izquierdo)
+                ctx.fillStyle = isDark ? 'rgba(244, 63, 94, 0.14)' : 'rgba(244, 63, 94, 0.09)';
+                ctx.beginPath(); ctx.moveTo(Ax, Ay); ctx.lineTo(Hx, Hy); ctx.lineTo(Cx, Cy); ctx.closePath(); ctx.fill();
+
+                // Triángulo II (Derecho)
+                ctx.fillStyle = isDark ? 'rgba(59, 130, 246, 0.14)' : 'rgba(59, 130, 246, 0.09)';
+                ctx.beginPath(); ctx.moveTo(Hx, Hy); ctx.lineTo(Bx, By); ctx.lineTo(Cx, Cy); ctx.closePath(); ctx.fill();
+            } else {
+                ctx.fillStyle = isDark ? 'rgba(99, 102, 241, 0.12)' : 'rgba(99, 102, 241, 0.08)';
+                ctx.beginPath(); ctx.moveTo(Ax, Ay); ctx.lineTo(Bx, By); ctx.lineTo(Cx, Cy); ctx.closePath(); ctx.fill();
+            }
+
+            // Arco del ángulo Alpha en el vértice A
+            ctx.fillStyle = 'rgba(245, 158, 11, 0.25)';
+            ctx.strokeStyle = '#f59e0b';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(Ax, Ay);
+            ctx.arc(Ax, Ay, 26, 0, -alphaRad, true);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+
+            // Lados del Triángulo Principal
+            ctx.strokeStyle = isDark ? '#e2e8f0' : '#1e293b';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(Ax, Ay);
+            ctx.lineTo(Bx, By);
+            ctx.lineTo(Cx, Cy);
+            ctx.closePath();
+            ctx.stroke();
+
+            // Si la altura h está trazada
+            if (state.m2ShowAltitude) {
+                // Si el ángulo es obtuso, mostrar prolongación de la base hasta H
+                if (xProj < 0) {
+                    ctx.save();
+                    ctx.setLineDash([4, 4]);
+                    ctx.strokeStyle = '#64748b';
+                    ctx.beginPath(); ctx.moveTo(Ax, Ay); ctx.lineTo(Hx, Hy); ctx.stroke();
+                    ctx.restore();
+                }
+
+                // Línea de Altura h
+                ctx.save();
+                ctx.setLineDash([6, 4]);
+                ctx.strokeStyle = '#e11d48';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(Cx, Cy);
+                ctx.lineTo(Hx, Hy);
+                ctx.stroke();
+                ctx.restore();
+
+                // Símbolo de ángulo recto en H
+                const sq = 10;
+                ctx.strokeStyle = '#e11d48';
+                ctx.lineWidth = 1.5;
+                ctx.strokeRect(Hx, Hy - sq, sq, sq);
+
+                // Etiquetas de proyecciones x e y
+                ctx.font = 'bold 12px Inter, sans-serif';
+                ctx.fillStyle = isDark ? '#60a5fa' : '#1d4ed8';
+                ctx.fillText(`x = ${xProj.toFixed(2)}m`, (Ax + Hx) / 2 - 28, Ay + 20);
+
+                ctx.fillStyle = isDark ? '#818cf8' : '#4338ca';
+                ctx.fillText(`y = ${(b - xProj).toFixed(2)}m`, (Hx + Bx) / 2 - 28, By + 20);
+
+                // Etiqueta de la altura h
+                ctx.fillStyle = isDark ? '#fb7185' : '#be123c';
+                ctx.fillText(`h = ${hTri.toFixed(2)}m`, Hx + 8, (Cy + Hy) / 2);
+            } else {
+                ctx.font = 'bold 12px Inter, sans-serif';
+                ctx.fillStyle = isDark ? '#cbd5e1' : '#334155';
+                ctx.fillText(`Base b = ${b.toFixed(1)} m`, (Ax + Bx) / 2 - 35, Ay + 22);
+            }
+
+            // Etiquetas de Vértices y Lados conocidos
+            ctx.font = 'bold 13px Inter, sans-serif';
+            ctx.fillStyle = isDark ? '#f8fafc' : '#0f172a';
+            ctx.fillText('A', Ax - 16, Ay + 5);
+            ctx.fillText('B', Bx + 10, By + 5);
+            ctx.fillText('C', Cx - 6, Cy - 12);
+
+            ctx.fillStyle = '#f59e0b';
+            ctx.fillText(`${state.m2AngleAlpha}°`, Ax + 30, Ay - 8);
+
+            ctx.fillStyle = isDark ? '#cbd5e1' : '#334155';
+            ctx.fillText(`a = ${a.toFixed(1)}m`, (Ax + Cx) / 2 - 55, (Ay + Cy) / 2 - 6);
+        }
+
+
+        // =========================================================================
+        // MÓDULO 3: ÁLGEBRA TRIGONOMÉTRICA CON LA "FÓRMULA SEMILLA"
+        // =========================================================================
+        const derivationsData = {
+            doble_sen: {
+                title: 'Seno del Ángulo Doble: $\\operatorname{sen}(2\\alpha)$',
+                badge: 'Deducción 1 • Sustitución β = α',
+                steps: [
+                    {
+                        label: 'Punto de Partida (Fórmula Semilla)',
+                        math: '$$\\operatorname{sen}(\\alpha + \\beta) = \\operatorname{sen}\\alpha \\cdot \\cos\\beta + \\cos\\alpha \\cdot \\operatorname{sen}\\beta$$',
+                        explanation: 'Partimos siempre de nuestra única identidad de adición conocida.'
+                    },
+                    {
+                        label: 'Transformación 1: Sustituimos $\\beta$ por $\\alpha$',
+                        math: '$$\\operatorname{sen}(\\alpha + \\alpha) = \\operatorname{sen}\\alpha \\cdot \\cos\\alpha + \\cos\\alpha \\cdot \\operatorname{sen}\\alpha$$',
+                        explanation: 'Como queremos calcular el ángulo doble $2\\alpha = \\alpha + \\alpha$, reemplazamos cada $\\beta$ por $\\alpha$.'
+                    },
+                    {
+                        label: 'Transformación 2: Agrupamos términos semejantes',
+                        math: '$$\\mathbf{\\operatorname{sen}(2\\alpha) = 2 \\cdot \\operatorname{sen}\\alpha \\cdot \\cos\\alpha}$$',
+                        explanation: '¡Listo! Como ambos sumandos son idénticos ($\\operatorname{sen}\\alpha \\cos\\alpha$), obtenemos la fórmula del ángulo doble sin memorizarla.'
+                    }
+                ]
+            },
+            resta_sen: {
+                title: 'Seno de la Diferencia: $\\operatorname{sen}(\\alpha - \\beta)$',
+                badge: 'Deducción 2 • Sustitución β → -β',
+                steps: [
+                    {
+                        label: 'Punto de Partida (Fórmula Semilla)',
+                        math: '$$\\operatorname{sen}(\\alpha + \\beta) = \\operatorname{sen}\\alpha \\cdot \\cos\\beta + \\cos\\alpha \\cdot \\operatorname{sen}\\beta$$',
+                        explanation: 'Escribimos la resta $\\alpha - \\beta$ como la suma $\\alpha + (-\\beta)$.'
+                    },
+                    {
+                        label: 'Transformación 1: Sustituimos $\\beta$ por $(-\\beta)$',
+                        math: '$$\\operatorname{sen}(\\alpha + (-\\beta)) = \\operatorname{sen}\\alpha \\cdot \\cos(-\\beta) + \\cos\\alpha \\cdot \\operatorname{sen}(-\\beta)$$',
+                        explanation: 'Evaluamos el seno y coseno del ángulo opuesto $(-\\beta)$.'
+                    },
+                    {
+                        label: 'Transformación 2: Aplicamos simetría en la Circunferencia ($R=1$)',
+                        math: '$$\\cos(-\\beta) = \\cos\\beta \\quad \\text{y} \\quad \\operatorname{sen}(-\\beta) = -\\operatorname{sen}\\beta$$',
+                        explanation: 'En la circunferencia goniométrica, cambiar $\\beta$ por $-\\beta$ mantiene la abscisa $x$ igual pero invierte el signo de la altura $y$.'
+                    },
+                    {
+                        label: 'Resultado Final Deducción',
+                        math: '$$\\mathbf{\\operatorname{sen}(\\alpha - \\beta) = \\operatorname{sen}\\alpha \\cdot \\cos\\beta - \\cos\\alpha \\cdot \\operatorname{sen}\\beta}$$',
+                        explanation: 'El signo menos sale de forma natural gracias a la simetría vertical del seno.'
+                    }
+                ]
+            },
+            suma_cos: {
+                title: 'Coseno de la Suma: $\\cos(\\alpha + \\beta)$',
+                badge: 'Deducción 3 • Relación de Complementarios (90° - θ)',
+                steps: [
+                    {
+                        label: 'Punto de Partida: Relación entre Seno y Coseno de complementarios',
+                        math: '$$\\cos(\\alpha + \\beta) = \\operatorname{sen}\\big(90^\\circ - (\\alpha + \\beta)\\big) = \\operatorname{sen}\\big((90^\\circ - \\alpha) - \\beta\\big)$$',
+                        explanation: 'En cualquier triángulo rectángulo, el coseno de un ángulo es el seno de su complementario ($90^\\circ - \\text{ángulo}$).'
+                    },
+                    {
+                        label: 'Transformación 1: Aplicamos la fórmula del seno de la resta',
+                        math: '$$= \\operatorname{sen}(90^\\circ - \\alpha) \\cdot \\cos\\beta - \\cos(90^\\circ - \\alpha) \\cdot \\operatorname{sen}\\beta$$',
+                        explanation: 'Usamos la fórmula semilla con el primer bloque $(90^\\circ - \\alpha)$ y el segundo bloque $\\beta$.'
+                    },
+                    {
+                        label: 'Transformación 2: Cambiamos los complementarios de $\\alpha$',
+                        math: '$$\\mathbf{\\cos(\\alpha + \\beta) = \\cos\\alpha \\cdot \\cos\\beta - \\operatorname{sen}\\alpha \\cdot \\operatorname{sen}\\beta}$$',
+                        explanation: 'Como $\\operatorname{sen}(90^\\circ - \\alpha) = \\cos\\alpha$ y $\\cos(90^\\circ - \\alpha) = \\operatorname{sen}\\alpha$, llegamos directamente al coseno de la suma.'
+                    }
+                ]
+            },
+            doble_cos: {
+                title: 'Coseno del Ángulo Doble: $\\cos(2\\alpha)$',
+                badge: 'Deducción 4 • Sustitución β = α en el Coseno de la Suma',
+                steps: [
+                    {
+                        label: 'Punto de Partida (Coseno de la Suma recién deducido)',
+                        math: '$$\\cos(\\alpha + \\beta) = \\cos\\alpha \\cdot \\cos\\beta - \\operatorname{sen}\\alpha \\cdot \\operatorname{sen}\\beta$$',
+                        explanation: 'Tomamos el resultado de la Deducción 3.'
+                    },
+                    {
+                        label: 'Transformación 1: Sustituimos $\\beta$ por $\\alpha$',
+                        math: '$$\\cos(\\alpha + \\alpha) = \\cos\\alpha \\cdot \\cos\\alpha - \\operatorname{sen}\\alpha \\cdot \\operatorname{sen}\\alpha$$',
+                        explanation: 'Multiplicamos cada razón por sí misma.'
+                    },
+                    {
+                        label: 'Resultado Final Deducción',
+                        math: '$$\\mathbf{\\cos(2\\alpha) = \\cos^2\\alpha - \\operatorname{sen}^2\\alpha}$$',
+                        explanation: '¡Obtenida! Observa el parecido visual con la relación fundamental ($\\cos^2\\alpha + \\operatorname{sen}^2\\alpha = 1$), pero con signo negativo.'
+                    }
+                ]
+            }
+        };
+
+        function selectDerivation(key) {
+            state.m3CurrentDeriv = key;
+            state.m3VisibleSteps = 1;
+
+            document.querySelectorAll('.deriv-btn').forEach(btn => {
+                btn.className = 'deriv-btn w-full text-left p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-indigo-300 transition flex items-center justify-between';
+            });
+            const activeBtn = document.getElementById(`deriv-btn-${key}`);
+            if (activeBtn) {
+                activeBtn.className = 'deriv-btn w-full text-left p-4 rounded-2xl border-2 border-indigo-600 bg-indigo-50/60 dark:bg-indigo-950/40 transition flex items-center justify-between';
+            }
+
+            renderDerivationSteps();
+        }
+
+        function nextDerivationStep() {
+            const total = derivationsData[state.m3CurrentDeriv].steps.length;
+            if (state.m3VisibleSteps < total) {
+                state.m3VisibleSteps++;
+                renderDerivationSteps();
+            }
+        }
+
+        function resetDerivationSteps() {
+            state.m3VisibleSteps = 1;
+            renderDerivationSteps();
+        }
+
+        function renderDerivationSteps() {
+            const data = derivationsData[state.m3CurrentDeriv];
+            document.getElementById('deriv-badge').textContent = data.badge;
+            const titleEl = document.getElementById('deriv-title');
+            titleEl.innerHTML = data.title;
+
+            const wrapper = document.getElementById('deriv-steps-wrapper');
+            wrapper.innerHTML = '';
+
+            data.steps.forEach((step, idx) => {
+                const isVisible = idx < state.m3VisibleSteps;
+                const card = document.createElement('div');
+                if (isVisible) {
+                    const isLast = idx === data.steps.length - 1;
+                    card.className = `p-4 rounded-xl border transition-all duration-300 ${
+                        isLast
+                            ? 'bg-emerald-50/80 dark:bg-emerald-950/40 border-emerald-300 dark:border-emerald-800'
+                            : 'bg-slate-50 dark:bg-slate-800/60 border-slate-200 dark:border-slate-700'
+                    }`;
+                    card.innerHTML = `
+                        <div class="flex items-center justify-between text-xs font-bold ${isLast ? 'text-emerald-700 dark:text-emerald-300' : 'text-indigo-600 dark:text-indigo-400'}">
+                            <span>Paso ${idx + 1}: ${step.label}</span>
+                            <span>${isLast ? '✓ Identidad Demostrada' : ''}</span>
+                        </div>
+                        <div class="my-2 text-sm sm:text-base overflow-x-auto">${step.math}</div>
+                        <p class="text-xs text-slate-600 dark:text-slate-300">${step.explanation}</p>
+                    `;
+                } else {
+                    card.className = 'p-3.5 rounded-xl border border-dashed border-slate-300 dark:border-slate-700 bg-slate-50/40 dark:bg-slate-900/40 flex items-center justify-between cursor-pointer hover:border-indigo-400 transition';
+                    card.onclick = () => {
+                        state.m3VisibleSteps = idx + 1;
+                        renderDerivationSteps();
+                    };
+                    card.innerHTML = `
+                        <span class="text-xs font-semibold text-slate-400">Paso ${idx + 1}: ${step.label} (Haz clic para revelar transformación)</span>
+                        <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400">+ Mostrar</span>
+                    `;
+                }
+                wrapper.appendChild(card);
+            });
+
+            const btnNext = document.getElementById('btn-next-deriv');
+            if (state.m3VisibleSteps >= data.steps.length) {
+                btnNext.classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                btnNext.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+
+            renderMathInContainer(document.getElementById('sec-mod3'));
+        }
+
+
+        // =========================================================================
+        // MÓDULO 4: FUNCIONES TRIGONOMÉTRICAS Y RADIANES
+        // =========================================================================
+        function setMod4Func(fnName) {
+            state.m4Func = fnName;
+            ['sin', 'cos', 'tan'].forEach(f => {
+                const btn = document.getElementById(`btn-m4-${f}`);
+                if (f === fnName) {
+                    const colorClass = f === 'sin' ? 'bg-rose-600' : (f === 'cos' ? 'bg-blue-600' : 'bg-emerald-600');
+                    btn.className = `px-3 py-1 rounded-lg text-xs font-bold ${colorClass} text-white transition`;
+                } else {
+                    btn.className = 'px-3 py-1 rounded-lg text-xs font-bold text-slate-600 dark:text-slate-300 transition';
+                }
+            });
+            updateMod4UI();
+            drawMod4Canvas();
+        }
+
+        function setMod4Rad(val) {
+            state.m4Rad = Math.max(0, Math.min(Math.PI * 2, val));
+            document.getElementById('slider-mod4').value = state.m4Rad;
+            updateMod4UI();
+            drawMod4Canvas();
+        }
+
+        function toggleMod4Play() {
+            state.m4Playing = !state.m4Playing;
+            const btnText = document.getElementById('btn-m4-play-text');
+            if (state.m4Playing) {
+                btnText.textContent = 'Pausar';
+                if (state.m4Rad >= 6.25) state.m4Rad = 0;
+                const loop = () => {
+                    if (!state.m4Playing) return;
+                    state.m4Rad += 0.025;
+                    if (state.m4Rad > Math.PI * 2) {
+                        state.m4Rad = 0;
+                    }
+                    document.getElementById('slider-mod4').value = state.m4Rad;
+                    updateMod4UI();
+                    drawMod4Canvas();
+                    state.m4AnimId = requestAnimationFrame(loop);
+                };
+                state.m4AnimId = requestAnimationFrame(loop);
+            } else {
+                btnText.textContent = 'Auto-Desenrollar';
+                if (state.m4AnimId) cancelAnimationFrame(state.m4AnimId);
+            }
+        }
+
+        function updateMod4UI() {
+            const r = state.m4Rad;
+            const deg = Math.round((r * 180) / Math.PI);
+            const piRatio = r / Math.PI;
+            let piText = `${piRatio.toFixed(2)}π`;
+            if (Math.abs(r) < 0.03) piText = '0';
+            else if (Math.abs(r - Math.PI / 6) < 0.04) piText = 'π/6';
+            else if (Math.abs(r - Math.PI / 4) < 0.04) piText = 'π/4';
+            else if (Math.abs(r - Math.PI / 3) < 0.04) piText = 'π/3';
+            else if (Math.abs(r - Math.PI / 2) < 0.04) piText = 'π/2';
+            else if (Math.abs(r - Math.PI) < 0.04) piText = 'π';
+            else if (Math.abs(r - (3 * Math.PI) / 2) < 0.04) piText = '3π/2';
+            else if (Math.abs(r - 2 * Math.PI) < 0.04) piText = '2π';
+
+            document.getElementById('m4-rad-display').textContent = `${r.toFixed(2)} rad (${piText}) ≈ ${deg}°`;
+
+            const valEl = document.getElementById('m4-func-val-display');
+            if (state.m4Func === 'sin') {
+                valEl.textContent = `y = sen(${r.toFixed(2)}) = ${Math.sin(r).toFixed(3)}`;
+                valEl.className = 'font-mono text-sm font-bold text-rose-600 dark:text-rose-400';
+            } else if (state.m4Func === 'cos') {
+                valEl.textContent = `y = cos(${r.toFixed(2)}) = ${Math.cos(r).toFixed(3)}`;
+                valEl.className = 'font-mono text-sm font-bold text-blue-600 dark:text-blue-400';
+            } else {
+                const t = Math.tan(r);
+                valEl.textContent = Math.abs(t) > 15 ? `y = tan(${r.toFixed(2)}) → ±∞ (Asíntota)` : `y = tan(${r.toFixed(2)}) = ${t.toFixed(3)}`;
+                valEl.className = 'font-mono text-sm font-bold text-emerald-600 dark:text-emerald-400';
+            }
+        }
+
+        function drawMod4Canvas() {
+            const canvas = document.getElementById('canvas-mod4');
+            if (!canvas) return;
+            const rect = canvas.parentElement.getBoundingClientRect();
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            const ctx = canvas.getContext('2d');
+            ctx.scale(dpr, dpr);
+
+            const w = rect.width;
+            const h = rect.height;
+            const isDark = state.darkMode;
+            ctx.clearRect(0, 0, w, h);
+
+            // Geometría: Circunferencia a la izquierda, gráfica cartesiana a la derecha
+            const cy = h * 0.5;
+            const radius = Math.min(h * 0.34, w * 0.13);
+            const cx = radius + 35;
+
+            const graphStartX = cx + radius + 45;
+            const graphEndX = w - 25;
+            const graphWidth = Math.max(150, graphEndX - graphStartX);
+
+            // Ejes de la circunferencia y de la función
+            ctx.strokeStyle = isDark ? '#475569' : '#cbd5e1';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(15, cy); ctx.lineTo(w - 15, cy);
+            ctx.moveTo(cx, cy - radius - 20); ctx.lineTo(cx, cy + radius + 20);
+            ctx.moveTo(graphStartX, 25); ctx.lineTo(graphStartX, h - 25);
+            ctx.stroke();
+
+            // Circunferencia base (gris tenue)
+            ctx.strokeStyle = isDark ? '#334155' : '#94a3b8';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Arco recorrido en la circunferencia (Naranja intenso)
+            const rad = state.m4Rad;
+            ctx.strokeStyle = '#f59e0b';
+            ctx.lineWidth = 4.5;
+            ctx.beginPath();
+            ctx.arc(cx, cy, radius, 0, -rad, true);
+            ctx.stroke();
+
+            // Mismo arco "Desenrollado" sobre el eje horizontal X de la gráfica (Naranja intenso)
+            const currentGraphX = graphStartX + (rad / (Math.PI * 2)) * graphWidth;
+            ctx.strokeStyle = '#f59e0b';
+            ctx.lineWidth = 4.5;
+            ctx.beginPath();
+            ctx.moveTo(graphStartX, cy);
+            ctx.lineTo(currentGraphX, cy);
+            ctx.stroke();
+
+            // Marcas en el eje X de la onda (π/2, π, 3π/2, 2π)
+            const ticks = [
+                { r: Math.PI / 2, label: 'π/2' },
+                { r: Math.PI, label: 'π' },
+                { r: (3 * Math.PI) / 2, label: '3π/2' },
+                { r: 2 * Math.PI, label: '2π' }
+            ];
+            ctx.fillStyle = isDark ? '#94a3b8' : '#475569';
+            ctx.font = 'bold 11px JetBrains Mono, monospace';
+            ticks.forEach(t => {
+                const tx = graphStartX + (t.r / (Math.PI * 2)) * graphWidth;
+                ctx.beginPath();
+                ctx.moveTo(tx, cy - 4);
+                ctx.lineTo(tx, cy + 4);
+                ctx.stroke();
+                ctx.fillText(t.label, tx - 10, cy + 20);
+            });
+
+            // Punto en la circunferencia
+            const px = cx + Math.cos(rad) * radius;
+            const py = cy - Math.sin(rad) * radius;
+
+            // Trazado completo tenue de fondo de la curva elegida
+            const evalFn = (x) => state.m4Func === 'sin' ? Math.sin(x) : (state.m4Func === 'cos' ? Math.cos(x) : Math.tan(x));
+            const mainColor = state.m4Func === 'sin' ? '#e11d48' : (state.m4Func === 'cos' ? '#2563eb' : '#10b981');
+
+            // Trazado activo de la onda desde 0 hasta state.m4Rad
+            ctx.strokeStyle = mainColor;
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            let prevY = null;
+            for (let s = 0; s <= rad; s += 0.02) {
+                const gx = graphStartX + (s / (Math.PI * 2)) * graphWidth;
+                const val = evalFn(s);
+                const gy = cy - val * radius;
+                if (Math.abs(val) > 4) {
+                    prevY = null;
+                    continue;
+                }
+                if (prevY === null) ctx.moveTo(gx, gy);
+                else ctx.lineTo(gx, gy);
+                prevY = gy;
+            }
+            ctx.stroke();
+
+            // Punto actual sobre la onda y línea de proyección horizontal
+            const currentVal = evalFn(rad);
+            const currentGraphY = cy - currentVal * radius;
+
+            // Radio en la circunferencia
+            ctx.strokeStyle = isDark ? '#f8fafc' : '#1e293b';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(cx, cy);
+            ctx.lineTo(px, py);
+            ctx.stroke();
+
+            // Si es seno, destacamos la altura y conectamos horizontalmente con la gráfica
+            if (Math.abs(currentVal) <= 3.5) {
+                ctx.save();
+                ctx.setLineDash([4, 4]);
+                ctx.strokeStyle = mainColor;
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.moveTo(px, state.m4Func === 'sin' ? py : currentGraphY);
+                ctx.lineTo(currentGraphX, currentGraphY);
+                ctx.stroke();
+                ctx.restore();
+
+                // Barra vertical en la posición actual de la onda
+                ctx.strokeStyle = mainColor;
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(currentGraphX, cy);
+                ctx.lineTo(currentGraphX, currentGraphY);
+                ctx.stroke();
+
+                // Punto brillante en la onda
+                ctx.fillStyle = mainColor;
+                ctx.beginPath();
+                ctx.arc(currentGraphX, currentGraphY, 6, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // Punto en la circunferencia
+            ctx.fillStyle = '#f59e0b';
+            ctx.beginPath();
+            ctx.arc(px, py, 6, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function setupMod4Interactions() {
+            const slider = document.getElementById('slider-mod4');
+            slider.addEventListener('input', (e) => {
+                if (state.m4Playing) toggleMod4Play();
+                setMod4Rad(parseFloat(e.target.value));
+            });
+        }
+
+
+        // =========================================================================
+        // SECCIÓN DE EJERCICIOS INTERACTIVOS Y EVALUACIÓN (3 NIVELES)
+        // =========================================================================
+        const exercisesDB = {
+            // NIVEL 1: FIJAR IDEAS (Circunferencia Goniométrica y Ángulos Notables)
+            1: [
+                {
+                    id: 'l1-q1',
+                    title: 'Lectura Visual de Coordenadas y Signos en la Circunferencia ($R=1$)',
+                    statement: 'Un punto $P(x, y)$ se sitúa sobre la circunferencia goniométrica en el ángulo $\\alpha = 150^\\circ$ (Segundo Cuadrante). Sabiendo que está a $30^\\circ$ por encima del semieje negativo $X$ ($180^\\circ$), ¿cuáles son sus coordenadas exactas $(\\cos 150^\\circ, \\operatorname{sen} 150^\\circ)$?',
+                    type: 'mcq',
+                    options: [
+                        { label: '$\\left(+\\frac{\\sqrt{3}}{2},\\; +\\frac{1}{2}\\right)$', correct: false },
+                        { label: '$\\left(-\\frac{\\sqrt{3}}{2},\\; +\\frac{1}{2}\\right)$', correct: true },
+                        { label: '$\\left(-\\frac{1}{2},\\; +\\frac{\\sqrt{3}}{2}\\right)$', correct: false },
+                        { label: '$\\left(-\\frac{\\sqrt{3}}{2},\\; -\\frac{1}{2}\\right)$', correct: false }
+                    ],
+                    hint1: 'Pista Conceptual (1.er intento): En el Cuadrante II (izquierda y arriba), la abscisa $x = \\cos\\alpha$ es NEGATIVA y la ordenada $y = \\operatorname{sen}\\alpha$ es POSITIVA.',
+                    hint2: 'Descomposición Geométrica (2.º intento): El triángulo rectángulo interior para $150^\\circ$ tiene un ángulo agudo de $180^\\circ - 150^\\circ = 30^\\circ$ con el eje horizontal. Por tanto, su base mide $\\cos 30^\\circ = \\frac{\\sqrt{3}}{2}$ (hacia la izquierda, negativo) y su altura mide $\\operatorname{sen} 30^\\circ = \\frac{1}{2}$ (hacia arriba, positivo).',
+                    visualAngle: 150
+                },
+                {
+                    id: 'l1-q2',
+                    title: 'Interpretación Geométrica de la Tangente y Simetrías',
+                    statement: 'Observa el ángulo $\\alpha = 225^\\circ$, situado en la bisectriz del Tercer Cuadrante ($180^\\circ + 45^\\circ$). ¿Cuál es el valor exacto de su pendiente o tangente $\\tan(225^\\circ) = \\frac{y}{x}$?',
+                    type: 'mcq',
+                    options: [
+                        { label: '$\\tan(225^\\circ) = -1$', correct: false },
+                        { label: '$\\tan(225^\\circ) = +1$', correct: true },
+                        { label: '$\\tan(225^\\circ) = -\\frac{\\sqrt{2}}{2}$', correct: false },
+                        { label: '$\\tan(225^\\circ) = 0$', correct: false }
+                    ],
+                    hint1: 'Pista Conceptual (1.er intento): Recuerda que $\\tan\\alpha = \\frac{y}{x} = \\frac{\\operatorname{sen}\\alpha}{\\cos\\alpha}$. ¿Qué signo tienen $x$ e $y$ en el Tercer Cuadrante?',
+                    hint2: 'Descomposición Geométrica (2.º intento): En $225^\\circ$, tanto la coordenada $x = -\\frac{\\sqrt{2}}{2}$ como la coordenada $y = -\\frac{\\sqrt{2}}{2}$ son negativas e iguales en módulo. Al dividir negativo entre negativo: $\\tan(225^\\circ) = \\frac{-\\sqrt{2}/2}{-\\sqrt{2}/2} = +1$.',
+                    visualAngle: 225
+                }
+            ],
+
+            // NIVEL 2: PRACTICAR (Resolución Procedural Guiada - Estrategia de la Altura)
+            2: [
+                {
+                    id: 'l2-q1',
+                    title: 'Resolución Guiada de un Triángulo Oblicuángulo paso a paso',
+                    statement: 'En un solar triangular $ABC$, conocemos el lado inclinado $a = 10\\text{ m}$, la base total $b = 14\\text{ m}$ y el ángulo comprendido $\\alpha = 60^\\circ$. Vamos a calcular el tercer lado $c$ sin usar el Teorema del Coseno, trazando la altura $h$.',
+                    type: 'guided',
+                    steps: [
+                        {
+                            prompt: 'Paso 1: Calcula primero la altura $h$ que divide el triángulo ($h = a \\cdot \\operatorname{sen} 60^\\circ$). Redondea a 2 decimales:',
+                            expected: 8.66,
+                            tolerance: 0.08,
+                            unit: 'm',
+                            hint1: 'Pista Conceptual: En el triángulo rectángulo izquierdo, la altura es $h = a \\cdot \\operatorname{sen}\\alpha = 10 \\cdot \\operatorname{sen}(60^\\circ)$.',
+                            hint2: 'Descomposición: Sabemos que $\\operatorname{sen}(60^\\circ) = \\frac{\\sqrt{3}}{2} \\approx 0.866$. Por tanto, $h = 10 \\cdot 0.866 = 8.66\\text{ m}$.'
+                        },
+                        {
+                            prompt: 'Paso 2: Calcula la proyección horizontal $x$ del lado $a$ sobre la base ($x = a \\cdot \\cos 60^\\circ$) y el resto de la base $y = b - x$. ¿Cuánto mide el segmento derecho $y$?',
+                            expected: 9.0,
+                            tolerance: 0.08,
+                            unit: 'm',
+                            hint1: 'Pista Conceptual: Calcula primero $x = 10 \\cdot \\cos(60^\\circ)$ y réstalo a la base total $b = 14\\text{ m}$.',
+                            hint2: 'Descomposición: Como $\\cos(60^\\circ) = 0.5$, la proyección es $x = 10 \\cdot 0.5 = 5\\text{ m}$. El resto de la base mide $y = 14 - 5 = 9\\text{ m}$.'
+                        },
+                        {
+                            prompt: 'Paso 3: Ahora aplica el Teorema de Pitágoras en el triángulo rectángulo derecho ($c = \\sqrt{h^2 + y^2}$) para hallar el lado buscado $c$:',
+                            expected: 12.49,
+                            tolerance: 0.1,
+                            unit: 'm',
+                            hint1: 'Pista Conceptual: Los catetos del triángulo rectángulo derecho son $h = 8.66\\text{ m}$ e $y = 9\\text{ m}$.',
+                            hint2: 'Descomposición: $c = \\sqrt{8.66^2 + 9^2} = \\sqrt{75 + 81} = \\sqrt{156} \\approx 12.49\\text{ m}$.'
+                        }
+                    ]
+                },
+                {
+                    id: 'l2-q2',
+                    title: 'Cálculo de Altura y Área mediante Herramientas Semilla',
+                    statement: 'Un cartel triangular tiene dos lados conocidos de longitudes $a = 6\\text{ m}$ y $b = 8\\text{ m}$ que forman un ángulo $\\alpha = 30^\\circ$.',
+                    type: 'guided',
+                    steps: [
+                        {
+                            prompt: 'Paso 1: Calcula la altura $h$ correspondiente a la base $b = 8\\text{ m}$ ($h = a \\cdot \\operatorname{sen} 30^\\circ$):',
+                            expected: 3.0,
+                            tolerance: 0.05,
+                            unit: 'm',
+                            hint1: 'Pista Conceptual: Recuerda que $h = a \\cdot \\operatorname{sen}\\alpha$ con $a = 6\\text{ m}$ y $\\alpha = 30^\\circ$.',
+                            hint2: 'Descomposición: Como $\\operatorname{sen}(30^\\circ) = 0.5$, tenemos $h = 6 \\cdot 0.5 = 3\\text{ m}$.'
+                        },
+                        {
+                            prompt: 'Paso 2: Calcula el área total $A$ del triángulo ($A = \\frac{1}{2} \\cdot b \\cdot h$):',
+                            expected: 12.0,
+                            tolerance: 0.05,
+                            unit: 'm²',
+                            hint1: 'Pista Conceptual: Sustituye la base $b = 8\\text{ m}$ y la altura $h = 3\\text{ m}$ en $\\text{Área} = \\frac{1}{2} b \\cdot h$.',
+                            hint2: 'Descomposición: $A = \\frac{1}{2} \\cdot 8 \\cdot 3 = 12\\text{ m}^2$.'
+                        }
+                    ]
+                }
+            ],
+
+            // NIVEL 3: PROFUNDIZAR / CONTEXTO REAL (Topografía y Alturas Inaccesibles)
+            3: [
+                {
+                    id: 'l3-q1',
+                    title: 'Topografía: Doble Observación de una Antena Inaccesible sobre un Risco',
+                    statement: 'Para medir la altura $h$ de una torre de telecomunicaciones cuyo pie es inaccesible (hay un río delante), una topógrafa mide el ángulo de elevación desde un punto $A$ y obtiene $30^\\circ$. Camina $d = 40\\text{ m}$ en línea recta acercándose hacia la torre hasta el punto $B$, desde donde el nuevo ángulo de elevación es $45^\\circ$.',
+                    type: 'guided',
+                    steps: [
+                        {
+                            prompt: 'Paso 1: En el triángulo rectángulo más cercano $B$, como el ángulo es $45^\\circ$ ($\\tan 45^\\circ = 1$), la distancia horizontal $x$ desde $B$ hasta la base de la torre es igual a $h$. Plantea la tangente desde el punto $A$: $\\tan(30^\\circ) = \\frac{h}{40 + h}$. Despeja y calcula la altura $h$ de la torre (usa $\\tan 30^\\circ \\approx 0.5774$):',
+                            expected: 54.64,
+                            tolerance: 0.4,
+                            unit: 'm',
+                            hint1: 'Pista Conceptual: De $\\tan 30^\\circ = \\frac{h}{40 + h}$ obtenemos $(40 + h) \\cdot 0.5774 = h$. Agrupa los términos con $h$ a un lado.',
+                            hint2: 'Descomposición Paso a Paso: $23.094 + 0.5774 h = h \\Rightarrow 23.094 = h \\cdot (1 - 0.5774) \\Rightarrow h = \\frac{23.094}{0.4226} \\approx 54.64\\text{ m}$.'
+                        }
+                    ]
+                },
+                {
+                    id: 'l3-q2',
+                    title: 'Navegación y Triangulación Costera',
+                    statement: 'Desde un faro $A$ y un puesto de vigilancia $B$ separados por una costa recta de $b = 1000\\text{ m}$, se divisa un barco $C$. El ángulo en $A$ es $\\alpha = 45^\\circ$ y sabemos que la distancia directa del faro $A$ al barco es $a = 707.1\\text{ m}$.',
+                    type: 'guided',
+                    steps: [
+                        {
+                            prompt: 'Paso 1: Calcula a qué distancia mínima $h$ (perpendicular) se encuentra el barco de la línea de costa:',
+                            expected: 500.0,
+                            tolerance: 1.5,
+                            unit: 'm',
+                            hint1: 'Pista Conceptual: La distancia perpendicular a la costa es la altura del triángulo: $h = a \\cdot \\operatorname{sen}(45^\\circ)$.',
+                            hint2: 'Descomposición: $h = 707.1 \\cdot \\operatorname{sen}(45^\\circ) = 707.1 \\cdot 0.7071 \\approx 500\\text{ m}$.'
+                        }
+                    ]
+                }
+            ]
+        };
+
+        function switchEvalLevel(lvl) {
+            state.evalLevel = lvl;
+            state.evalQuestionIdx = 0;
+
+            [1, 2, 3].forEach(l => {
+                const btn = document.getElementById(`btn-lvl-${l}`);
+                if (l === lvl) {
+                    btn.className = 'lvl-btn p-4 rounded-2xl border-2 border-indigo-600 bg-indigo-50/70 dark:bg-indigo-950/40 text-left transition';
+                } else {
+                    btn.className = 'lvl-btn p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-left hover:border-indigo-300 transition';
+                }
+            });
+
+            renderEvalWorkspace();
+        }
+
+        function updateScoreBadge() {
+            document.getElementById('eval-score-badge').textContent = `${state.evalCompleted.size} / 6 Completados`;
+        }
+
+        function renderEvalWorkspace() {
+            const container = document.getElementById('eval-workspace');
+            const list = exercisesDB[state.evalLevel];
+            const q = list[state.evalQuestionIdx];
+
+            // Selector de problema dentro del nivel
+            let navPills = list.map((item, idx) => {
+                const isDone = state.evalCompleted.has(item.id);
+                const isCurrent = idx === state.evalQuestionIdx;
+                return `
+                    <button onclick="state.evalQuestionIdx=${idx}; renderEvalWorkspace();" 
+                        class="px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 ${
+                            isCurrent
+                                ? 'bg-indigo-600 text-white shadow-sm'
+                                : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200'
+                        }">
+                        <span>Actividad ${idx + 1}</span>
+                        ${isDone ? '<span class="text-emerald-300">✓</span>' : ''}
+                    </button>
+                `;
+            }).join('');
+
+            if (q.type === 'mcq') {
+                const attemptKey = q.id;
+                const fails = state.evalAttempts[attemptKey] || 0;
+
+                const optionsHTML = q.options.map((opt, oIdx) => `
+                    <button onclick="checkMCQAnswer('${q.id}', ${oIdx})" 
+                        class="p-4 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-indigo-500 bg-slate-50/60 dark:bg-slate-800/50 text-left transition flex items-center justify-between group">
+                        <span class="text-sm font-medium">${opt.label}</span>
+                        <span class="w-6 h-6 rounded-full border border-slate-300 dark:border-slate-600 group-hover:border-indigo-500 flex items-center justify-center text-xs font-bold text-slate-400">
+                            ${String.fromCharCode(65 + oIdx)}
+                        </span>
+                    </button>
+                `).join('');
+
+                container.innerHTML = `
+                    <div class="space-y-5">
+                        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 dark:border-slate-800 pb-4">
+                            <div class="flex items-center gap-2">${navPills}</div>
+                            <span class="text-xs text-slate-400">Intentos en este ejercicio: <strong>${fails}</strong></span>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg font-extrabold text-slate-900 dark:text-white">${q.title}</h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">${q.statement}</p>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            ${optionsHTML}
+                        </div>
+
+                        <div id="eval-feedback-box" class="space-y-3"></div>
+                    </div>
+                `;
+            } else if (q.type === 'guided') {
+                const stepsHTML = q.steps.map((st, sIdx) => {
+                    const stepKey = `${q.id}-s${sIdx}`;
+                    return `
+                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 space-y-3">
+                            <p class="text-sm font-semibold text-slate-800 dark:text-slate-200">${st.prompt}</p>
+                            <div class="flex flex-wrap items-center gap-2">
+                                <input type="number" step="0.01" id="input-${stepKey}" placeholder="Tu respuesta..." 
+                                    class="px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-sm font-mono w-44 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                                <span class="text-xs font-mono font-bold text-slate-500">${st.unit}</span>
+                                <button onclick="checkGuidedStep('${q.id}', ${sIdx})" 
+                                    class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold transition shadow-sm">
+                                    Comprobar Paso
+                                </button>
+                            </div>
+                            <div id="feedback-${stepKey}" class="space-y-2"></div>
+                        </div>
+                    `;
+                }).join('');
+
+                container.innerHTML = `
+                    <div class="space-y-5">
+                        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 dark:border-slate-800 pb-4">
+                            <div class="flex items-center gap-2">${navPills}</div>
+                            <span class="text-xs font-semibold text-indigo-600 dark:text-indigo-400">Tolerancia de redondeo: ±0.1</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                            <div class="lg:col-span-7 space-y-4">
+                                <div>
+                                    <h3 class="text-lg font-extrabold text-slate-900 dark:text-white">${q.title}</h3>
+                                    <p class="text-sm text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">${q.statement}</p>
+                                </div>
+                                <div class="space-y-4">${stepsHTML}</div>
+                            </div>
+                            <div class="lg:col-span-5 bg-slate-50 dark:bg-slate-950 rounded-2xl border border-slate-200 dark:border-slate-800 p-4">
+                                <div class="text-xs font-bold uppercase text-slate-400 mb-2">Esquema Geométrico de Apoyo</div>
+                                <div class="w-full h-[230px]">
+                                    <canvas id="canvas-eval-helper" class="w-full h-full"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            renderMathInContainer(container);
+            setTimeout(drawEvalHelperCanvas, 30);
+        }
+
+        // Validación de Preguntas Tipo Test con Pistas Progresivas (Intento 1 -> Pista Conceptual, Intento 2 -> Descomposición)
+        function checkMCQAnswer(qId, optIdx) {
+            const list = exercisesDB[state.evalLevel];
+            const q = list.find(item => item.id === qId);
+            const selected = q.options[optIdx];
+            const fbBox = document.getElementById('eval-feedback-box');
+
+            if (selected.correct) {
+                state.evalCompleted.add(qId);
+                updateScoreBadge();
+                fbBox.innerHTML = `
+                    <div class="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-300 dark:border-emerald-800 text-emerald-900 dark:text-emerald-200 text-xs sm:text-sm">
+                        <div class="font-bold flex items-center gap-1.5 text-emerald-700 dark:text-emerald-300 mb-1">
+                            <span>✓ ¡Respuesta Correcta!</span>
+                        </div>
+                        <p>${q.hint2}</p>
+                    </div>
+                `;
+            } else {
+                state.evalAttempts[qId] = (state.evalAttempts[qId] || 0) + 1;
+                const fails = state.evalAttempts[qId];
+
+                let hintsHTML = `
+                    <div class="p-3.5 rounded-xl bg-amber-50 dark:bg-amber-950/50 border border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-200 text-xs sm:text-sm">
+                        <div class="font-bold mb-1">💡 ${q.hint1}</div>
+                    </div>
+                `;
+                if (fails >= 2) {
+                    hintsHTML += `
+                        <div class="p-3.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-300 dark:border-indigo-800 text-indigo-900 dark:text-indigo-200 text-xs sm:text-sm">
+                            <div class="font-bold mb-1">📐 ${q.hint2}</div>
+                        </div>
+                    `;
+                }
+                fbBox.innerHTML = hintsHTML;
+            }
+            renderMathInContainer(fbBox);
+        }
+
+        // Validación de Pasos Guiados con Pistas Progresivas
+        function checkGuidedStep(qId, sIdx) {
+            const list = exercisesDB[state.evalLevel];
+            const q = list.find(item => item.id === qId);
+            const step = q.steps[sIdx];
+            const stepKey = `${qId}-s${sIdx}`;
+
+            const inputEl = document.getElementById(`input-${stepKey}`);
+            const fbEl = document.getElementById(`feedback-${stepKey}`);
+            const val = parseFloat(inputEl.value);
+
+            if (isNaN(val)) {
+                fbEl.innerHTML = `<div class="text-xs font-semibold text-rose-600">Por favor, introduce un valor numérico válido.</div>`;
+                return;
+            }
+
+            if (Math.abs(val - step.expected) <= step.tolerance) {
+                fbEl.innerHTML = `
+                    <div class="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-300 dark:border-emerald-800 text-emerald-900 dark:text-emerald-200 text-xs">
+                        <strong>✓ ¡Paso Correcto!</strong> Valor validado (${step.expected} ${step.unit}). ${step.hint2}
+                    </div>
+                `;
+                state.evalCompleted.add(`${stepKey}-ok`);
+                // Verificar si todos los pasos del ejercicio están completos
+                const allOk = q.steps.every((_, idx) => state.evalCompleted.has(`${qId}-s${idx}-ok`));
+                if (allOk) {
+                    state.evalCompleted.add(qId);
+                    updateScoreBadge();
+                }
+            } else {
+                state.evalAttempts[stepKey] = (state.evalAttempts[stepKey] || 0) + 1;
+                const fails = state.evalAttempts[stepKey];
+
+                let html = `
+                    <div class="p-3 rounded-xl bg-amber-50 dark:bg-amber-950/50 border border-amber-300 dark:border-amber-800 text-amber-900 dark:text-amber-200 text-xs">
+                        <strong>Respuesta incorrecta (${fails}.º intento).</strong><br>${step.hint1}
+                    </div>
+                `;
+                if (fails >= 2) {
+                    html += `
+                        <div class="p-3 rounded-xl bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-300 dark:border-indigo-800 text-indigo-900 dark:text-indigo-200 text-xs">
+                            <strong>📐 Descomposición Geométrica Detallada:</strong><br>${step.hint2}
+                        </div>
+                    `;
+                }
+                fbEl.innerHTML = html;
+            }
+            renderMathInContainer(fbEl);
+            drawEvalHelperCanvas();
+        }
+
+        // Dibujo de apoyo geométrico en los ejercicios de Nivel 2 y 3
+        function drawEvalHelperCanvas() {
+            const canvas = document.getElementById('canvas-eval-helper');
+            if (!canvas) return;
+            const rect = canvas.parentElement.getBoundingClientRect();
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            const ctx = canvas.getContext('2d');
+            ctx.scale(dpr, dpr);
+
+            const w = rect.width;
+            const h = rect.height;
+            const isDark = state.darkMode;
+            ctx.clearRect(0, 0, w, h);
+
+            const Ax = 35, Ay = h - 35;
+            const Bx = w - 35, By = h - 35;
+            const Cx = w * 0.45, Cy = 35;
+            const Hx = Cx, Hy = Ay;
+
+            // Triángulo principal
+            ctx.fillStyle = isDark ? 'rgba(99, 102, 241, 0.14)' : 'rgba(99, 102, 241, 0.08)';
+            ctx.beginPath(); ctx.moveTo(Ax, Ay); ctx.lineTo(Bx, By); ctx.lineTo(Cx, Cy); ctx.closePath(); ctx.fill();
+
+            ctx.strokeStyle = isDark ? '#cbd5e1' : '#334155';
+            ctx.lineWidth = 2.5;
+            ctx.beginPath(); ctx.moveTo(Ax, Ay); ctx.lineTo(Bx, By); ctx.lineTo(Cx, Cy); ctx.closePath(); ctx.stroke();
+
+            // Altura h punteada en rojo
+            ctx.save();
+            ctx.setLineDash([5, 4]);
+            ctx.strokeStyle = '#e11d48';
+            ctx.lineWidth = 2.5;
+            ctx.beginPath(); ctx.moveTo(Cx, Cy); ctx.lineTo(Hx, Hy); ctx.stroke();
+            ctx.restore();
+
+            ctx.strokeStyle = '#e11d48';
+            ctx.strokeRect(Hx, Hy - 9, 9, 9);
+
+            // Etiquetas pedagógicas
+            ctx.font = 'bold 12px Inter, sans-serif';
+            ctx.fillStyle = '#e11d48';
+            ctx.fillText('h = a·sen α', Hx + 8, (Cy + Hy) / 2);
+
+            ctx.fillStyle = isDark ? '#60a5fa' : '#2563eb';
+            ctx.fillText('x = a·cos α', (Ax + Hx) / 2 - 28, Ay + 18);
+
+            ctx.fillStyle = isDark ? '#e2e8f0' : '#1e293b';
+            ctx.fillText('A (α)', Ax - 10, Ay + 18);
+            ctx.fillText('B', Bx - 5, By + 18);
+            ctx.fillText('C', Cx - 5, Cy - 8);
+        }
+
+        window.onload = function () {
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+            setupMod1Interactions();
+            setupMod2Interactions();
+            selectDerivation('doble_sen');
+            setupMod4Interactions();
+            updateMod4UI();
+            renderEvalWorkspace();
+
+            updateMod1UI();
+            drawMod1Canvas();
+
+            renderMathInContainer(document.body);
+
+            window.addEventListener('resize', () => {
+                redrawAllActiveCanvases();
+            });
+        };
+    </script>
+</body>
+</html>
