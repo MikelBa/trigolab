@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrigoLab 1.º Bachillerato | Simplificación Procedural y Visual</title>
+    <title>TrigoLab 1. Batxilergoa</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -87,57 +87,61 @@
             border-bottom: 3px solid #818cf8;
             color: #818cf8;
         }
+        /* Evitar que KaTeX rompa líneas dentro de botones o etiquetas */
+        .katex {
+            white-space: nowrap;
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200">
 
     <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-violet-600 flex items-center justify-center text-white font-bold shadow-md shadow-indigo-500/20">
+            <div class="flex justify-between items-center h-16 gap-3">
+                <div class="flex items-center gap-2.5 shrink-0">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-violet-600 flex items-center justify-center text-white font-bold shadow-md shadow-indigo-500/20 shrink-0">
                         <i data-lucide="compass" class="w-6 h-6"></i>
                     </div>
                     <div>
-                        <div class="flex items-center gap-2">
+                        <div class="flex items-center gap-2 whitespace-nowrap">
                             <span class="font-extrabold text-lg tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-600 dark:from-indigo-400 dark:to-violet-400">TrigoLab</span>
-                            <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800 dark:bg-indigo-900/60 dark:text-indigo-300">1.º Bachillerato</span>
+                            <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-800 dark:bg-indigo-900/60 dark:text-indigo-300">1. Batxilergoa</span>
                         </div>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">Filosofía de Simplificación Procedural • Menos memoria, más comprensión</p>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400 hidden xl:block whitespace-nowrap"></p>
                     </div>
                 </div>
 
                 <!-- Navigation Tabs Desktop -->
-                <nav class="hidden lg:flex space-x-1" aria-label="Módulos">
-                    <button onclick="switchSection('mod1')" id="nav-mod1" class="nav-btn tab-active px-3 py-2 text-sm rounded-t-lg transition-colors flex items-center gap-1.5">
-                        <span class="w-5 h-5 rounded-full bg-indigo-100 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300 text-xs flex items-center justify-center font-bold">1</span>
-                        Circunferencia ($R=1$)
+                <nav class="hidden lg:flex items-center space-x-1 shrink-0" aria-label="Módulos">
+                    <button onclick="switchSection('mod1')" id="nav-mod1" class="nav-btn tab-active px-2.5 py-2 text-xs xl:text-sm rounded-t-lg transition-colors flex items-center gap-1.5 whitespace-nowrap shrink-0">
+                        <span class="w-5 h-5 rounded-full bg-indigo-100 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300 text-xs flex items-center justify-center font-bold shrink-0">1</span>
+                        <span>Zirkunferentzia ($R=1$)</span>
                     </button>
-                    <button onclick="switchSection('mod2')" id="nav-mod2" class="nav-btn px-3 py-2 text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 rounded-t-lg transition-colors flex items-center gap-1.5">
-                        <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-xs flex items-center justify-center font-bold">2</span>
-                        Estrategia de la Altura
+                    <button onclick="switchSection('mod2')" id="nav-mod2" class="nav-btn px-2.5 py-2 text-xs xl:text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 rounded-t-lg transition-colors flex items-center gap-1.5 whitespace-nowrap shrink-0">
+                        <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-xs flex items-center justify-center font-bold shrink-0">2</span>
+                        <span>Altueraren estrategia</span>
                     </button>
-                    <button onclick="switchSection('mod3')" id="nav-mod3" class="nav-btn px-3 py-2 text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 rounded-t-lg transition-colors flex items-center gap-1.5">
-                        <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-xs flex items-center justify-center font-bold">3</span>
-                        Fórmula Semilla
+                    <button onclick="switchSection('mod3')" id="nav-mod3" class="nav-btn px-2.5 py-2 text-xs xl:text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 rounded-t-lg transition-colors flex items-center gap-1.5 whitespace-nowrap shrink-0">
+                        <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-xs flex items-center justify-center font-bold shrink-0">3</span>
+                        <span>Formulak</span>
                     </button>
-                    <button onclick="switchSection('mod4')" id="nav-mod4" class="nav-btn px-3 py-2 text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 rounded-t-lg transition-colors flex items-center gap-1.5">
-                        <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-xs flex items-center justify-center font-bold">4</span>
-                        Funciones y Radianes
+                    <button onclick="switchSection('mod4')" id="nav-mod4" class="nav-btn px-2.5 py-2 text-xs xl:text-sm text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 rounded-t-lg transition-colors flex items-center gap-1.5 whitespace-nowrap shrink-0">
+                        <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-xs flex items-center justify-center font-bold shrink-0">4</span>
+                        <span>Funtzioak eta radianak</span>
                     </button>
-                    <button onclick="switchSection('eval')" id="nav-eval" class="nav-btn px-3 py-2 text-sm text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 rounded-t-lg transition-colors flex items-center gap-1.5 font-semibold">
-                        <i data-lucide="Award" class="w-4 h-4"></i>
-                        Laboratorio de Ejercicios
+                    <button onclick="switchSection('eval')" id="nav-eval" class="nav-btn px-2.5 py-2 text-xs xl:text-sm text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 rounded-t-lg transition-colors flex items-center gap-1.5 font-semibold whitespace-nowrap shrink-0">
+                        <i data-lucide="award" class="w-4 h-4 shrink-0"></i>
+                        <span>Ariketak</span>
                     </button>
                 </nav>
 
                 <!-- Right Controls: Formula Cheat-Sheet Modal & Dark Mode -->
-                <div class="flex items-center gap-2">
-                    <button onclick="toggleModal('modal-formulario')" class="px-3 py-1.5 text-xs sm:text-sm font-semibold rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 dark:bg-amber-900/40 dark:hover:bg-amber-900/60 dark:text-amber-200 flex items-center gap-1.5 transition shadow-sm" title="Ver el Mínimo Formulario Indispensable">
-                        <i data-lucide="sparkles" class="w-4 h-4 text-amber-600 dark:text-amber-400"></i>
-                        <span>Mínimo Formulario</span>
+                <div class="flex items-center gap-2 shrink-0">
+                    <button onclick="toggleModal('modal-formulario')" class="px-3 py-1.5 text-xs xl:text-sm font-semibold rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 dark:bg-amber-900/40 dark:hover:bg-amber-900/60 dark:text-amber-200 flex items-center gap-1.5 transition shadow-sm whitespace-nowrap shrink-0" title="Ver el Mínimo Formulario Indispensable">
+                        <i data-lucide="sparkles" class="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0"></i>
+                        <span>Ezinbesteko formulak</span>
                     </button>
-                    <button onclick="toggleTheme()" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition" aria-label="Cambiar tema claro/oscuro">
+                    <button onclick="toggleTheme()" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition shrink-0" aria-label="Cambiar tema claro/oscuro">
                         <i data-lucide="moon" id="theme-icon-dark" class="w-5 h-5 block dark:hidden"></i>
                         <i data-lucide="sun" id="theme-icon-light" class="w-5 h-5 hidden dark:block text-amber-400"></i>
                     </button>
@@ -146,24 +150,21 @@
 
             <!-- Mobile Navigation Bar -->
             <div class="flex lg:hidden overflow-x-auto py-2 gap-1.5 no-scrollbar border-t border-slate-100 dark:border-slate-800">
-                <button onclick="switchSection('mod1')" id="mnav-mod1" class="mnav-btn shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold bg-indigo-600 text-white">1. Circunferencia</button>
-                <button onclick="switchSection('mod2')" id="mnav-mod2" class="mnav-btn shrink-0 px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">2. La Altura</button>
-                <button onclick="switchSection('mod3')" id="mnav-mod3" class="mnav-btn shrink-0 px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">3. Fórmula Semilla</button>
-                <button onclick="switchSection('mod4')" id="mnav-mod4" class="mnav-btn shrink-0 px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">4. Radianes y Ondas</button>
-                <button onclick="switchSection('eval')" id="mnav-eval" class="mnav-btn shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-300">★ Ejercicios</button>
+                <button onclick="switchSection('mod1')" id="mnav-mod1" class="mnav-btn shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold bg-indigo-600 text-white">1. Zirkunferentzia</button>
+                <button onclick="switchSection('mod2')" id="mnav-mod2" class="mnav-btn shrink-0 px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">2. Altuera</button>
+                <button onclick="switchSection('mod3')" id="mnav-mod3" class="mnav-btn shrink-0 px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">3. Formulak</button>
+                <button onclick="switchSection('mod4')" id="mnav-mod4" class="mnav-btn shrink-0 px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">4. Radianak eta uhinak</button>
+                <button onclick="switchSection('eval')" id="mnav-eval" class="mnav-btn shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-100 dark:bg-emerald-900/50 text-emerald-800 dark:text-emerald-300">★ Ariektak</button>
             </div>
         </div>
     </header>
 
     <div class="bg-indigo-950 text-indigo-100 py-2.5 px-4 border-b border-indigo-900">
         <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-xs">
-            <div class="flex items-center gap-2">
-                <span class="px-2 py-0.5 rounded bg-indigo-500/30 border border-indigo-400/30 font-semibold text-indigo-200">Principio Didáctico Activo</span>
-                <span id="pedagogical-banner-text">Integramos la circunferencia de radio $R=1$ con el triángulo rectángulo desde el primer instante.</span>
-            </div>
+            <div class="flex items-center gap-2"></div>
             <div class="flex items-center gap-4 text-indigo-300">
-                <span class="hidden md:inline">📏 Geometría en <strong>Grados ($^\circ$)</strong></span>
-                <span class="hidden md:inline">〰️ Funciones en <strong>Radianes ($\text{rad}$)</strong></span>
+                <span class="hidden md:inline">📏 Geometría <strong>graduetan ($^\circ$)</strong></span>
+                <span class="hidden md:inline">〰️ Funtzioak <strong>radianetan ($\text{rad}$)</strong></span>
             </div>
         </div>
     </div>
@@ -177,12 +178,12 @@
         <section id="sec-mod1" class="module-section space-y-6">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
                 <div>
-                    <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Módulo 1 • Conexión Visual Inmediata</span>
-                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">La Circunferencia Goniométrica ($R=1$) y el Triángulo Interior</h1>
+                    <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">1. modulua • Berehalako Ikus-konexioa</span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">Zirkunferentzia goniometrikoa ($R=1$) eta barne-triangelua</h1>
                 </div>
                 <div class="flex items-center gap-2 self-start">
                     <span class="text-xs px-3 py-1.5 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 font-medium">
-                        Unidad angular: <strong>Grados sexagesimales ($^\circ$)</strong>
+                        Unitate angeluarra: <strong>Gradu hirurogeitarrak ($^\circ$)</strong>
                     </span>
                 </div>
             </div>
@@ -196,12 +197,12 @@
                         <div>
                             <h2 class="font-bold text-base sm:text-lg flex items-center gap-2">
                                 <i data-lucide="mouse-pointer-click" class="w-5 h-5 text-indigo-600"></i>
-                                Explorador de Coordenadas sobre $R=1$
+                                Koordenatuen esploratzailea $R=1$ izanik.
                             </h2>
-                            <p class="text-xs text-slate-500 dark:text-slate-400">Arrastra el punto $P(x,y)$ sobre la circunferencia o usa los botones de ángulos notables.</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">Arrastratu $P(x,y)$ puntua zirkunferentzian zehar edo erabili angelu nabarmenduen botoiak.</p>
                         </div>
                         <div id="m1-quadrant-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-100 text-indigo-800 dark:bg-indigo-900/70 dark:text-indigo-200">
-                            Cuadrante I (+, +)
+                            I. koadrantea (+, +)
                         </div>
                     </div>
 
@@ -214,14 +215,14 @@
                     <div class="mt-5 space-y-4">
                         <div class="flex items-center justify-between gap-4">
                             <label for="slider-mod1" class="text-sm font-semibold text-slate-700 dark:text-slate-300 shrink-0">
-                                Ángulo $\alpha$: <span id="m1-angle-display" class="font-mono text-base font-bold text-indigo-600 dark:text-indigo-400">30°</span>
+                                Angelua $\alpha$: <span id="m1-angle-display" class="font-mono text-base font-bold text-indigo-600 dark:text-indigo-400">30°</span>
                             </label>
                             <input type="range" id="slider-mod1" min="0" max="360" value="30" step="1" class="w-full">
                         </div>
 
                         <!-- Botones de Ángulos Notables y Asociados -->
                         <div>
-                            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-2">Saltar a Ángulos Notables y de Ejes:</span>
+                            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-2">Angelu nabarmenetara eta ardatzetara jauzi egin:</span>
                             <div class="flex flex-wrap gap-1.5">
                                 <button onclick="setMod1Angle(0)" class="px-2.5 py-1 text-xs font-mono font-semibold rounded-lg bg-slate-100 hover:bg-indigo-100 dark:bg-slate-800 dark:hover:bg-indigo-900/60 transition">0°</button>
                                 <button onclick="setMod1Angle(30)" class="px-2.5 py-1 text-xs font-mono font-semibold rounded-lg bg-indigo-50 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 hover:bg-indigo-100 transition">30°</button>
@@ -247,23 +248,23 @@
                     
                     <!-- Tarjetas de Lectura en Tiempo Real -->
                     <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 p-5">
-                        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Lectura Geométrica Instantánea ($R=1$)</h3>
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Berehalako irakurketa geometrikoa ($R=1$)</h3>
                         <div class="grid grid-cols-3 gap-3">
                             <!-- Coseno (X) -->
                             <div class="p-3 rounded-xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800/80">
-                                <div class="text-xs font-bold text-blue-700 dark:text-blue-400">Abscisa $x = \cos\alpha$</div>
+                                <div class="text-xs font-bold text-blue-700 dark:text-blue-400">Abzisa-ardatza $x = \cos\alpha$</div>
                                 <div id="m1-val-cos" class="font-mono text-lg font-extrabold text-blue-900 dark:text-blue-200 mt-1">+0.866</div>
                                 <div id="m1-exact-cos" class="text-xs text-blue-600 dark:text-blue-400 mt-0.5 font-medium">$\frac{\sqrt{3}}{2}$</div>
                             </div>
                             <!-- Seno (Y) -->
                             <div class="p-3 rounded-xl bg-rose-50/70 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800/80">
-                                <div class="text-xs font-bold text-rose-700 dark:text-rose-400">Ordenada $y = \operatorname{sen}\alpha$</div>
+                                <div class="text-xs font-bold text-rose-700 dark:text-rose-400">Ordenatu-ardatza $y = \operatorname{sen}\alpha$</div>
                                 <div id="m1-val-sin" class="font-mono text-lg font-extrabold text-rose-900 dark:text-rose-200 mt-1">+0.500</div>
                                 <div id="m1-exact-sin" class="text-xs text-rose-600 dark:text-rose-400 mt-0.5 font-medium">$\frac{1}{2}$</div>
                             </div>
                             <!-- Tangente (Y/X) -->
                             <div class="p-3 rounded-xl bg-emerald-50/70 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/80">
-                                <div class="text-xs font-bold text-emerald-700 dark:text-emerald-400">Pendiente $\tan\alpha = \frac{y}{x}$</div>
+                                <div class="text-xs font-bold text-emerald-700 dark:text-emerald-400">Malda $\tan\alpha = \frac{y}{x}$</div>
                                 <div id="m1-val-tan" class="font-mono text-lg font-extrabold text-emerald-900 dark:text-emerald-200 mt-1">+0.577</div>
                                 <div id="m1-exact-tan" class="text-xs text-emerald-600 dark:text-emerald-400 mt-0.5 font-medium">$\frac{\sqrt{3}}{3}$</div>
                             </div>
@@ -271,7 +272,7 @@
 
                         <!-- Relación Pitagórica en Vivo -->
                         <div class="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-600 dark:text-slate-400">
-                            <span>Teorema de Pitágoras en el triángulo interior:</span>
+                            <span>Pitagorasen teorema barruko triangeluan:</span>
                             <span id="m1-pythagoras-live" class="font-mono font-semibold text-indigo-600 dark:text-indigo-400">$(0.87)^2 + (0.50)^2 = 1^2$</span>
                         </div>
                     </div>
@@ -280,23 +281,23 @@
                     <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 p-5 space-y-3">
                         <div class="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-bold text-sm">
                             <i data-lucide="book-open" class="w-4 h-4"></i>
-                            <span>Apuntes Sintéticos: ¿Por qué elegir radio $R = 1$?</span>
+                            <span>Oharrak: Zergatik aukeratu irratia $R = 1$?</span>
                         </div>
                         <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-                            En un triángulo rectángulo cuya hipotenusa mide exactamente $R=1$, las razones trigonométricas dejan de ser divisiones abstractas y se convierten directamente en las <strong>coordenadas cartesianas $(x,y)$</strong> del punto $P$:
+                            Hipotenusak zehazki $R=1$ neurtzen duen triangelu angeluzuzen batean, arrazoi trigonometrikoek zatiketa abstraktuak izateari uzten diote, eta $P$ puntuaren <strong>koordenatu kartesiarrak $(x,y)$ </strong> bihurtzen dira zuzenean:
                         </p>
                         <ul class="text-xs sm:text-sm space-y-2 bg-slate-50 dark:bg-slate-800/60 p-3.5 rounded-xl border border-slate-200/70 dark:border-slate-700">
                             <li class="flex items-start gap-2">
                                 <span class="w-2.5 h-2.5 rounded-full bg-blue-500 mt-1.5 shrink-0"></span>
-                                <span><strong>Coseno ($\cos\alpha = x$):</strong> Es la proyección horizontal (sombra en el eje $X$). Positivo a la derecha (Cuadrantes I y IV), negativo a la izquierda (II y III).</span>
+                                <span><strong>Kosinua ($\cos\alpha = x$):</strong> Proiekzio horizontala da (itzala $X$ ardatzean). Positiboa eskuinean (I. eta IV. koadranteak), negatiboa ezkerrean (II. eta III.).</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <span class="w-2.5 h-2.5 rounded-full bg-rose-500 mt-1.5 shrink-0"></span>
-                                <span><strong>Seno ($\operatorname{sen}\alpha = y$):</strong> Es la altura vertical (proyección en el eje $Y$). Positivo arriba (Cuadrantes I y II), negativo abajo (III y IV).</span>
+                                <span><strong>Sinua ($\operatorname{sin}\alpha = y$):</strong> Altuera bertikala da (proiekzioa $Y$ ardatzean). Positiboa goian (I eta II koadranteak), negatiboa behean (III eta IV).</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 mt-1.5 shrink-0"></span>
-                                <span><strong>Tangente ($\tan\alpha = \frac{y}{x}$):</strong> Es el cociente entre altura y base, y coincide con el segmento vertical sobre la recta tangente en $x=1$.</span>
+                                <span><strong>Tangentea ($\tan\alpha = \frac{y}{x}$):</strong> Altueraren eta oinarriaren arteko zatidura da, eta segmentu bertikalarekin bat dator, zuzen ukitzailearen gainean, $x=1$-ean.</span>
                             </li>
                         </ul>
                     </div>
@@ -306,15 +307,15 @@
                         <div class="flex items-center justify-between mb-3">
                             <h3 class="text-sm font-bold flex items-center gap-1.5">
                                 <i data-lucide="table" class="w-4 h-4 text-indigo-600"></i>
-                                Tabla de Ángulos Notables (Truco $\frac{\sqrt{n}}{2}$)
+                                Angelu nabarmenen taula (Trikimailua $\frac{\sqrt{n}}{2}$)
                             </h3>
-                            <span class="text-[11px] text-slate-400">Haz clic en una columna</span>
+                            <span class="text-[11px] text-slate-400">Egin klik zutabe batean</span>
                         </div>
                         <div class="overflow-x-auto">
                             <table class="w-full text-center text-xs border-collapse">
                                 <thead>
                                     <tr class="border-b border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400">
-                                        <th class="py-2 px-2 text-left">Razón</th>
+                                        <th class="py-2 px-2 text-left"></th>
                                         <th onclick="setMod1Angle(0)" class="py-2 px-2 cursor-pointer hover:bg-indigo-50 dark:hover:bg-slate-800 rounded-t transition font-bold">0°</th>
                                         <th onclick="setMod1Angle(30)" class="py-2 px-2 cursor-pointer hover:bg-indigo-50 dark:hover:bg-slate-800 rounded-t transition font-bold text-indigo-600 dark:text-indigo-400">30°</th>
                                         <th onclick="setMod1Angle(45)" class="py-2 px-2 cursor-pointer hover:bg-indigo-50 dark:hover:bg-slate-800 rounded-t transition font-bold">45°</th>
@@ -324,7 +325,7 @@
                                 </thead>
                                 <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
                                     <tr>
-                                        <td class="py-2.5 px-2 text-left font-bold text-rose-600 dark:text-rose-400">$\operatorname{sen}\alpha$ ($y$)</td>
+                                        <td class="py-2.5 px-2 text-left font-bold text-rose-600 dark:text-rose-400">$y = \operatorname{sin}\alpha$</td>
                                         <td class="py-2.5 px-2">$0$</td>
                                         <td class="py-2.5 px-2">$\frac{1}{2}$</td>
                                         <td class="py-2.5 px-2">$\frac{\sqrt{2}}{2}$</td>
@@ -332,7 +333,7 @@
                                         <td class="py-2.5 px-2">$1$</td>
                                     </tr>
                                     <tr>
-                                        <td class="py-2.5 px-2 text-left font-bold text-blue-600 dark:text-blue-400">$\cos\alpha$ ($x$)</td>
+                                        <td class="py-2.5 px-2 text-left font-bold text-blue-600 dark:text-blue-400">$x = \cos\alpha$</td>
                                         <td class="py-2.5 px-2">$1$</td>
                                         <td class="py-2.5 px-2">$\frac{\sqrt{3}}{2}$</td>
                                         <td class="py-2.5 px-2">$\frac{\sqrt{2}}{2}$</td>
@@ -340,7 +341,7 @@
                                         <td class="py-2.5 px-2">$0$</td>
                                     </tr>
                                     <tr>
-                                        <td class="py-2.5 px-2 text-left font-bold text-emerald-600 dark:text-emerald-400">$\tan\alpha$ ($y/x$)</td>
+                                        <td class="py-2.5 px-2 text-left font-bold text-emerald-600 dark:text-emerald-400">$y/x = \tan\alpha$</td>
                                         <td class="py-2.5 px-2">$0$</td>
                                         <td class="py-2.5 px-2">$\frac{\sqrt{3}}{3}$</td>
                                         <td class="py-2.5 px-2">$1$</td>
@@ -831,8 +832,8 @@
     <!-- FOOTER -->
     <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-4 px-4 mt-12">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 dark:text-slate-400 gap-2">
-            <div><strong>TrigoLab 1.º Bachillerato</strong> • Diseño Instruccional Basado en Simplificación Procedural y Visualización Dinámica</div>
-            <div>Unidades 3 y 4: Resolución de Triángulos, Fórmulas y Funciones Trigonométricas</div>
+            <div><strong>TrigoLab 1. Batxilergoa</strong></div>
+            <div>3. eta 4. gaiak: Triangeluen ebazpena, formula eta funtzio trigonometrikoak.</div>
         </div>
     </footer>
 
@@ -1014,23 +1015,23 @@
                 elExTan.innerHTML = `$${exact.tan}$`;
                 renderMathInContainer(elExCos.parentElement.parentElement);
             } else {
-                elExCos.textContent = 'Aprox. decimal';
-                elExSin.textContent = 'Aprox. decimal';
-                elExTan.textContent = 'Cociente y/x';
+                elExCos.textContent = 'Hurbilpen dezimala';
+                elExSin.textContent = 'Hurbilpen dezimala';
+                elExTan.textContent = 'Hurbilpen dezimala';
             }
 
             // Badge de Cuadrante y signos
             const qBadge = document.getElementById('m1-quadrant-badge');
             if (deg > 0 && deg < 90) {
-                qBadge.textContent = 'Cuadrante I (x > 0, y > 0)';
+                qBadge.textContent = 'I. koadrantea (x > 0, y > 0)';
             } else if (deg > 90 && deg < 180) {
-                qBadge.textContent = 'Cuadrante II (x < 0, y > 0)';
+                qBadge.textContent = 'II. koadrantea (x < 0, y > 0)';
             } else if (deg > 180 && deg < 270) {
-                qBadge.textContent = 'Cuadrante III (x < 0, y < 0)';
+                qBadge.textContent = 'III. koadrantea (x < 0, y < 0)';
             } else if (deg > 270 && deg < 360) {
-                qBadge.textContent = 'Cuadrante IV (x > 0, y < 0)';
+                qBadge.textContent = 'IV. koadrantea (x > 0, y < 0)';
             } else {
-                qBadge.textContent = `Ángulo sobre Eje (${deg}°)`;
+                qBadge.textContent = `Angelua (${deg}°) ardatzean`;
             }
 
             // Pitágoras en vivo
@@ -1260,12 +1261,12 @@
             const btnText = document.getElementById('btn-mod2-altitude-text');
             const pill = document.getElementById('m2-status-pill');
             if (state.m2ShowAltitude) {
-                btnText.textContent = 'Ocultar Altura h';
-                pill.textContent = 'Altura Activa (2 Triángulos Rectángulos)';
+                btnText.textContent = 'h altuera ezkutatu';
+                pill.textContent = 'Altuera aktiboa (2 triangelu angeluzuzen)';
                 pill.className = 'text-xs px-2.5 py-0.5 rounded-full font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300';
             } else {
-                btnText.textContent = 'Trazar Altura h (Dividir)';
-                pill.textContent = 'Sin Dividir (Oblicuángulo)';
+                btnText.textContent = 'Trazatu h altuera (zatitu)';
+                pill.textContent = 'Zatitu gabe (zeiharra)';
                 pill.className = 'text-xs px-2.5 py-0.5 rounded-full font-semibold bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300';
             }
             drawMod2Canvas();
@@ -1310,15 +1311,15 @@
 
             document.getElementById('m2-step1-res').textContent = `h = ${h.toFixed(2)} m`;
             document.getElementById('m2-step1-desc').innerHTML =
-                `Aplicamos la herramienta de la altura: $h = a \\cdot \\operatorname{sen}\\alpha = ${a} \\cdot \\operatorname{sen}(${alphaDeg}^\\circ) = \\mathbf{${h.toFixed(2)}\\text{ m}}$.`;
+                `Altueraren erreminta aplikatzen dugu: $h = a \\cdot \\operatorname{sen}\\alpha = ${a} \\cdot \\operatorname{sen}(${alphaDeg}^\\circ) = \\mathbf{${h.toFixed(2)}\\text{ m}}$.`;
 
             document.getElementById('m2-step2-res').textContent = `x = ${x.toFixed(2)} m | y = ${y.toFixed(2)} m`;
             document.getElementById('m2-step2-desc').innerHTML =
-                `Proyección: $x = a \\cdot \\cos(${alphaDeg}^\\circ) = \\mathbf{${x.toFixed(2)}\\text{ m}}$. Segmento restante en la base: $y = b - x = ${b} - (${x.toFixed(2)}) = \\mathbf{${y.toFixed(2)}\\text{ m}}$.`;
+                `Proiekzioa: $x = a \\cdot \\cos(${alphaDeg}^\\circ) = \\mathbf{${x.toFixed(2)}\\text{ m}}$. Oinarrian geratzen den segmentua: $y = b - x = ${b} - (${x.toFixed(2)}) = \\mathbf{${y.toFixed(2)}\\text{ m}}$.`;
 
             document.getElementById('m2-step3-res').textContent = `c = ${c.toFixed(2)} m | β = ${betaDeg.toFixed(1)}°`;
             document.getElementById('m2-step3-desc').innerHTML =
-                `Pitágoras en el Triángulo II: $c = \\sqrt{h^2 + y^2} = \\sqrt{${h.toFixed(2)}^2 + (${y.toFixed(2)})^2} = \\mathbf{${c.toFixed(2)}\\text{ m}}$.`;
+                `Pitagoras II. triangeluan: $c = \\sqrt{h^2 + y^2} = \\sqrt{${h.toFixed(2)}^2 + (${y.toFixed(2)})^2} = \\mathbf{${c.toFixed(2)}\\text{ m}}$.`;
 
             document.getElementById('m2-step4-res').textContent = `Área = ${area.toFixed(2)} m²`;
             document.getElementById('m2-step4-desc').innerHTML =
@@ -1442,7 +1443,7 @@
             } else {
                 ctx.font = 'bold 12px Inter, sans-serif';
                 ctx.fillStyle = isDark ? '#cbd5e1' : '#334155';
-                ctx.fillText(`Base b = ${b.toFixed(1)} m`, (Ax + Bx) / 2 - 35, Ay + 22);
+                ctx.fillText(`Oinarria b = ${b.toFixed(1)} m`, (Ax + Bx) / 2 - 35, Ay + 22);
             }
 
             // Etiquetas de Vértices y Lados conocidos
@@ -2275,7 +2276,7 @@
             ctx.fillText('C', Cx - 5, Cy - 8);
         }
 
-        window.onload = function () {
+        function initApp() {
             if (window.lucide) {
                 lucide.createIcons();
             }
@@ -2291,10 +2292,21 @@
 
             renderMathInContainer(document.body);
 
-            window.addEventListener('resize', () => {
+            // Asegurar redibujado tras el primer layout completo
+            requestAnimationFrame(() => {
                 redrawAllActiveCanvases();
             });
-        };
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initApp);
+        } else {
+            initApp();
+        }
+
+        window.addEventListener('resize', () => {
+            redrawAllActiveCanvases();
+        });
     </script>
 </body>
 </html>
