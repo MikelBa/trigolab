@@ -137,7 +137,7 @@
 
                 <!-- Right Controls: Formula Cheat-Sheet Modal & Dark Mode -->
                 <div class="flex items-center gap-2 shrink-0">
-                    <button onclick="toggleModal('modal-formulario')" class="px-3 py-1.5 text-xs xl:text-sm font-semibold rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 dark:bg-amber-900/40 dark:hover:bg-amber-900/60 dark:text-amber-200 flex items-center gap-1.5 transition shadow-sm whitespace-nowrap shrink-0" title="Ver el Mínimo Formulario Indispensable">
+                    <button onclick="toggleModal('modal-formulario')" class="px-3 py-1.5 text-xs xl:text-sm font-semibold rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 dark:bg-amber-900/40 dark:hover:bg-amber-900/60 dark:text-amber-200 flex items-center gap-1.5 transition shadow-sm whitespace-nowrap shrink-0" title="Ikusi ezinbesteko formulak">
                         <i data-lucide="sparkles" class="w-4 h-4 text-amber-600 dark:text-amber-400 shrink-0"></i>
                         <span>Ezinbesteko formulak</span>
                     </button>
@@ -258,7 +258,7 @@
                             </div>
                             <!-- Seno (Y) -->
                             <div class="p-3 rounded-xl bg-rose-50/70 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800/80">
-                                <div class="text-xs font-bold text-rose-700 dark:text-rose-400">Ordenatu-ardatza $y = \operatorname{sen}\alpha$</div>
+                                <div class="text-xs font-bold text-rose-700 dark:text-rose-400">Ordenatu-ardatza $y = \sin\alpha$</div>
                                 <div id="m1-val-sin" class="font-mono text-lg font-extrabold text-rose-900 dark:text-rose-200 mt-1">+0.500</div>
                                 <div id="m1-exact-sin" class="text-xs text-rose-600 dark:text-rose-400 mt-0.5 font-medium">$\frac{1}{2}$</div>
                             </div>
@@ -293,7 +293,7 @@
                             </li>
                             <li class="flex items-start gap-2">
                                 <span class="w-2.5 h-2.5 rounded-full bg-rose-500 mt-1.5 shrink-0"></span>
-                                <span><strong>Sinua ($\operatorname{sin}\alpha = y$):</strong> Altuera bertikala da (proiekzioa $Y$ ardatzean). Positiboa goian (I eta II koadranteak), negatiboa behean (III eta IV).</span>
+                                <span><strong>Sinua ($\sin\alpha = y$):</strong> Altuera bertikala da (proiekzioa $Y$ ardatzean). Positiboa goian (I eta II koadranteak), negatiboa behean (III eta IV).</span>
                             </li>
                             <li class="flex items-start gap-2">
                                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 mt-1.5 shrink-0"></span>
@@ -325,7 +325,7 @@
                                 </thead>
                                 <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
                                     <tr>
-                                        <td class="py-2.5 px-2 text-left font-bold text-rose-600 dark:text-rose-400">$y = \operatorname{sin}\alpha$</td>
+                                        <td class="py-2.5 px-2 text-left font-bold text-rose-600 dark:text-rose-400">$y = \sin\alpha$</td>
                                         <td class="py-2.5 px-2">$0$</td>
                                         <td class="py-2.5 px-2">$\frac{1}{2}$</td>
                                         <td class="py-2.5 px-2">$\frac{\sqrt{2}}{2}$</td>
@@ -364,12 +364,12 @@
         <section id="sec-mod2" class="module-section hidden space-y-6">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
                 <div>
-                    <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Módulo 2 • Descomposición de Problemas</span>
-                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">Resolución Procedural: La "Estrategia de la Altura"</h1>
+                    <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">2. modulua • Problemak deskonposatzea</span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">Prozedura-ebazpena: "Altueraren Estrategia"</h1>
                 </div>
                 <div class="flex items-center gap-2 self-start">
                     <span class="text-xs px-3 py-1.5 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800 font-medium">
-                        Sin memorizar Teorema del Seno ni del Coseno
+                        Sinuaren eta Kosinuaren teorema buruz ikasi gabe
                     </span>
                 </div>
             </div>
@@ -379,25 +379,25 @@
                 <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-start gap-3.5">
                     <div class="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold shrink-0">1</div>
                     <div>
-                        <h3 class="text-sm font-bold text-slate-900 dark:text-white">Proyección de un Segmento</h3>
+                        <h3 class="text-sm font-bold text-slate-900 dark:text-white">Segmentu baten proiekzioa</h3>
                         <div class="text-base font-semibold text-blue-600 dark:text-blue-400 my-1">$x = a \cdot \cos\alpha$</div>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">La sombra horizontal de un lado inclinado $a$ sobre la base es el lado multiplicado por el coseno del ángulo.</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Alde inklinatu baten itzal horizontala, $a$ oinarriaren gainean, angeluaren kosinuaz biderkatutako aldea da.</p>
                     </div>
                 </div>
                 <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-start gap-3.5">
                     <div class="w-10 h-10 rounded-xl bg-rose-100 dark:bg-rose-900/50 text-rose-600 dark:text-rose-400 flex items-center justify-center font-bold shrink-0">2</div>
                     <div>
-                        <h3 class="text-sm font-bold text-slate-900 dark:text-white">Altura de un Triángulo</h3>
-                        <div class="text-base font-semibold text-rose-600 dark:text-rose-400 my-1">$h = a \cdot \operatorname{sen}\alpha$</div>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">Al trazar la altura $h$, esta actúa como cateto opuesto al ángulo $\alpha$, dividiendo el triángulo en dos rectángulos.</p>
+                        <h3 class="text-sm font-bold text-slate-900 dark:text-white">Triangelu baten altuera</h3>
+                        <div class="text-base font-semibold text-rose-600 dark:text-rose-400 my-1">$h = a \cdot \sin\alpha$</div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">$h$ altuera trazatzean, $\alpha$ angeluaren aurkako kateto gisa jokatzen du, triangelua bi triangelu angeluzuzenetan zatituz.</p>
                     </div>
                 </div>
                 <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-start gap-3.5">
                     <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-900/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold shrink-0">3</div>
                     <div>
-                        <h3 class="text-sm font-bold text-slate-900 dark:text-white">Área del Triángulo</h3>
-                        <div class="text-base font-semibold text-emerald-600 dark:text-emerald-400 my-1">$S = \frac{1}{2} \cdot b \cdot a \cdot \operatorname{sen}\alpha$</div>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">Como $\text{Área} = \frac{\text{base} \cdot \text{altura}}{2}$ y sabemos que $h = a \cdot \operatorname{sen}\alpha$, sustituimos directamente.</p>
+                        <h3 class="text-sm font-bold text-slate-900 dark:text-white">Triangeluaren azalera</h3>
+                        <div class="text-base font-semibold text-emerald-600 dark:text-emerald-400 my-1">$S = \frac{1}{2} \cdot b \cdot a \cdot \sin\alpha$</div>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Nola $\text{Azalera} = \frac{\text{oinarria}\cdot \text{altuera}}{2}$ eta badakigu  $h = a \cdot \sin\alpha$ dela, zuzenean ordezkatzen dugu.</p>
                     </div>
                 </div>
             </div>
@@ -410,13 +410,13 @@
                         <div>
                             <h2 class="font-bold text-base sm:text-lg flex items-center gap-2">
                                 <i data-lucide="scissors" class="w-5 h-5 text-indigo-600"></i>
-                                Trazador Dinámico: Divide y Vencerás
+                                Trazatzaile dinamikoa: "Divide et impera"
                             </h2>
-                            <p class="text-xs text-slate-500 dark:text-slate-400">Ajusta los datos conocidos ($a$, $b$, $\alpha$) y pulsa <strong>"Trazar Altura $h$"</strong> para descomponer.</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">Datu ezagunak doitu ($a$, $b$, $\alpha$) eta sakatu <strong>"$h$ altuera trazatu"</strong> deskonposatzeko.</p>
                         </div>
                         <button onclick="toggleMod2Altitude()" id="btn-mod2-altitude" class="px-4 py-2 rounded-xl font-bold text-xs sm:text-sm bg-indigo-600 hover:bg-indigo-700 text-white shadow-md shadow-indigo-500/20 flex items-center gap-2 transition">
                             <i data-lucide="git-branch" class="w-4 h-4"></i>
-                            <span id="btn-mod2-altitude-text">Trazar Altura h (Dividir)</span>
+                            <span id="btn-mod2-altitude-text">h altuera trazatu (Zatitu)</span>
                         </button>
                     </div>
 
@@ -428,21 +428,21 @@
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-5 pt-4 border-t border-slate-100 dark:border-slate-800">
                         <div>
                             <div class="flex justify-between text-xs font-semibold mb-1">
-                                <span>Lado inclinado $a$:</span>
+                                <span> Alde inklinatua $a$:</span>
                                 <span id="m2-val-a" class="font-mono text-indigo-600 dark:text-indigo-400 font-bold">8.0 m</span>
                             </div>
                             <input type="range" id="slider-m2-a" min="4" max="12" step="0.5" value="8" class="w-full">
                         </div>
                         <div>
                             <div class="flex justify-between text-xs font-semibold mb-1">
-                                <span>Base total $b$:</span>
+                                <span> Oinarri osoa $b$:</span>
                                 <span id="m2-val-b" class="font-mono text-indigo-600 dark:text-indigo-400 font-bold">11.0 m</span>
                             </div>
                             <input type="range" id="slider-m2-b" min="6" max="15" step="0.5" value="11" class="w-full">
                         </div>
                         <div>
                             <div class="flex justify-between text-xs font-semibold mb-1">
-                                <span>Ángulo $\alpha$ (vértice A):</span>
+                                <span>Angelua $\alpha$ (A erpinean):</span>
                                 <span id="m2-val-alpha" class="font-mono text-indigo-600 dark:text-indigo-400 font-bold">50°</span>
                             </div>
                             <input type="range" id="slider-m2-alpha" min="25" max="115" step="1" value="50" class="w-full">
@@ -455,15 +455,12 @@
                     <div class="flex items-center justify-between">
                         <h3 class="font-bold text-base flex items-center gap-2">
                             <i data-lucide="list-Ordered" class="w-5 h-5 text-indigo-600"></i>
-                            Descomposición Paso a Paso
+                            Deskonposizioa pausoz pauso
                         </h3>
-                        <span id="m2-status-pill" class="text-xs px-2.5 py-0.5 rounded-full font-semibold bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300">
-                            Altura Activa
-                        </span>
                     </div>
 
                     <p class="text-xs text-slate-500 dark:text-slate-400">
-                        Observa cómo cualquier triángulo oblicuángulo se resuelve encadenando pasos elementales sobre los <strong>dos triángulos rectángulos</strong> (Izquierdo $\text{I}$ y Derecho $\text{II}$):
+                        Aztertu nola ebazten den edozein triangelu zeihar oinarrizko pausuak erabiliz <strong>bi triangelu angeluzuzenetan</strong> (Ezkerrekoa $\text{I}$ eta Eskuinekoa $\text{II}$) deskonposatuta:
                     </p>
 
                     <!-- Pasos Procedurales Dinámicos -->
@@ -471,44 +468,44 @@
                         <!-- Paso 1 -->
                         <div class="p-3.5 rounded-xl bg-rose-50/70 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-800/70">
                             <div class="flex items-center justify-between">
-                                <span class="text-xs font-bold text-rose-700 dark:text-rose-300 uppercase">Paso 1: Triángulo Rectángulo I (Altura $h$)</span>
+                                <span class="text-xs font-bold text-rose-700 dark:text-rose-300 uppercase">1. urratsa: Triangelu angeluzuzena I (Altuera $h$)</span>
                                 <span class="text-xs font-mono font-bold text-rose-800 dark:text-rose-200" id="m2-step1-res">h = 6.13 m</span>
                             </div>
                             <p class="text-xs text-slate-600 dark:text-slate-300 mt-1" id="m2-step1-desc">
-                                Aplicamos la herramienta de la altura: $h = a \cdot \operatorname{sen}\alpha = 8 \cdot \operatorname{sen}(50^\circ) = 6.13\text{ m}$.
+                                Altueraren metodoa aplikatzen dugu: $h = a \cdot \sin\alpha = 8 \cdot \sin(50^\circ) = 6.13\text{ m}$.
                             </p>
                         </div>
 
                         <!-- Paso 2 -->
                         <div class="p-3.5 rounded-xl bg-blue-50/70 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800/70">
                             <div class="flex items-center justify-between">
-                                <span class="text-xs font-bold text-blue-700 dark:text-blue-300 uppercase">Paso 2: Proyección $x$ y Resto de Base $y$</span>
+                                <span class="text-xs font-bold text-blue-700 dark:text-blue-300 uppercase">2. urratsa: $x$ proiekzioa eta gainerako $y$ oinarria</span>
                                 <span class="text-xs font-mono font-bold text-blue-800 dark:text-blue-200" id="m2-step2-res">x = 5.14 m | y = 5.86 m</span>
                             </div>
                             <p class="text-xs text-slate-600 dark:text-slate-300 mt-1" id="m2-step2-desc">
-                                Proyección: $x = a \cdot \cos\alpha = 5.14\text{ m}$. Por tanto, la base del triángulo derecho es $y = b - x = 11 - 5.14 = 5.86\text{ m}$.
+                                Proiekzioa: $x = a \cdot \cos\alpha = 5.14\text{ m}$. Beraz, eskuineko triangeluaren oinarria $y = b - x = 11 - 5.14 = 5.86\text{ m}$ da.
                             </p>
                         </div>
 
                         <!-- Paso 3 -->
                         <div class="p-3.5 rounded-xl bg-indigo-50/70 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-800/70">
                             <div class="flex items-center justify-between">
-                                <span class="text-xs font-bold text-indigo-700 dark:text-indigo-300 uppercase">Paso 3: Triángulo Rectángulo II (Lado $c$ y Ángulo $\beta$)</span>
+                                <span class="text-xs font-bold text-indigo-700 dark:text-indigo-300 uppercase">3. urratsa: Triangelu angeluzuzena II ($c$ aldea eta $\beta$ angelua)</span>
                                 <span class="text-xs font-mono font-bold text-indigo-800 dark:text-indigo-200" id="m2-step3-res">c = 8.48 m | β = 46.3°</span>
                             </div>
                             <p class="text-xs text-slate-600 dark:text-slate-300 mt-1" id="m2-step3-desc">
-                                Por Pitágoras en el triángulo derecho: $c = \sqrt{h^2 + y^2} = 8.48\text{ m}$. Y la tangente nos da $\tan\beta = \frac{h}{y} \Rightarrow \beta = 46.3^\circ$.
+                                Pitagorasen teorema erabilita eskuineko triangeluan: $c = \sqrt{h^2 + y^2} = 8.48\text{ m}$. Y la tangente nos da $\tan\beta = \frac{h}{y} \Rightarrow \beta = 46.3^\circ$.
                             </p>
                         </div>
 
                         <!-- Paso 4: Área -->
                         <div class="p-3.5 rounded-xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/70">
                             <div class="flex items-center justify-between">
-                                <span class="text-xs font-bold text-emerald-700 dark:text-emerald-300 uppercase">Paso 4: Área Total del Triángulo</span>
-                                <span class="text-xs font-mono font-bold text-emerald-800 dark:text-emerald-200" id="m2-step4-res">Área = 33.71 m²</span>
+                                <span class="text-xs font-bold text-emerald-700 dark:text-emerald-300 uppercase">4. urratsa: Triangeluaren azalera osoa</span>
+                                <span class="text-xs font-mono font-bold text-emerald-800 dark:text-emerald-200" id="m2-step4-res">Azalera = 33.71 m²</span>
                             </div>
                             <p class="text-xs text-slate-600 dark:text-slate-300 mt-1" id="m2-step4-desc">
-                                $S = \frac{1}{2} \cdot b \cdot h = \frac{1}{2} \cdot b \cdot a \cdot \operatorname{sen}\alpha = 33.71\text{ m}^2$.
+                                $S = \frac{1}{2} \cdot b \cdot h = \frac{1}{2} \cdot b \cdot a \cdot \sin\alpha = 33.71\text{ m}^2$.
                             </p>
                         </div>
                     </div>
@@ -540,7 +537,7 @@
                         🌱 La Única Identidad de Adición que Necesitas
                     </span>
                     <div class="text-xl sm:text-3xl font-extrabold py-2 bg-slate-900/30 rounded-xl border border-white/15">
-                        $$\operatorname{sen}(\alpha + \beta) = \operatorname{sen}\alpha \cdot \cos\beta + \cos\alpha \cdot \operatorname{sen}\beta$$
+                        $$\sin(\alpha + \beta) = \sin\alpha \cdot \cos\beta + \cos\alpha \cdot \sin\beta$$
                     </div>
                     <p class="text-xs sm:text-sm text-indigo-100">
                         En lugar de memorizar decenas de fórmulas desconectadas, en 1.º de Bachillerato aprendemos a <strong>deducirlas en dos pasos algebraicos</strong> realizando simples sustituciones de ángulos.
@@ -558,7 +555,7 @@
                     <button onclick="selectDerivation('doble_sen')" id="deriv-btn-doble_sen" class="deriv-btn w-full text-left p-4 rounded-2xl border-2 border-indigo-600 bg-indigo-50/60 dark:bg-indigo-950/40 transition flex items-center justify-between">
                         <div>
                             <div class="text-xs font-bold text-indigo-600 dark:text-indigo-400">Deducción 1 • Sustitución $\beta = \alpha$</div>
-                            <div class="font-bold text-slate-900 dark:text-white mt-0.5">Seno del Ángulo Doble: $\operatorname{sen}(2\alpha)$</div>
+                            <div class="font-bold text-slate-900 dark:text-white mt-0.5">Seno del Ángulo Doble: $\sin(2\alpha)$</div>
                         </div>
                         <i data-lucide="chevron-right" class="w-5 h-5 text-indigo-600"></i>
                     </button>
@@ -566,7 +563,7 @@
                     <button onclick="selectDerivation('resta_sen')" id="deriv-btn-resta_sen" class="deriv-btn w-full text-left p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-indigo-300 transition flex items-center justify-between">
                         <div>
                             <div class="text-xs font-bold text-slate-500">Deducción 2 • Sustitución $\beta \rightarrow -\beta$</div>
-                            <div class="font-bold text-slate-900 dark:text-white mt-0.5">Seno de la Resta: $\operatorname{sen}(\alpha - \beta)$</div>
+                            <div class="font-bold text-slate-900 dark:text-white mt-0.5">Seno de la Resta: $\sin(\alpha - \beta)$</div>
                         </div>
                         <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400"></i>
                     </button>
@@ -593,7 +590,7 @@
                     <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-slate-100 dark:border-slate-800">
                         <div>
                             <span id="deriv-badge" class="text-xs font-bold uppercase text-indigo-600 dark:text-indigo-400">Demostrador Algebraico Paso a Paso</span>
-                            <h3 id="deriv-title" class="text-xl font-extrabold text-slate-900 dark:text-white mt-0.5">Seno del Ángulo Doble: $\operatorname{sen}(2\alpha)$</h3>
+                            <h3 id="deriv-title" class="text-xl font-extrabold text-slate-900 dark:text-white mt-0.5">Seno del Ángulo Doble: $\sin(2\alpha)$</h3>
                         </div>
                         <div class="flex items-center gap-2">
                             <button onclick="resetDerivationSteps()" class="px-3 py-1.5 text-xs font-semibold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 transition">
@@ -615,7 +612,7 @@
                     <div class="mt-6 p-4 rounded-xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/70 flex items-start gap-3">
                         <i data-lucide="lightbulb" class="w-5 h-5 text-amber-600 shrink-0 mt-0.5"></i>
                         <div class="text-xs text-amber-900 dark:text-amber-200 leading-relaxed">
-                            <strong>Recordatorio de la Circunferencia ($R=1$):</strong> No memorices signos de ángulos opuestos ni complementarios. Al mirar la circunferencia del Módulo 1 ves inmediatamente que al cambiar $\beta$ por $-\beta$, la abscisa $x$ no cambia ($\cos(-\beta) = \cos\beta$) pero la altura $y$ invierte su signo ($\operatorname{sen}(-\beta) = -\operatorname{sen}\beta$).
+                            <strong>Recordatorio de la Circunferencia ($R=1$):</strong> No memorices signos de ángulos opuestos ni complementarios. Al mirar la circunferencia del Módulo 1 ves inmediatamente que al cambiar $\beta$ por $-\beta$, la abscisa $x$ no cambia ($\cos(-\beta) = \cos\beta$) pero la altura $y$ invierte su signo ($\sin(-\beta) = -\sin\beta$).
                         </div>
                     </div>
                 </div>
@@ -650,7 +647,7 @@
                 <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
                     <div class="text-xs font-bold uppercase text-indigo-600 dark:text-indigo-400 mb-1">2. ¿Por qué no usar grados en $f(x)$?</div>
                     <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
-                        Para representar funciones reales $y = \operatorname{sen}(x)$ necesitamos que el eje horizontal $X$ y el eje vertical $Y$ tengan la <strong>misma escala lineal</strong>: desenrollamos la longitud del arco ($0$ a $2\pi \approx 6.28$) sobre el eje $X$.
+                        Para representar funciones reales $y = \sin(x)$ necesitamos que el eje horizontal $X$ y el eje vertical $Y$ tengan la <strong>misma escala lineal</strong>: desenrollamos la longitud del arco ($0$ a $2\pi \approx 6.28$) sobre el eje $X$.
                     </p>
                 </div>
                 <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
@@ -680,7 +677,7 @@
                     <!-- Selector de Función y Animación -->
                     <div class="flex flex-wrap items-center gap-2">
                         <div class="inline-flex rounded-xl bg-slate-100 dark:bg-slate-800 p-1">
-                            <button onclick="setMod4Func('sin')" id="btn-m4-sin" class="px-3 py-1 rounded-lg text-xs font-bold bg-rose-600 text-white transition">$y = \operatorname{sen}(x)$</button>
+                            <button onclick="setMod4Func('sin')" id="btn-m4-sin" class="px-3 py-1 rounded-lg text-xs font-bold bg-rose-600 text-white transition">$y = \sin(x)$</button>
                             <button onclick="setMod4Func('cos')" id="btn-m4-cos" class="px-3 py-1 rounded-lg text-xs font-bold text-slate-600 dark:text-slate-300 transition">$y = \cos(x)$</button>
                             <button onclick="setMod4Func('tan')" id="btn-m4-tan" class="px-3 py-1 rounded-lg text-xs font-bold text-slate-600 dark:text-slate-300 transition">$y = \tan(x)$</button>
                         </div>
@@ -784,8 +781,7 @@
                 <div class="flex items-center gap-2.5">
                     <i data-lucide="sparkles" class="w-6 h-6"></i>
                     <div>
-                        <h3 class="font-extrabold text-lg">El Mínimo Formulario Indispensable</h3>
-                        <p class="text-xs text-amber-100">Todo 1.º de Bachillerato reducido a 3 herramientas métricas y 1 fórmula semilla</p>
+                        <h3 class="font-extrabold text-lg">Ezinbesteko formulat</h3>
                     </div>
                 </div>
                 <button onclick="toggleModal('modal-formulario')" class="p-1.5 rounded-lg bg-white/20 hover:bg-white/30 text-white transition">
@@ -794,35 +790,35 @@
             </div>
             <div class="p-6 space-y-5 max-h-[80vh] overflow-y-auto">
                 <div>
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-2">A. En la Circunferencia Goniométrica ($R=1$)</h4>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-2">A. Zirkunferentzia goniometrikoa ($R=1$)</h4>
                     <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-sm">
-                        $$x = \cos\alpha \quad;\quad y = \operatorname{sen}\alpha \quad;\quad \tan\alpha = \frac{y}{x} \quad;\quad \cos^2\alpha + \operatorname{sen}^2\alpha = 1$$
+                        $$x = \cos\alpha \quad;\quad y = \sin\alpha \quad;\quad \tan\alpha = \frac{y}{x} \quad;\quad \cos^2\alpha + \sin^2\alpha = 1$$
                     </div>
                 </div>
 
                 <div>
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-2">B. Las 3 Herramientas para Resolver Cualquier Triángulo (Estrategia de la Altura)</h4>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-2">B. Edozein triangelu ebazteko 3 tresnak (Altueraren Estrategia)</h4>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
                         <div class="p-3 rounded-xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800">
-                            <div class="text-xs font-bold text-blue-700 dark:text-blue-300">1. Proyección</div>
+                            <div class="text-xs font-bold text-blue-700 dark:text-blue-300">1. Proiekzioa</div>
                             <div class="mt-1 font-semibold">$A'B' = AB \cdot \cos\alpha$</div>
                         </div>
                         <div class="p-3 rounded-xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800">
-                            <div class="text-xs font-bold text-rose-700 dark:text-rose-300">2. Altura</div>
-                            <div class="mt-1 font-semibold">$h = a \cdot \operatorname{sen}\alpha$</div>
+                            <div class="text-xs font-bold text-rose-700 dark:text-rose-300">2. Altuera</div>
+                            <div class="mt-1 font-semibold">$h = a \cdot \sin\alpha$</div>
                         </div>
                         <div class="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800">
-                            <div class="text-xs font-bold text-emerald-700 dark:text-emerald-300">3. Área</div>
-                            <div class="mt-1 font-semibold">$A = \frac{1}{2} a b \operatorname{sen}\alpha$</div>
+                            <div class="text-xs font-bold text-emerald-700 dark:text-emerald-300">3. Azalera</div>
+                            <div class="mt-1 font-semibold">$A = \frac{1}{2} a b \sin\alpha$</div>
                         </div>
                     </div>
                 </div>
 
                 <div>
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-2">C. La Única "Fórmula Semilla" para Identidades Algebraicas</h4>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-2">C. Identitate aljebraikoetarako behar den formula bakarra</h4>
                     <div class="p-3.5 rounded-xl bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800 text-center">
-                        $$\operatorname{sen}(\alpha + \beta) = \operatorname{sen}\alpha \cos\beta + \cos\alpha \operatorname{sen}\beta$$
-                        <p class="text-xs text-slate-600 dark:text-slate-400 mt-1">De aquí brotan $\operatorname{sen}(2\alpha)$, $\operatorname{sen}(\alpha-\beta)$, $\cos(\alpha+\beta)$ y $\cos(2\alpha)$ sin memorizar más.</p>
+                        $$\sin(\alpha + \beta) = \sin\alpha \cos\beta + \cos\alpha \sin\beta$$
+                        <p class="text-xs text-slate-600 dark:text-slate-400 mt-1">Hortik atera ahal dira $\sin(2\alpha)$, $\sin(\alpha-\beta)$, $\cos(\alpha+\beta)$ eta $\cos(2\alpha)$ ezer gehiago memorizatu gabe.</p>
                     </div>
                 </div>
             </div>
@@ -1311,19 +1307,19 @@
 
             document.getElementById('m2-step1-res').textContent = `h = ${h.toFixed(2)} m`;
             document.getElementById('m2-step1-desc').innerHTML =
-                `Altueraren erreminta aplikatzen dugu: $h = a \\cdot \\operatorname{sen}\\alpha = ${a} \\cdot \\operatorname{sen}(${alphaDeg}^\\circ) = \\mathbf{${h.toFixed(2)}\\text{ m}}$.`;
+                `Altueraren erreminta aplikatzen dugu: $h = a \\cdot \\sin\\alpha = ${a} \\cdot \\sin(${alphaDeg}^\\circ) = \\mathbf{${h.toFixed(2)}\\text{ m}}$.`;
 
             document.getElementById('m2-step2-res').textContent = `x = ${x.toFixed(2)} m | y = ${y.toFixed(2)} m`;
             document.getElementById('m2-step2-desc').innerHTML =
-                `Proiekzioa: $x = a \\cdot \\cos(${alphaDeg}^\\circ) = \\mathbf{${x.toFixed(2)}\\text{ m}}$. Oinarrian geratzen den segmentua: $y = b - x = ${b} - (${x.toFixed(2)}) = \\mathbf{${y.toFixed(2)}\\text{ m}}$.`;
+                `Proiekzioa: $x = a \\cdot \\cos(${alphaDeg}^\\circ) = \\mathbf{${x.toFixed(2)}\\text{ m}}$. Oinarrian geratzen den gainerako segmentua: $y = b - x = ${b} - (${x.toFixed(2)}) = \\mathbf{${y.toFixed(2)}\\text{ m}}$.`;
 
             document.getElementById('m2-step3-res').textContent = `c = ${c.toFixed(2)} m | β = ${betaDeg.toFixed(1)}°`;
             document.getElementById('m2-step3-desc').innerHTML =
-                `Pitagoras II. triangeluan: $c = \\sqrt{h^2 + y^2} = \\sqrt{${h.toFixed(2)}^2 + (${y.toFixed(2)})^2} = \\mathbf{${c.toFixed(2)}\\text{ m}}$.`;
+                `Pitagoras II triangeluan: $c = \\sqrt{h^2 + y^2} = \\sqrt{${h.toFixed(2)}^2 + (${y.toFixed(2)})^2} = \\mathbf{${c.toFixed(2)}\\text{ m}}$.`;
 
-            document.getElementById('m2-step4-res').textContent = `Área = ${area.toFixed(2)} m²`;
+            document.getElementById('m2-step4-res').textContent = `Azalera = ${area.toFixed(2)} m²`;
             document.getElementById('m2-step4-desc').innerHTML =
-                `$S = \\frac{1}{2} \\cdot b \\cdot a \\cdot \\operatorname{sen}\\alpha = \\frac{1}{2} \\cdot ${b} \\cdot ${h.toFixed(2)} = \\mathbf{${area.toFixed(2)}\\text{ m}^2}$.`;
+                `$S = \\frac{1}{2} \\cdot b \\cdot a \\cdot \\sin\\alpha = \\frac{1}{2} \\cdot ${b} \\cdot ${h.toFixed(2)} = \\mathbf{${area.toFixed(2)}\\text{ m}^2}$.`;
 
             renderMathInContainer(document.getElementById('m2-steps-container'));
         }
@@ -1466,48 +1462,48 @@
         // =========================================================================
         const derivationsData = {
             doble_sen: {
-                title: 'Seno del Ángulo Doble: $\\operatorname{sen}(2\\alpha)$',
+                title: 'Seno del Ángulo Doble: $\\sin(2\\alpha)$',
                 badge: 'Deducción 1 • Sustitución β = α',
                 steps: [
                     {
                         label: 'Punto de Partida (Fórmula Semilla)',
-                        math: '$$\\operatorname{sen}(\\alpha + \\beta) = \\operatorname{sen}\\alpha \\cdot \\cos\\beta + \\cos\\alpha \\cdot \\operatorname{sen}\\beta$$',
+                        math: '$$\\sin(\\alpha + \\beta) = \\sin\\alpha \\cdot \\cos\\beta + \\cos\\alpha \\cdot \\sin\\beta$$',
                         explanation: 'Partimos siempre de nuestra única identidad de adición conocida.'
                     },
                     {
                         label: 'Transformación 1: Sustituimos $\\beta$ por $\\alpha$',
-                        math: '$$\\operatorname{sen}(\\alpha + \\alpha) = \\operatorname{sen}\\alpha \\cdot \\cos\\alpha + \\cos\\alpha \\cdot \\operatorname{sen}\\alpha$$',
+                        math: '$$\\sin(\\alpha + \\alpha) = \\sin\\alpha \\cdot \\cos\\alpha + \\cos\\alpha \\cdot \\sin\\alpha$$',
                         explanation: 'Como queremos calcular el ángulo doble $2\\alpha = \\alpha + \\alpha$, reemplazamos cada $\\beta$ por $\\alpha$.'
                     },
                     {
                         label: 'Transformación 2: Agrupamos términos semejantes',
-                        math: '$$\\mathbf{\\operatorname{sen}(2\\alpha) = 2 \\cdot \\operatorname{sen}\\alpha \\cdot \\cos\\alpha}$$',
-                        explanation: '¡Listo! Como ambos sumandos son idénticos ($\\operatorname{sen}\\alpha \\cos\\alpha$), obtenemos la fórmula del ángulo doble sin memorizarla.'
+                        math: '$$\\mathbf{\\sin(2\\alpha) = 2 \\cdot \\sin\\alpha \\cdot \\cos\\alpha}$$',
+                        explanation: '¡Listo! Como ambos sumandos son idénticos ($\\sin\\alpha \\cos\\alpha$), obtenemos la fórmula del ángulo doble sin memorizarla.'
                     }
                 ]
             },
             resta_sen: {
-                title: 'Seno de la Diferencia: $\\operatorname{sen}(\\alpha - \\beta)$',
+                title: 'Seno de la Diferencia: $\\sin(\\alpha - \\beta)$',
                 badge: 'Deducción 2 • Sustitución β → -β',
                 steps: [
                     {
                         label: 'Punto de Partida (Fórmula Semilla)',
-                        math: '$$\\operatorname{sen}(\\alpha + \\beta) = \\operatorname{sen}\\alpha \\cdot \\cos\\beta + \\cos\\alpha \\cdot \\operatorname{sen}\\beta$$',
+                        math: '$$\\sin(\\alpha + \\beta) = \\sin\\alpha \\cdot \\cos\\beta + \\cos\\alpha \\cdot \\sin\\beta$$',
                         explanation: 'Escribimos la resta $\\alpha - \\beta$ como la suma $\\alpha + (-\\beta)$.'
                     },
                     {
                         label: 'Transformación 1: Sustituimos $\\beta$ por $(-\\beta)$',
-                        math: '$$\\operatorname{sen}(\\alpha + (-\\beta)) = \\operatorname{sen}\\alpha \\cdot \\cos(-\\beta) + \\cos\\alpha \\cdot \\operatorname{sen}(-\\beta)$$',
+                        math: '$$\\sin(\\alpha + (-\\beta)) = \\sin\\alpha \\cdot \\cos(-\\beta) + \\cos\\alpha \\cdot \\sin(-\\beta)$$',
                         explanation: 'Evaluamos el seno y coseno del ángulo opuesto $(-\\beta)$.'
                     },
                     {
                         label: 'Transformación 2: Aplicamos simetría en la Circunferencia ($R=1$)',
-                        math: '$$\\cos(-\\beta) = \\cos\\beta \\quad \\text{y} \\quad \\operatorname{sen}(-\\beta) = -\\operatorname{sen}\\beta$$',
+                        math: '$$\\cos(-\\beta) = \\cos\\beta \\quad \\text{y} \\quad \\sin(-\\beta) = -\\sin\\beta$$',
                         explanation: 'En la circunferencia goniométrica, cambiar $\\beta$ por $-\\beta$ mantiene la abscisa $x$ igual pero invierte el signo de la altura $y$.'
                     },
                     {
                         label: 'Resultado Final Deducción',
-                        math: '$$\\mathbf{\\operatorname{sen}(\\alpha - \\beta) = \\operatorname{sen}\\alpha \\cdot \\cos\\beta - \\cos\\alpha \\cdot \\operatorname{sen}\\beta}$$',
+                        math: '$$\\mathbf{\\sin(\\alpha - \\beta) = \\sin\\alpha \\cdot \\cos\\beta - \\cos\\alpha \\cdot \\sin\\beta}$$',
                         explanation: 'El signo menos sale de forma natural gracias a la simetría vertical del seno.'
                     }
                 ]
@@ -1518,18 +1514,18 @@
                 steps: [
                     {
                         label: 'Punto de Partida: Relación entre Seno y Coseno de complementarios',
-                        math: '$$\\cos(\\alpha + \\beta) = \\operatorname{sen}\\big(90^\\circ - (\\alpha + \\beta)\\big) = \\operatorname{sen}\\big((90^\\circ - \\alpha) - \\beta\\big)$$',
+                        math: '$$\\cos(\\alpha + \\beta) = \\sin\\big(90^\\circ - (\\alpha + \\beta)\\big) = \\sin\\big((90^\\circ - \\alpha) - \\beta\\big)$$',
                         explanation: 'En cualquier triángulo rectángulo, el coseno de un ángulo es el seno de su complementario ($90^\\circ - \\text{ángulo}$).'
                     },
                     {
                         label: 'Transformación 1: Aplicamos la fórmula del seno de la resta',
-                        math: '$$= \\operatorname{sen}(90^\\circ - \\alpha) \\cdot \\cos\\beta - \\cos(90^\\circ - \\alpha) \\cdot \\operatorname{sen}\\beta$$',
+                        math: '$$= \\sin(90^\\circ - \\alpha) \\cdot \\cos\\beta - \\cos(90^\\circ - \\alpha) \\cdot \\sin\\beta$$',
                         explanation: 'Usamos la fórmula semilla con el primer bloque $(90^\\circ - \\alpha)$ y el segundo bloque $\\beta$.'
                     },
                     {
                         label: 'Transformación 2: Cambiamos los complementarios de $\\alpha$',
-                        math: '$$\\mathbf{\\cos(\\alpha + \\beta) = \\cos\\alpha \\cdot \\cos\\beta - \\operatorname{sen}\\alpha \\cdot \\operatorname{sen}\\beta}$$',
-                        explanation: 'Como $\\operatorname{sen}(90^\\circ - \\alpha) = \\cos\\alpha$ y $\\cos(90^\\circ - \\alpha) = \\operatorname{sen}\\alpha$, llegamos directamente al coseno de la suma.'
+                        math: '$$\\mathbf{\\cos(\\alpha + \\beta) = \\cos\\alpha \\cdot \\cos\\beta - \\sin\\alpha \\cdot \\sin\\beta}$$',
+                        explanation: 'Como $\\sin(90^\\circ - \\alpha) = \\cos\\alpha$ y $\\cos(90^\\circ - \\alpha) = \\sin\\alpha$, llegamos directamente al coseno de la suma.'
                     }
                 ]
             },
@@ -1539,18 +1535,18 @@
                 steps: [
                     {
                         label: 'Punto de Partida (Coseno de la Suma recién deducido)',
-                        math: '$$\\cos(\\alpha + \\beta) = \\cos\\alpha \\cdot \\cos\\beta - \\operatorname{sen}\\alpha \\cdot \\operatorname{sen}\\beta$$',
+                        math: '$$\\cos(\\alpha + \\beta) = \\cos\\alpha \\cdot \\cos\\beta - \\sin\\alpha \\cdot \\sin\\beta$$',
                         explanation: 'Tomamos el resultado de la Deducción 3.'
                     },
                     {
                         label: 'Transformación 1: Sustituimos $\\beta$ por $\\alpha$',
-                        math: '$$\\cos(\\alpha + \\alpha) = \\cos\\alpha \\cdot \\cos\\alpha - \\operatorname{sen}\\alpha \\cdot \\operatorname{sen}\\alpha$$',
+                        math: '$$\\cos(\\alpha + \\alpha) = \\cos\\alpha \\cdot \\cos\\alpha - \\sin\\alpha \\cdot \\sin\\alpha$$',
                         explanation: 'Multiplicamos cada razón por sí misma.'
                     },
                     {
                         label: 'Resultado Final Deducción',
-                        math: '$$\\mathbf{\\cos(2\\alpha) = \\cos^2\\alpha - \\operatorname{sen}^2\\alpha}$$',
-                        explanation: '¡Obtenida! Observa el parecido visual con la relación fundamental ($\\cos^2\\alpha + \\operatorname{sen}^2\\alpha = 1$), pero con signo negativo.'
+                        math: '$$\\mathbf{\\cos(2\\alpha) = \\cos^2\\alpha - \\sin^2\\alpha}$$',
+                        explanation: '¡Obtenida! Observa el parecido visual con la relación fundamental ($\\cos^2\\alpha + \\sin^2\\alpha = 1$), pero con signo negativo.'
                     }
                 ]
             }
@@ -1881,7 +1877,7 @@
                 {
                     id: 'l1-q1',
                     title: 'Lectura Visual de Coordenadas y Signos en la Circunferencia ($R=1$)',
-                    statement: 'Un punto $P(x, y)$ se sitúa sobre la circunferencia goniométrica en el ángulo $\\alpha = 150^\\circ$ (Segundo Cuadrante). Sabiendo que está a $30^\\circ$ por encima del semieje negativo $X$ ($180^\\circ$), ¿cuáles son sus coordenadas exactas $(\\cos 150^\\circ, \\operatorname{sen} 150^\\circ)$?',
+                    statement: 'Un punto $P(x, y)$ se sitúa sobre la circunferencia goniométrica en el ángulo $\\alpha = 150^\\circ$ (Segundo Cuadrante). Sabiendo que está a $30^\\circ$ por encima del semieje negativo $X$ ($180^\\circ$), ¿cuáles son sus coordenadas exactas $(\\cos 150^\\circ, \\sin 150^\\circ)$?',
                     type: 'mcq',
                     options: [
                         { label: '$\\left(+\\frac{\\sqrt{3}}{2},\\; +\\frac{1}{2}\\right)$', correct: false },
@@ -1889,8 +1885,8 @@
                         { label: '$\\left(-\\frac{1}{2},\\; +\\frac{\\sqrt{3}}{2}\\right)$', correct: false },
                         { label: '$\\left(-\\frac{\\sqrt{3}}{2},\\; -\\frac{1}{2}\\right)$', correct: false }
                     ],
-                    hint1: 'Pista Conceptual (1.er intento): En el Cuadrante II (izquierda y arriba), la abscisa $x = \\cos\\alpha$ es NEGATIVA y la ordenada $y = \\operatorname{sen}\\alpha$ es POSITIVA.',
-                    hint2: 'Descomposición Geométrica (2.º intento): El triángulo rectángulo interior para $150^\\circ$ tiene un ángulo agudo de $180^\\circ - 150^\\circ = 30^\\circ$ con el eje horizontal. Por tanto, su base mide $\\cos 30^\\circ = \\frac{\\sqrt{3}}{2}$ (hacia la izquierda, negativo) y su altura mide $\\operatorname{sen} 30^\\circ = \\frac{1}{2}$ (hacia arriba, positivo).',
+                    hint1: 'Pista Conceptual (1.er intento): En el Cuadrante II (izquierda y arriba), la abscisa $x = \\cos\\alpha$ es NEGATIVA y la ordenada $y = \\sin\\alpha$ es POSITIVA.',
+                    hint2: 'Descomposición Geométrica (2.º intento): El triángulo rectángulo interior para $150^\\circ$ tiene un ángulo agudo de $180^\\circ - 150^\\circ = 30^\\circ$ con el eje horizontal. Por tanto, su base mide $\\cos 30^\\circ = \\frac{\\sqrt{3}}{2}$ (hacia la izquierda, negativo) y su altura mide $\\sin 30^\\circ = \\frac{1}{2}$ (hacia arriba, positivo).',
                     visualAngle: 150
                 },
                 {
@@ -1904,7 +1900,7 @@
                         { label: '$\\tan(225^\\circ) = -\\frac{\\sqrt{2}}{2}$', correct: false },
                         { label: '$\\tan(225^\\circ) = 0$', correct: false }
                     ],
-                    hint1: 'Pista Conceptual (1.er intento): Recuerda que $\\tan\\alpha = \\frac{y}{x} = \\frac{\\operatorname{sen}\\alpha}{\\cos\\alpha}$. ¿Qué signo tienen $x$ e $y$ en el Tercer Cuadrante?',
+                    hint1: 'Pista Conceptual (1.er intento): Recuerda que $\\tan\\alpha = \\frac{y}{x} = \\frac{\\sin\\alpha}{\\cos\\alpha}$. ¿Qué signo tienen $x$ e $y$ en el Tercer Cuadrante?',
                     hint2: 'Descomposición Geométrica (2.º intento): En $225^\\circ$, tanto la coordenada $x = -\\frac{\\sqrt{2}}{2}$ como la coordenada $y = -\\frac{\\sqrt{2}}{2}$ son negativas e iguales en módulo. Al dividir negativo entre negativo: $\\tan(225^\\circ) = \\frac{-\\sqrt{2}/2}{-\\sqrt{2}/2} = +1$.',
                     visualAngle: 225
                 }
@@ -1919,12 +1915,12 @@
                     type: 'guided',
                     steps: [
                         {
-                            prompt: 'Paso 1: Calcula primero la altura $h$ que divide el triángulo ($h = a \\cdot \\operatorname{sen} 60^\\circ$). Redondea a 2 decimales:',
+                            prompt: 'Paso 1: Calcula primero la altura $h$ que divide el triángulo ($h = a \\cdot \\sin 60^\\circ$). Redondea a 2 decimales:',
                             expected: 8.66,
                             tolerance: 0.08,
                             unit: 'm',
-                            hint1: 'Pista Conceptual: En el triángulo rectángulo izquierdo, la altura es $h = a \\cdot \\operatorname{sen}\\alpha = 10 \\cdot \\operatorname{sen}(60^\\circ)$.',
-                            hint2: 'Descomposición: Sabemos que $\\operatorname{sen}(60^\\circ) = \\frac{\\sqrt{3}}{2} \\approx 0.866$. Por tanto, $h = 10 \\cdot 0.866 = 8.66\\text{ m}$.'
+                            hint1: 'Pista Conceptual: En el triángulo rectángulo izquierdo, la altura es $h = a \\cdot \\sin\\alpha = 10 \\cdot \\sin(60^\\circ)$.',
+                            hint2: 'Descomposición: Sabemos que $\\sin(60^\\circ) = \\frac{\\sqrt{3}}{2} \\approx 0.866$. Por tanto, $h = 10 \\cdot 0.866 = 8.66\\text{ m}$.'
                         },
                         {
                             prompt: 'Paso 2: Calcula la proyección horizontal $x$ del lado $a$ sobre la base ($x = a \\cdot \\cos 60^\\circ$) y el resto de la base $y = b - x$. ¿Cuánto mide el segmento derecho $y$?',
@@ -1951,12 +1947,12 @@
                     type: 'guided',
                     steps: [
                         {
-                            prompt: 'Paso 1: Calcula la altura $h$ correspondiente a la base $b = 8\\text{ m}$ ($h = a \\cdot \\operatorname{sen} 30^\\circ$):',
+                            prompt: 'Paso 1: Calcula la altura $h$ correspondiente a la base $b = 8\\text{ m}$ ($h = a \\cdot \\sin 30^\\circ$):',
                             expected: 3.0,
                             tolerance: 0.05,
                             unit: 'm',
-                            hint1: 'Pista Conceptual: Recuerda que $h = a \\cdot \\operatorname{sen}\\alpha$ con $a = 6\\text{ m}$ y $\\alpha = 30^\\circ$.',
-                            hint2: 'Descomposición: Como $\\operatorname{sen}(30^\\circ) = 0.5$, tenemos $h = 6 \\cdot 0.5 = 3\\text{ m}$.'
+                            hint1: 'Pista Conceptual: Recuerda que $h = a \\cdot \\sin\\alpha$ con $a = 6\\text{ m}$ y $\\alpha = 30^\\circ$.',
+                            hint2: 'Descomposición: Como $\\sin(30^\\circ) = 0.5$, tenemos $h = 6 \\cdot 0.5 = 3\\text{ m}$.'
                         },
                         {
                             prompt: 'Paso 2: Calcula el área total $A$ del triángulo ($A = \\frac{1}{2} \\cdot b \\cdot h$):',
@@ -1999,8 +1995,8 @@
                             expected: 500.0,
                             tolerance: 1.5,
                             unit: 'm',
-                            hint1: 'Pista Conceptual: La distancia perpendicular a la costa es la altura del triángulo: $h = a \\cdot \\operatorname{sen}(45^\\circ)$.',
-                            hint2: 'Descomposición: $h = 707.1 \\cdot \\operatorname{sen}(45^\\circ) = 707.1 \\cdot 0.7071 \\approx 500\\text{ m}$.'
+                            hint1: 'Pista Conceptual: La distancia perpendicular a la costa es la altura del triángulo: $h = a \\cdot \\sin(45^\\circ)$.',
+                            hint2: 'Descomposición: $h = 707.1 \\cdot \\sin(45^\\circ) = 707.1 \\cdot 0.7071 \\approx 500\\text{ m}$.'
                         }
                     ]
                 }
