@@ -520,12 +520,12 @@
         <section id="sec-mod3" class="module-section hidden space-y-6">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
                 <div>
-                    <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Módulo 3 • Economía Cognitiva en Álgebra</span>
-                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">Álgebra Trigonométrica con una sola "Fórmula Semilla"</h1>
+                    <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">3. modulua • Aljebrako ekonomia kognitiboa</span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-1">Aljebra trigonometrikoa "Hazi Formula" bakarrarekin</h1>
                 </div>
                 <div class="flex items-center gap-2 self-start">
                     <span class="text-xs px-3 py-1.5 rounded-xl bg-purple-50 dark:bg-purple-950/60 text-purple-800 dark:text-purple-300 border border-purple-200 dark:border-purple-800 font-medium">
-                        1 Fórmula Semilla $\rightarrow$ Todas las Identidades
+                        1 "Hazi formula" $\rightarrow$ Identitate guztiak
                     </span>
                 </div>
             </div>
@@ -534,13 +534,13 @@
             <div class="bg-gradient-to-r from-indigo-600 via-indigo-700 to-violet-700 rounded-2xl p-6 text-white shadow-lg">
                 <div class="max-w-3xl mx-auto text-center space-y-3">
                     <span class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-white/20 backdrop-blur-sm">
-                        🌱 La Única Identidad de Adición que Necesitas
+                        🌱 Beharrezkoa den gehitze-identitate bakarra
                     </span>
                     <div class="text-xl sm:text-3xl font-extrabold py-2 bg-slate-900/30 rounded-xl border border-white/15">
                         $$\sin(\alpha + \beta) = \sin\alpha \cdot \cos\beta + \cos\alpha \cdot \sin\beta$$
                     </div>
                     <p class="text-xs sm:text-sm text-indigo-100">
-                        En lugar de memorizar decenas de fórmulas desconectadas, en 1.º de Bachillerato aprendemos a <strong>deducirlas en dos pasos algebraicos</strong> realizando simples sustituciones de ángulos.
+                        Deskonektatutako dozenaka formula memorizatu beharrean, angeluen ordezkapen sinpleak eginez <strong>bi pauso aljebraikoetan deduziko</strong> ditugu formulak.
                     </p>
                 </div>
             </div>
@@ -550,36 +550,36 @@
                 
                 <!-- Lista de Derivaciones -->
                 <div class="lg:col-span-4 space-y-3">
-                    <h2 class="font-bold text-sm uppercase tracking-wider text-slate-400 px-1">Elige qué fórmula quieres deducir:</h2>
+                    <h2 class="font-bold text-sm uppercase tracking-wider text-slate-400 px-1">Aukeratu deduzitu nahi duzun formula:</h2>
                     
                     <button onclick="selectDerivation('doble_sen')" id="deriv-btn-doble_sen" class="deriv-btn w-full text-left p-4 rounded-2xl border-2 border-indigo-600 bg-indigo-50/60 dark:bg-indigo-950/40 transition flex items-center justify-between">
                         <div>
-                            <div class="text-xs font-bold text-indigo-600 dark:text-indigo-400">Deducción 1 • Sustitución $\beta = \alpha$</div>
-                            <div class="font-bold text-slate-900 dark:text-white mt-0.5">Seno del Ángulo Doble: $\sin(2\alpha)$</div>
+                            <div class="text-xs font-bold text-indigo-600 dark:text-indigo-400">1. dedukzioa • Ordezkatu $\beta = \alpha$</div>
+                            <div class="font-bold text-slate-900 dark:text-white mt-0.5">Angelu bikoitzaren sinua: $\sin(2\alpha)$</div>
                         </div>
                         <i data-lucide="chevron-right" class="w-5 h-5 text-indigo-600"></i>
                     </button>
 
                     <button onclick="selectDerivation('resta_sen')" id="deriv-btn-resta_sen" class="deriv-btn w-full text-left p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-indigo-300 transition flex items-center justify-between">
                         <div>
-                            <div class="text-xs font-bold text-slate-500">Deducción 2 • Sustitución $\beta \rightarrow -\beta$</div>
-                            <div class="font-bold text-slate-900 dark:text-white mt-0.5">Seno de la Resta: $\sin(\alpha - \beta)$</div>
+                            <div class="text-xs font-bold text-slate-500">2. dedukzioa • Ordezkatu $\beta \rightarrow -\beta$</div>
+                            <div class="font-bold text-slate-900 dark:text-white mt-0.5">Diferentziaren sinua: $\sin(\alpha - \beta)$</div>
                         </div>
                         <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400"></i>
                     </button>
 
                     <button onclick="selectDerivation('suma_cos')" id="deriv-btn-suma_cos" class="deriv-btn w-full text-left p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-indigo-300 transition flex items-center justify-between">
                         <div>
-                            <div class="text-xs font-bold text-slate-500">Deducción 3 • Complementario $90^\circ - x$</div>
-                            <div class="font-bold text-slate-900 dark:text-white mt-0.5">Coseno de la Suma: $\cos(\alpha + \beta)$</div>
+                            <div class="text-xs font-bold text-slate-500">3. dedukzioa • $90^\circ - x$ osagarria</div>
+                            <div class="font-bold text-slate-900 dark:text-white mt-0.5">Gehiketaren kosinua: $\cos(\alpha + \beta)$</div>
                         </div>
                         <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400"></i>
                     </button>
 
                     <button onclick="selectDerivation('doble_cos')" id="deriv-btn-doble_cos" class="deriv-btn w-full text-left p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-indigo-300 transition flex items-center justify-between">
                         <div>
-                            <div class="text-xs font-bold text-slate-500">Deducción 4 • Sustitución $\beta = \alpha$ en $\cos$</div>
-                            <div class="font-bold text-slate-900 dark:text-white mt-0.5">Coseno del Ángulo Doble: $\cos(2\alpha)$</div>
+                            <div class="text-xs font-bold text-slate-500">4. dedukzioa • Ordezkatu $\cos$-en $\beta = \alpha$</div>
+                            <div class="font-bold text-slate-900 dark:text-white mt-0.5">Koisnuaren angelu bikoitza: $\cos(2\alpha)$</div>
                         </div>
                         <i data-lucide="chevron-right" class="w-5 h-5 text-slate-400"></i>
                     </button>
@@ -589,15 +589,15 @@
                 <div class="lg:col-span-8 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
                     <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-slate-100 dark:border-slate-800">
                         <div>
-                            <span id="deriv-badge" class="text-xs font-bold uppercase text-indigo-600 dark:text-indigo-400">Demostrador Algebraico Paso a Paso</span>
-                            <h3 id="deriv-title" class="text-xl font-extrabold text-slate-900 dark:text-white mt-0.5">Seno del Ángulo Doble: $\sin(2\alpha)$</h3>
+                            <span id="deriv-badge" class="text-xs font-bold uppercase text-indigo-600 dark:text-indigo-400">Pausoz pausoko frogatzaile aljebraikoa</span>
+                            <h3 id="deriv-title" class="text-xl font-extrabold text-slate-900 dark:text-white mt-0.5">Angelu bikoitzaren sinua: $\sin(2\alpha)$</h3>
                         </div>
                         <div class="flex items-center gap-2">
                             <button onclick="resetDerivationSteps()" class="px-3 py-1.5 text-xs font-semibold rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 transition">
-                                Reiniciar Pasos
+                                Urratsak berrezarri
                             </button>
                             <button onclick="nextDerivationStep()" id="btn-next-deriv" class="px-4 py-1.5 text-xs font-bold rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm transition flex items-center gap-1">
-                                <span>Desplegar Siguiente Transformación</span>
+                                <span>Zabaldu Hurrengo transformazioa</span>
                                 <i data-lucide="arrow-down" class="w-3.5 h-3.5"></i>
                             </button>
                         </div>
@@ -612,7 +612,7 @@
                     <div class="mt-6 p-4 rounded-xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/70 flex items-start gap-3">
                         <i data-lucide="lightbulb" class="w-5 h-5 text-amber-600 shrink-0 mt-0.5"></i>
                         <div class="text-xs text-amber-900 dark:text-amber-200 leading-relaxed">
-                            <strong>Recordatorio de la Circunferencia ($R=1$):</strong> No memorices signos de ángulos opuestos ni complementarios. Al mirar la circunferencia del Módulo 1 ves inmediatamente que al cambiar $\beta$ por $-\beta$, la abscisa $x$ no cambia ($\cos(-\beta) = \cos\beta$) pero la altura $y$ invierte su signo ($\sin(-\beta) = -\sin\beta$).
+                            <strong>Zirkunferentziaren ($R=1$) oharra:</strong> Ez memorizatu kontrako angeluen ikurrik, ezta osagarririk ere. 1. moduluaren zirkunferentzia begiratzean, berehala ikusten da $\beta$ aldatzen bada $-\beta$ terminoagatik, $x$ absiza ez da aldatzen ($\cos(-\beta) = \cos\beta$) baina $y$ altuerak bere zeinua aldatzen du ($\sin(-\beta) = -\sin\beta$).
                         </div>
                     </div>
                 </div>
@@ -1463,91 +1463,91 @@
         // =========================================================================
         const derivationsData = {
             doble_sen: {
-                title: 'Seno del Ángulo Doble: $\\sin(2\\alpha)$',
-                badge: 'Deducción 1 • Sustitución β = α',
+                title: 'Sinuaren angelu bikoitza: $\\sin(2\\alpha)$',
+                badge: '1. dedukzioa • Ordezkatu β = α',
                 steps: [
                     {
-                        label: 'Punto de Partida (Fórmula Semilla)',
+                        label: 'Abiapuntua:',
                         math: '$$\\sin(\\alpha + \\beta) = \\sin\\alpha \\cdot \\cos\\beta + \\cos\\alpha \\cdot \\sin\\beta$$',
-                        explanation: 'Partimos siempre de nuestra única identidad de adición conocida.'
+                        explanation: 'Beti abiatzen gara angeluen baturaren identitate ezagunetik.'
                     },
                     {
-                        label: 'Transformación 1: Sustituimos $\\beta$ por $\\alpha$',
+                        label: '1, transformazioa: $\\beta$ ordezkatzen dugu $\\alpha$ terminoarekin',
                         math: '$$\\sin(\\alpha + \\alpha) = \\sin\\alpha \\cdot \\cos\\alpha + \\cos\\alpha \\cdot \\sin\\alpha$$',
-                        explanation: 'Como queremos calcular el ángulo doble $2\\alpha = \\alpha + \\alpha$, reemplazamos cada $\\beta$ por $\\alpha$.'
+                        explanation: 'Angelu bikoitza kalkulatu nahi dugunez $2\\alpha = \\alpha + \\alpha$,  $\\beta$ bakoitza $\\alpha$ terminoarekin ordezkatzen dugu.'
                     },
                     {
-                        label: 'Transformación 2: Agrupamos términos semejantes',
+                        label: '2. transformazioa: Antzeko terminoak elkartzen ditugu',
                         math: '$$\\mathbf{\\sin(2\\alpha) = 2 \\cdot \\sin\\alpha \\cdot \\cos\\alpha}$$',
-                        explanation: '¡Listo! Como ambos sumandos son idénticos ($\\sin\\alpha \\cos\\alpha$), obtenemos la fórmula del ángulo doble sin memorizarla.'
+                        explanation: 'Listo! Bi batugaiak berdinak direnez ($\\sin\\alpha \\cos\\alpha$), sinuaren angelu bikoitzaren formula lortzen dugu.'
                     }
                 ]
             },
             resta_sen: {
-                title: 'Seno de la Diferencia: $\\sin(\\alpha - \\beta)$',
-                badge: 'Deducción 2 • Sustitución β → -β',
+                title: 'Diferentziaren sinua: $\\sin(\\alpha - \\beta)$',
+                badge: '2. Dedukzioa • Ordezkatu β → -β',
                 steps: [
                     {
-                        label: 'Punto de Partida (Fórmula Semilla)',
+                        label: 'Abiapuntua',
                         math: '$$\\sin(\\alpha + \\beta) = \\sin\\alpha \\cdot \\cos\\beta + \\cos\\alpha \\cdot \\sin\\beta$$',
-                        explanation: 'Escribimos la resta $\\alpha - \\beta$ como la suma $\\alpha + (-\\beta)$.'
+                        explanation: '$\\alpha - \\beta$ kenketa idazten dugu $\\alpha + (-\\beta)$ batura bezala.'
                     },
                     {
-                        label: 'Transformación 1: Sustituimos $\\beta$ por $(-\\beta)$',
+                        label: '1. transformazioa: $\\beta$ ordezkatzen dugu $(-\\beta)$ terminoagatik',
                         math: '$$\\sin(\\alpha + (-\\beta)) = \\sin\\alpha \\cdot \\cos(-\\beta) + \\cos\\alpha \\cdot \\sin(-\\beta)$$',
-                        explanation: 'Evaluamos el seno y coseno del ángulo opuesto $(-\\beta)$.'
+                        explanation: '$(-\\beta)$ kontrako angeluaren sinua eta kosinua ebaluatzen ditugu.'
                     },
                     {
-                        label: 'Transformación 2: Aplicamos simetría en la Circunferencia ($R=1$)',
+                        label: '2. Transformazioa: Zirkunferentziako ($R=1$) simetria erabiltzen dugu',
                         math: '$$\\cos(-\\beta) = \\cos\\beta \\quad \\text{y} \\quad \\sin(-\\beta) = -\\sin\\beta$$',
-                        explanation: 'En la circunferencia goniométrica, cambiar $\\beta$ por $-\\beta$ mantiene la abscisa $x$ igual pero invierte el signo de la altura $y$.'
+                        explanation: 'Zirkunferentzia goniometrikoan, $\\beta$ aldatzean $-\\beta$ terminoagatik, $x$ absiza aradatza berdin mantentzen du baina $y$ altueraren sinua aldatzen du.'
                     },
                     {
-                        label: 'Resultado Final Deducción',
+                        label: 'Amaierako emaitza',
                         math: '$$\\mathbf{\\sin(\\alpha - \\beta) = \\sin\\alpha \\cdot \\cos\\beta - \\cos\\alpha \\cdot \\sin\\beta}$$',
-                        explanation: 'El signo menos sale de forma natural gracias a la simetría vertical del seno.'
+                        explanation: 'Minus zeinua naturalki ateratzen da sinuaren simetria bertikalari esker.'
                     }
                 ]
             },
             suma_cos: {
-                title: 'Coseno de la Suma: $\\cos(\\alpha + \\beta)$',
-                badge: 'Deducción 3 • Relación de Complementarios (90° - θ)',
+                title: 'Gehiketaren kosinua: $\\cos(\\alpha + \\beta)$',
+                badge: '3. dedukzioa • Osagarrien arteko erlazioa (90° - θ)',
                 steps: [
                     {
-                        label: 'Punto de Partida: Relación entre Seno y Coseno de complementarios',
+                        label: 'Abiapuntua: Sinu eta kosinuaren osagarrien arteko erlazioa',
                         math: '$$\\cos(\\alpha + \\beta) = \\sin\\big(90^\\circ - (\\alpha + \\beta)\\big) = \\sin\\big((90^\\circ - \\alpha) - \\beta\\big)$$',
-                        explanation: 'En cualquier triángulo rectángulo, el coseno de un ángulo es el seno de su complementario ($90^\\circ - \\text{ángulo}$).'
+                        explanation: 'Edozein triangelu angeluzuzenetan, angelu baten kosinua bere osagarriaren sinua da ($90^\\circ - \\text{ángulo}$).'
                     },
                     {
-                        label: 'Transformación 1: Aplicamos la fórmula del seno de la resta',
+                        label: '1. transformazioa: Aplikatu kenketaren sinuaren formula',
                         math: '$$= \\sin(90^\\circ - \\alpha) \\cdot \\cos\\beta - \\cos(90^\\circ - \\alpha) \\cdot \\sin\\beta$$',
                         explanation: 'Usamos la fórmula semilla con el primer bloque $(90^\\circ - \\alpha)$ y el segundo bloque $\\beta$.'
                     },
                     {
-                        label: 'Transformación 2: Cambiamos los complementarios de $\\alpha$',
+                        label: '2.transformazioa: $\\alpha$-ren osagarriak ordezkatu',
                         math: '$$\\mathbf{\\cos(\\alpha + \\beta) = \\cos\\alpha \\cdot \\cos\\beta - \\sin\\alpha \\cdot \\sin\\beta}$$',
                         explanation: 'Como $\\sin(90^\\circ - \\alpha) = \\cos\\alpha$ y $\\cos(90^\\circ - \\alpha) = \\sin\\alpha$, llegamos directamente al coseno de la suma.'
                     }
                 ]
             },
             doble_cos: {
-                title: 'Coseno del Ángulo Doble: $\\cos(2\\alpha)$',
-                badge: 'Deducción 4 • Sustitución β = α en el Coseno de la Suma',
+                title: 'Angelu bikoitzaren kosinua: $\\cos(2\\alpha)$',
+                badge: '4. dedukzioa • β = α  ordezkatu baturaren kosinuaren formulan',
                 steps: [
                     {
-                        label: 'Punto de Partida (Coseno de la Suma recién deducido)',
+                        label: 'Abiapuntua (Baturaren kosinua)',
                         math: '$$\\cos(\\alpha + \\beta) = \\cos\\alpha \\cdot \\cos\\beta - \\sin\\alpha \\cdot \\sin\\beta$$',
-                        explanation: 'Tomamos el resultado de la Deducción 3.'
+                        explanation: '3. dedukzioan lortutako emaitza hartu abiapuntu bezala.'
                     },
                     {
-                        label: 'Transformación 1: Sustituimos $\\beta$ por $\\alpha$',
+                        label: '1. transformazioa: $\\beta$ ordezkatu $\\alpha$-rengatik',
                         math: '$$\\cos(\\alpha + \\alpha) = \\cos\\alpha \\cdot \\cos\\alpha - \\sin\\alpha \\cdot \\sin\\alpha$$',
-                        explanation: 'Multiplicamos cada razón por sí misma.'
+                        explanation: 'Arrazoi bakoitza bere buruagatik biderkatzen da.'
                     },
                     {
-                        label: 'Resultado Final Deducción',
+                        label: 'Amaierako emaitza',
                         math: '$$\\mathbf{\\cos(2\\alpha) = \\cos^2\\alpha - \\sin^2\\alpha}$$',
-                        explanation: '¡Obtenida! Observa el parecido visual con la relación fundamental ($\\cos^2\\alpha + \\sin^2\\alpha = 1$), pero con signo negativo.'
+                        explanation: 'Lortuta! Oinarrizko erlazioarekin ($\\cos^2\\alpha + \\sin^2\\alpha = 1$) antzekotasuna du, baina zeinu negatiboarekin.'
                     }
                 ]
             }
